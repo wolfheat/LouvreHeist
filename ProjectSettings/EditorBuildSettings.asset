@@ -29,6 +29,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DreamsII/DreamsDungeon2.unity
     guid: 32ed2383b507fd54094f736a78271d5d
+  - enabled: 1
+    path: Assets/Scenes/DreamsII/Test.unity
+    guid: 1bca29e22679f3245a2c71f0bd483c4a
+  - enabled: 0
+    path: Assets/Synty/PolygonConstruction/Scenes/Construction_City_Demo.unity
+    guid: 6e6d2665aff26d74caec0f825280ae5f
+  - enabled: 0
+    path: Assets/Synty/PolygonTown/Scenes/Demo.unity
+    guid: 54e9644b66e21b441b9a6eb04b6dad58
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 60a7588858519284d8cbd39f18ea1f16, type: 3}
   m_UseUCBPForAssetBundles: 0

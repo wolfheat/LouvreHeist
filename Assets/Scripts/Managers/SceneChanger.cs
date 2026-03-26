@@ -10,6 +10,8 @@ public class SceneChanger : MonoBehaviour
 {
     public static SceneChanger Instance { get; private set; }
 
+    public string GameNameString = "Test"; 
+
     private void Start()
     {
         if (Instance != null)
@@ -37,25 +39,25 @@ public class SceneChanger : MonoBehaviour
         Debug.Log("** Checking Scenes to Set active. **");
         if (SceneManager.GetSceneByName("StartMenu").IsValid() && SceneManager.GetSceneByName("StartMenu").isLoaded)
         {
-            if (SceneManager.GetSceneByName("DreamsDungeon2").IsValid() && SceneManager.GetSceneByName("DreamsDungeon2").isLoaded)
+            if (SceneManager.GetSceneByName(GameNameString).IsValid() && SceneManager.GetSceneByName(GameNameString).isLoaded)
             {
                 Debug.Log("Both Start and DungeonII is loaded");
                 // If both Menu and Dungeon is loaded unload the menu
                 SceneManager.UnloadSceneAsync("StartMenu");
-                if(!SceneManager.GetSceneByName("DreamsDungeon2").isLoaded)
-                    SceneManager.LoadScene("DreamsDungeon2");
-                SceneManager.SetActiveScene(SceneManager.GetSceneByName("DreamsDungeon2"));
+                if(!SceneManager.GetSceneByName(GameNameString).isLoaded)
+                    SceneManager.LoadScene(GameNameString);
+                SceneManager.SetActiveScene(SceneManager.GetSceneByName(GameNameString));
                 return;
             }
             Debug.Log("Only Start is loaded");
             // If only Menu is loaded set it as active
             SceneManager.SetActiveScene(SceneManager.GetSceneByName("StartMenu"));
             Debug.Log("  StartMenu is set as active.");
-        }else if (SceneManager.GetSceneByName("DreamsDungeon2").IsValid() && SceneManager.GetSceneByName("DreamsDungeon2").isLoaded)
+        }else if (SceneManager.GetSceneByName(GameNameString).IsValid() && SceneManager.GetSceneByName(GameNameString).isLoaded)
         {
             Debug.Log("Only Dungeon II is loaded");
             // If only Dungeon is loaded set it as active            
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName("DreamsDungeon2"));
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName(GameNameString));
             Debug.Log("  Dungeon is set as active.");
         }
         Resources.UnloadUnusedAssets();
@@ -71,8 +73,8 @@ public class SceneChanger : MonoBehaviour
     {        
         string unloadScene = "";
         // Get active scene so it can be unloaded?
-        if (SceneManager.GetActiveScene().name == "DreamsDungeon2")
-            unloadScene = "DreamsDungeon2";
+        if (SceneManager.GetActiveScene().name == GameNameString)
+            unloadScene = GameNameString;
         else if (SceneManager.GetActiveScene().name == "StartMenu")
             unloadScene = "StartMenu";
 
@@ -92,8 +94,8 @@ public class SceneChanger : MonoBehaviour
     {        
         string unloadScene = "";
         // Get active scene so it can be unloaded?
-        if (SceneManager.GetActiveScene().name == "DreamsDungeon2")
-            unloadScene = "DreamsDungeon2";
+        if (SceneManager.GetActiveScene().name == GameNameString)
+            unloadScene = GameNameString;
         else if (SceneManager.GetActiveScene().name == "StartMenu")
             unloadScene = "StartMenu";
 

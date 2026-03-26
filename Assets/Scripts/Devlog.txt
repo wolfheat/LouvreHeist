@@ -1,144 +1,48 @@
-Dungeon Crawler Jam 2025
+Dungeon Crawler Jam 2026
 
-DEVLOG FOR Dungeon Crawler 2025
-Apr 2025
+DEVLOG FOR Dungeon Crawler 2026
+Mar 2026
 
 * IDEAS
-- Make an updated version of the last years entry. With some new fetures.
+- Make a game where you recreate the Louvre Heist
 
 
-10/4	* Started working on the project
-12/4	* not much done. Tried other floor and roof and boxtiles.
-13/4	* Added Oxygen bar and regeneration area
-14/4	* Player now dies when out of oxygen
-		* Added Coins that player can pick up
-		* Added Respawn point with shop and regain area
-15/4	* Added coins sound when picking up coins or buying stuff
-		* Added animated coins ingame and expanded the inventory UI
-		* Doors implemented, player can unlock doors with keys
-		* Added minimap from walls
-		* Map now follows player and player arrow rotates with player
-		* Map now have Fog of War that revealse as player explores
-17/4	* Map is now an item that can be picked up
-		* Game is divided into several parts that player can reach the end at
-		* Keys added with sounds
-18/4	* Made levels Serial added final boss room, added gems
-		* Gems now unlocks boss room
-19/4	* Added a 6th gem, added boss which opens end portal when defeted
-		* Added pillars with shops at boss entrance
-		* Chicken now gives speed to player
-		* All items can be bought, Menu closes at successful buy
-		* Shops now reset after payer dies in boss area
-		* Speed modifier now also resets
-		* Items can only be purchased once
-		* Shops screen now close when moving away from pillar
-		* Added new Enemy attack, Firestorm
-		* Player has a third throwattack not fully integrated
-20/4	* Bombs can now be bought indefinitely
-		* Added bananas
-		* Added more content before boss
-		* Player now only moves on stone with stone stepsounds
-		* Made sure bananas are not removed if player touches entry at boss area after buying them
-		* Bomb attack changed to do 5hp damage
-		* Limited the amount in a row wildfire attack can happen
-		* Updated Credits page
-		* Removed shortcuts
-		* try Build
-		* At Jam end 442 joined
+26/3	* Started with idea for the project
+
+		TODO:
+
+		Make elevation possible for the hoist
+		Fix exiting to Main Menu
+
+		Add Sound Settings menu available from ingame
+
+
+		Game
+		Add Moving cars and people? With colliders?
+
+		Make LiftCar interactable maybe also engine sound when used?
+
+		Make Liftcar drivable? Optional, can also be placed by itself before player spawn in?
+
+		Have perks?
+		Some stuff that limits the player but gives some other benefit?
+		
+		
+		Hungry, Bad bladder, Bad Stamina, Slow etc
+
+		Faster, Stronger, Special Skill?
+
+		Add Tool and Toolbar, so player can use different tools to complete tasks or attack NPCs
+		
 
 		POST JAM
-22/4	* Changed boss floor again
-		* Fixed boss music repeating when stepping on boss activation square 
-		* Boss fire sounds adjusted
-		* Added enemy landing sound
-23/4	* Added courtyard
-		* Adjusted ceilings
-		* Changed light blue gem to purple
-24/4	* Adjusted firestorm spell
-		* Removed energy effects on picking coins, now normal pick up effect is used
-		* Removed stones dropped from bombing walls
-		* SAVE
-		* Removed Bloat
-		* Added Lightning with Post Processing adjustments
-25/4	* Animated opening of doors implemented
-		  [PC build - 86Mb]
-		* Adjusted main floor graphics to more 3D
-		* limited texture sizes 
-		  [PC build - 73Mb]
-		* Adjusted items particle effect circles
-26/4	* Removed duplicate walls
-		* Added Completion percent to Credits screen
-27/4	* Remake of mesh UVs in blender, is now mirrored corners
-		* Added sound for Unable to do stuff
-		* Added another ambient music for main dungeon
-		* Updated sound for picking up gems
-29/4	* Adjusted credits to fit actual text
-30/4	* Created new teleport particle effects
-		* Fixed Credits scroll start issue
-		* Credits screen now ends with thanks for playing staying on screen and growing.
-		* Fixed issue with death panel not taking player to menu
-		* Using same sound for placing gems as picking them
-		* Made keyboard keys interact with doors
-		* Made ESC close shop if open before pausing game
-		* Made mouse and keyboard work for shop
-1/5		* Fixed environment colors not working
-		* Deleted duplicate  map item
-		* Adjusted Start Menu pan
-2/5		* Started Adding Leaderboard
-		* Added name change and storage locally for player name
-		* Adding Unity Leaderboards
-		* Leaderboards working, but only one best result is shared per machine
-		* Adjusted credits by a hiding panel
-3/5		* Removed some bload code
-		* Slowed down enemy die animation and stays longer before removed
-		* Improved map	
-		* Made keyboard work for menu and pause menu
-4/5		* Player can no longer place bombs or interact with keyboard when paused
-		* Fixes space deselecting in main menu, was a Ingame click ui issue
-		* Fixed items animations going under floor
-		* Made startmenu background pan fade instead of backing up?
-		* Added enemy take damage sounds
-		* Death screen now looks like pause screen and has keyboard inputs
-		* Added cant afford sound, might change later
-5/5		* Added beginning sign for portal back to the start
-		* Added portals and spawnpoints for minimap
-		* Added cracked walls to minimap
-		* Added cost sign for shops, upgraded shop visuals a bit
-6/5		* Added monitor options in the settings
-		* Reworked some UI interface main menu
-		* Leaderboard now include system used
-		[PC build 67Mb]
-		[WebGL build 60Mb]
-7/5		* Fixed issue with webGL not hiding display buttons correctly
-		* Limit player from muting music/sound if typing in a name using "m" or "n"
-		* Added headers for leaderboard
-		* Implemented soft scroll for keyboard for leaderboards
-		* Header separated in the leaderboards
-		* Keyboardcontrol for leaderboards refined
-		* Might have fixed boss locking up
-		* Enemy throw attack is now a trident direction
-		* Made shop buttons not autoclick if first click is released over the buttons
-		* Enabled Enter as interact, both for items and shop
-		* Added smoke to bombs
-		* Added limitations for player name
-8/5		* Added Unity Analytics
-		* Made bombs regenerate at healing area by a timer
-		* Adjusted Smoke effects
-		* Fixed door cracks being to large
-9/5		* Updated leaderboard layout added version
-		* Fixed music and boss reset when player dies after boss
-		* Fixed deaths count calculation error
-		* Fixed issue when player moves mouse when entering inputname
-		* Fixed issue where layer clicks to change name but used keys to enter them starting navigation
-		* Made movement slightly more respondant 		
-		[PC build 69Mb]		[WebGL build 62Mb]3m17s		[Linux BUild 81Mb]36s
-10/5	* Automatically sets system logo in bottom left corner
-		* bloat removed		[PC 67.7Mb, 67.4Mb] v. 0.0.11
-11/5	* Added screen shake for bombs, doors, and enemy jumps and death
-		Post Release [PC 67.7Mb, 67.4Mb] v. 0.0.11
 
-15/5	* Fixed leaderboard time going on new line, removed initial leaderboard entries showing when loading the leaderboard		
-17/5	* Fixed spaces in player names not allowed for leaderboard.
+
+
+		[PC build 69Mb]		[WebGL build 62Mb]3m17s		[Linux BUild 81Mb]36s
+
+
+
 		* New release 0.0.14
 
 

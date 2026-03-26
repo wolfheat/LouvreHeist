@@ -226,7 +226,7 @@ namespace Wolfheat.StartMenu
         {
             Debug.Log("Start Game Pressed");
             //SceneManager.UnloadSceneAsync("StartMenu");
-            SceneChanger.Instance.ChangeScene("DreamsDungeon2");
+            SceneChanger.Instance.ChangeScene(SceneChanger.Instance.GameNameString);
         }
 
         private void ShowLeaderboards()
