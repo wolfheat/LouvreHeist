@@ -2,14 +2,17 @@ using System.Collections;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PickUpController : MonoBehaviour
 {
     public Interactable ActiveInteractable { get; set; }
     public Wall Wall { get; set; }
     public Door Door { get; set; }
+    public Vehicle Vehicle { get; set; }
     public EnemyController Enemy { get; set; }
     public Mock Mockup { get; set; } = null;
+    public Stair Stair { get; set; } = null;
 
     private LayerMask enemyLayerMask;
     private LayerMask mockupLayerMask;
@@ -100,6 +103,8 @@ public class PickUpController : MonoBehaviour
         if (colliders.Length == 0) {
             Wall = null;
             Door = null;
+            Vehicle = null;
+            Stair = null;
         }
         else if(colliders[0].gameObject.TryGetComponent(out Wall FoundWall)) {
             this.Wall = FoundWall;
@@ -108,6 +113,16 @@ public class PickUpController : MonoBehaviour
         }else if(colliders[0].gameObject.TryGetComponent(out Door FoundDoor)) {
             // Found A wall
              this.Door = FoundDoor;
+            Wall = null;
+        }
+        else if (colliders[0].gameObject.TryGetComponent(out Vehicle FoundVehicle)) {
+            // Found A wall
+            this.Vehicle = FoundVehicle;
+            Wall = null;
+        }
+        else if (colliders[0].gameObject.TryGetComponent(out Stair FoundStair)) {
+            // Found A wall
+            this.Stair = FoundStair;
             Wall = null;
         }
     }
@@ -123,8 +138,7 @@ public class PickUpController : MonoBehaviour
             //Debug.LogError("No Interactable found. box centered at "+transform.position+" size "+Game.boxSize);
             ActiveInteractable = null;
         }
-        else
-        {
+        else {
             //Debug.Log("Active Interactable set to: " + colliders[0].name);
             ActiveInteractable = colliders[0].gameObject.GetComponent<Interactable>();
         }

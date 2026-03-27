@@ -8,32 +8,55 @@ using Wolfheat.StartMenu;
 using static UnityEngine.GraphicsBuffer;
 using static UnityEngine.InputSystem.InputAction;
 
-public enum MoveActionType{Step,SideStep,Rotate}
+public enum MoveActionType{Step,SideStep,Rotate,VehicleEnter, VehicleExit, Stair}
 public class MoveAction
 {
+
     public MoveActionType moveType;
     public int dir = 0;
     public Vector2Int move;
+    public Vector3 moveSpecificPosition;
+    public Vehicle vehicle;
+
     public MoveAction(MoveActionType t, int d)
     {
         moveType = t;
         dir = d;
-    }
+    }    
     public MoveAction(MoveActionType t, Vector2Int m)
     {
         moveType = t;
         move = m;
+    }
+    public MoveAction(MoveActionType t, Vector3 pos)
+    {
+        moveType = t;
+        moveSpecificPosition = pos;
+    }
+    public MoveAction(MoveActionType t, Transform m, Vehicle vehicleEntered)
+    {
+        moveType = t;
+        vehicle = vehicleEntered;
+    }
+    public MoveAction(MoveActionType t, Vehicle vehicleExited)
+    {
+        moveType = t;
+        vehicle = vehicleExited;
     }
 }
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] Mock playerMock;
     [SerializeField] PlayerAnimationController playerAnimationController;
+    [SerializeField] PlayerLanternController playerLanternController;
     [SerializeField] TakeFireDamage takeFireDamage;
+
     public PickUpController pickupController;
     public bool DoingAction { get; set; } = false;
-    public MoveActionType ActiveMoveActionType { get; set; } = MoveActionType.Step;
+    public bool IsSeated => ActiveVehicle != null;
+    public Vehicle ActiveVehicle { get; set; } = null;
 
+    public MoveActionType ActiveMoveActionType { get; set; } = MoveActionType.Step;
 
     private MoveAction savedAction = null;
     private MoveAction lastAction = null;
@@ -101,7 +124,18 @@ public class PlayerController : MonoBehaviour
         if(Stats.Instance.IsDead || GameState.IsPaused)
             return; 
         Debug.Log("Right Click Place Bomb");
+
+        if (IsSeated) {
+            IterractWithVehicleEngine();
+            return;
+        }
         PlaceBomb();
+    }
+
+    private void IterractWithVehicleEngine()
+    {
+        Debug.Log("Interacting with Engine of "+ActiveVehicle.name);
+        ActiveVehicle.StartEngine();
     }
 
     private void PlaceBomb()
@@ -156,6 +190,15 @@ public class PlayerController : MonoBehaviour
     public void InterractWith(bool mouseSource = false)
     {
 
+        Debug.Log("Seated: " + IsSeated);
+
+        if (IsSeated) {
+            //Just Exit Vehicle
+            ExitVehicle();
+            return;
+        }
+
+
         if (Stats.Instance.IsDead || GameState.IsPaused) return;
         pickupController.UpdateColliders();
 
@@ -180,6 +223,10 @@ public class PlayerController : MonoBehaviour
 
 
         Debug.Log("Pick up item ahead is "+ pickupController.ActiveInteractable);   
+
+
+        Debug.Log("Checking for a Stair " + (pickupController.Stair!=null));   
+
         // Interact with closest visible item 
         if (pickupController.ActiveInteractable != null)
         {
@@ -189,6 +236,8 @@ public class PlayerController : MonoBehaviour
         {
             if (pickupController.Wall != null)
             {
+
+                Debug.Log("** Interact with item, but wall ahead");
                 if (!Stats.Instance.HasSledgeHammer && pickupController.Wall.GetComponent<Door>() != null)
                 {
                     Debug.Log("ICantBreakThisWithMyBareHands");
@@ -197,10 +246,10 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (pickupController.Wall.gameObject.TryGetComponent(out Door door)) {
                     InteractWithDoor(door);
-                }
+                }                
                 else if (pickupController.Wall.gameObject.TryGetComponent(out Altar altar)) {
                     Shop.Instance.ShowPanel(altar.MineralAccepted);
-                }                
+                }                                
                 else {
                     playerAnimationController.SetState(PlayerState.Hit);
                 }
@@ -208,6 +257,11 @@ public class PlayerController : MonoBehaviour
             else if (pickupController.Door != null && pickupController.Door.GetComponent<Collider>().enabled) {
                 Debug.Log("Player has a Door in front "+pickupController.Door, pickupController.Door);
                 InteractWithDoor(pickupController.Door);
+            }
+            else if (pickupController.Vehicle != null) {
+                Debug.Log("** Interact with vehicle ahead");
+
+                InteractWithVehicle(pickupController.Vehicle);
             }
             else if (pickupController.Enemy != null)
             {
@@ -219,7 +273,29 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Hit Enemy Mock "+pickupController.Mockup.name, pickupController.Mockup); 
                 playerAnimationController.SetState(PlayerState.Attack);
             }
+            else if (pickupController.Stair != null)
+            {
+                Debug.Log("** Interact with stair ahead");
+                Debug.Log("Entering a Stair ");
+                if (pickupController.Stair.TryUseStair(out Transform destination)) {
+                    Debug.Log("Stair has a valid Destination at: "+destination.position);
+                    TraverseStair(destination);
+                }
+            }
         }
+
+    }
+
+    private void TraverseStair(Transform destination)
+    {
+        Debug.Log("Player Traverses a stair");
+
+        // Write or overwrite next action
+        MoveAction moveAction;
+        moveAction = new MoveAction(MoveActionType.Stair, destination.position);
+        savedAction = moveAction;
+
+        return;
 
     }
 
@@ -246,11 +322,65 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if(DoingAction) return;
+
+        SeatedUIDisplayer.Instance.ShowSeated(IsSeated);
+
+        if (DoingAction) return;
+
 
         if (savedAction != null)
         {
-            if (savedAction.moveType == MoveActionType.Step || savedAction.moveType == MoveActionType.SideStep)
+            if (IsSeated) {
+                if (savedAction.moveType == MoveActionType.VehicleExit) {                
+                    Debug.Log("Performing Exit Vehicle, activeVehicle: " + (ActiveVehicle != null));
+                    // Perform Exit
+                    Vector3 target;
+                    Quaternion targetRotation;
+
+                    target = ActiveVehicle.GetExitTransform.position;
+                    targetRotation = ActiveVehicle.GetExitTransform.rotation;
+
+                    StartCoroutine(Move(target));
+                    StartCoroutine(Rotate(targetRotation));
+
+                    ActiveVehicle = null;
+
+                    playerLanternController.SetNormalIntensity();
+
+                    savedAction = null;
+                }
+                return;
+            }
+
+            Debug.Log("Update current movetype "+savedAction.moveType);
+
+            if (savedAction.moveType == MoveActionType.VehicleEnter) {
+
+
+                ActiveVehicle = savedAction.vehicle;
+
+                Vector3 target = savedAction.vehicle.GetSeatedTransform.position;
+                Quaternion targetRotation = savedAction.vehicle.GetSeatedTransform.rotation;
+                
+                //Vector3 target = ActiveVehicle.GetSeatedTransform.position;
+                //Quaternion targetRotation = ActiveVehicle.GetSeatedTransform.rotation;
+
+                lastAction = savedAction;
+
+                playerLanternController.SetVehicleIntensity();
+
+                StartCoroutine(Move(target));
+                StartCoroutine(Rotate(targetRotation));
+
+                savedAction = null;
+                //return;
+            }
+            
+            else if (savedAction.moveType == MoveActionType.Stair)
+            {
+                StartCoroutine(Move(savedAction.moveSpecificPosition));
+            }
+            else if (savedAction.moveType == MoveActionType.Step || savedAction.moveType == MoveActionType.SideStep)
             {
 
                 Vector3 target = EndPositionForMotion(savedAction);
@@ -260,7 +390,6 @@ public class PlayerController : MonoBehaviour
                 if (!LevelCreator.Instance.Occupied(target) && Mocks.Instance.IsTileFree(Convert.V3ToV2Int(target)))
                 {
                     lastAction = savedAction;
-                    //Debug.Log("Storing saved Movement as Last movement and start new movement");
                     //Debug.Log("Moving to " + target+" "+savedAction.moveType);
                     StartCoroutine(Move(target));
                 }
@@ -324,6 +453,36 @@ public class PlayerController : MonoBehaviour
                 SoundMaster.Instance.PlaySound(SoundName.LockedDoor);
             }
         }
+    }
+    
+    private void InteractWithVehicle(Vehicle vehicle)
+    {
+        Debug.Log("Interacting with a vehicle");
+
+        Transform seatedPosition = vehicle.EnterVehicle();
+
+        //Debug.Log("Seat Player at local position of " + seatedPosition);
+
+        Debug.Log("** Entering a vehicle to from" + transform.position);
+
+        // Write or overwrite next action
+        MoveAction moveAction;
+        moveAction = new MoveAction(MoveActionType.VehicleEnter, vehicle);
+        savedAction = moveAction;
+
+        return;
+    }
+    
+    private void ExitVehicle()
+    {
+        Debug.Log("Exiting a vehicle: "+ (ActiveVehicle!=null));
+        
+        // Write or overwrite next action
+        MoveAction moveAction;
+        moveAction = new MoveAction(MoveActionType.VehicleExit, ActiveVehicle);
+        savedAction = moveAction;
+
+        return;
     }
 
     private void TurnPerformed(InputAction.CallbackContext obj)
@@ -449,17 +608,24 @@ public class PlayerController : MonoBehaviour
         PlaceMock(target);
 
         DoingAction = true;
+        
         Vector3 start = transform.position;
         Vector3 end = target;
+
+        float distance = Vector3.Distance(end,start);
+
+
         timer = 0;
-        while (timer < MoveTime*Stats.Instance.MovingSpeedMultiplier)
+        float fulltimeForMovement = MoveTime * Stats.Instance.MovingSpeedMultiplier * distance;
+        while (timer < fulltimeForMovement)
         {
             yield return null;
-            transform.position = Vector3.LerpUnclamped(start,end,timer/(MoveTime*Stats.Instance.MovingSpeedMultiplier));
+            transform.position = Vector3.LerpUnclamped(start,end,timer/ fulltimeForMovement);
             timer += Time.deltaTime;
         }
         //Debug.Log("Moving player "+(transform.position-target).magnitude);
         //transform.position = target;
+        
         DoingAction = false;
 
         MotionActionCompleted();
@@ -510,7 +676,7 @@ public class PlayerController : MonoBehaviour
     
     public void UpdatePlayerInput()
     {
-        if (Stats.Instance.IsDead) return;
+        if (Stats.Instance.IsDead || IsSeated) return;
 
         // Check to align player
         if (savedAction != null && savedAction.moveType != lastAction.moveType)
@@ -532,6 +698,7 @@ public class PlayerController : MonoBehaviour
     }
     public void MotionActionCompleted()
     {
+
         if (Stats.Instance.IsDead) return;
 
         //Debug.Log("Motion completed, has stored action: "+savedAction);
@@ -635,6 +802,7 @@ public class PlayerController : MonoBehaviour
 
         savedAction = null;
         lastAction = null;
+        Debug.Log("LASTACTION - NULL");
         DoingAction = false;
 
         takeFireDamage.StopFire();

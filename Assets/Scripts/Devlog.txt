@@ -8,14 +8,14 @@ Mar 2026
 
 
 26/3	* Started with idea for the project
+27/3	* Made some General Gamemechanics work, vehicle interaction
+
 
 		TODO:
 
-		Make elevation possible for the hoist
 		Fix exiting to Main Menu
 
 		Add Sound Settings menu available from ingame
-
 
 		Game
 		Add Moving cars and people? With colliders?
