@@ -28,8 +28,4 @@ public class PowerUp : InteractableItem
         meshFilter.mesh = data.mesh;
         meshRenderer.material = data.material;
     }
-    internal void ResetTo(Vector3 pos)
-    {
-        throw new NotImplementedException();
-    }
 }

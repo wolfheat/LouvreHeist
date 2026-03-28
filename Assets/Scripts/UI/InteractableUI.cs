@@ -107,6 +107,30 @@ public class InteractableUI : MonoBehaviour
                 SoundMaster.Instance.PlaySound(SoundName.GemPickup);
                 Inventory.Instance.Gem(gemtype);
                 //Stats.Instance.AddBomb(data.value);
+            }else if (((UsableData)data).usableType == UsableType.SledgeHammer)
+            {
+                Debug.Log("picking up sledgehammer ");
+
+                SoundMaster.Instance.PlaySound(SoundName.GemPickup);
+                //Inventory.Instance.Gem(gemtype);
+                //Stats.Instance.AddBomb(data.value);
+                ToolsController.Instance.UnlockTool(ToolType.Hammer);
+            }else if (((UsableData)data).usableType == UsableType.Grinder)
+            {
+                Debug.Log("picking up grinder ");
+
+                SoundMaster.Instance.PlaySound(SoundName.GemPickup);
+                //Inventory.Instance.Gem(gemtype);
+                //Stats.Instance.AddBomb(data.value);
+                ToolsController.Instance.UnlockTool(ToolType.Grinder);
+            }else if (((UsableData)data).usableType == UsableType.LockPick)
+            {
+                Debug.Log("picking up lockpick ");
+
+                SoundMaster.Instance.PlaySound(SoundName.GemPickup);
+                //Inventory.Instance.Gem(gemtype);
+                //Stats.Instance.AddBomb(data.value);
+                ToolsController.Instance.UnlockTool(ToolType.LockPick);
             }
         }
 

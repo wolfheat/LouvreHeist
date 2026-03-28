@@ -13,6 +13,7 @@ public class UIController : MonoBehaviour
 {
     [SerializeField] InteractableUI interactableUI;
     [SerializeField] TransitionScreen transitionScreen;
+    [SerializeField] ToolsUIController toolsUIController;
     [SerializeField] DeathScreenController deathScreen;
     [SerializeField] WinScreenScroll winScreen;
     [SerializeField] GameObject helpScreen;
@@ -221,4 +222,7 @@ public class UIController : MonoBehaviour
     internal bool MapIsActive() => mapMask != null && mapMask.gameObject.activeSelf;
 
     internal void ShowBossHealth(bool doShow = true) => bossHealthBar.SetActive(doShow);
+
+    internal void SetToolsUIActiveTool(ToolType tool) => toolsUIController.ShowActiveTool(tool);
+    internal void ActivateToolsUITool(ToolType tool) => toolsUIController.ActivateTool(tool);
 }

@@ -10,6 +10,7 @@ public class PickUpController : MonoBehaviour
     public Wall Wall { get; set; }
     public Door Door { get; set; }
     public Vehicle Vehicle { get; set; }
+    public LockPickable LockPickable { get; set; }
     public EnemyController Enemy { get; set; }
     public Mock Mockup { get; set; } = null;
     public Stair Stair { get; set; } = null;
@@ -105,6 +106,7 @@ public class PickUpController : MonoBehaviour
             Door = null;
             Vehicle = null;
             Stair = null;
+            LockPickable = null;
         }
         else if(colliders[0].gameObject.TryGetComponent(out Wall FoundWall)) {
             this.Wall = FoundWall;
@@ -118,6 +120,10 @@ public class PickUpController : MonoBehaviour
         else if (colliders[0].gameObject.TryGetComponent(out Vehicle FoundVehicle)) {
             // Found A wall
             this.Vehicle = FoundVehicle;
+            Wall = null;
+        }else if (colliders[0].gameObject.TryGetComponent(out LockPickable FoundLockpickable)) {
+            // Found A wall
+            this.LockPickable = FoundLockpickable;
             Wall = null;
         }
         else if (colliders[0].gameObject.TryGetComponent(out Stair FoundStair)) {

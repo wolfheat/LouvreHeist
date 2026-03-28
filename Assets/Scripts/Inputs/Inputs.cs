@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Wolfheat.StartMenu;
@@ -8,6 +10,8 @@ namespace Wolfheat.Inputs
     {
         public Controls Controls { get; set; }
         public InputAction Actions { get; set; }
+
+        private List<System.Action<InputAction.CallbackContext>> storedLinks = new();
 
         public static Inputs Instance { get; private set; }
 
@@ -33,7 +37,26 @@ namespace Wolfheat.Inputs
             Debug.Log("Loading Complete");
             Controls.Player.M.performed += SoundMaster.Instance.ToggleAllAudio;
             Controls.Player.N.performed += SoundMaster.Instance.ToggleMusic;
+
+            // Tools Input Loader
+            Controls.Player.One.performed += One;
+            Controls.Player.Two.performed += Two;
+            Controls.Player.Three.performed += Three;
+            Controls.Player.Four.performed += Four;
+            Controls.Player.Five.performed += Five;
+            Controls.Player.Six.performed += Six;
+            Controls.Player.ScrollDown.performed += Prev;
+            Controls.Player.ScrollUp.performed += Next;
         }
+
+        private void One(InputAction.CallbackContext c) => ToolsController.Instance.EquipTool(ToolType.Hands);
+        private void Two(InputAction.CallbackContext c) => ToolsController.Instance.EquipTool(ToolType.LockPick);
+        private void Three(InputAction.CallbackContext c) => ToolsController.Instance.EquipTool(ToolType.Hammer);
+        private void Four(InputAction.CallbackContext c) => ToolsController.Instance.EquipTool(ToolType.Grinder);
+        private void Five(InputAction.CallbackContext c) => ToolsController.Instance.EquipTool(ToolType.Skull);
+        private void Six(InputAction.CallbackContext c) => ToolsController.Instance.EquipTool(ToolType.Skull2);
+        private void Prev(InputAction.CallbackContext c) => ToolsController.Instance.EquipTool(-1);
+        private void Next(InputAction.CallbackContext c) => ToolsController.Instance.EquipTool(1);
 
         private void OnDisable()
         {
@@ -42,6 +65,17 @@ namespace Wolfheat.Inputs
             Controls.Player.T.performed -= JumpToNextEntryPoint;
             Controls.Player.Y.performed -= Give10Gold;
             Controls.Disable();
+
+
+            // Tools Input Loader
+            Controls.Player.One.performed -= One;
+            Controls.Player.Two.performed -= Two;
+            Controls.Player.Three.performed -= Three;
+            Controls.Player.Four.performed -= Four;
+            Controls.Player.Five.performed -= Five;
+            Controls.Player.Six.performed -= Six;
+            Controls.Player.ScrollDown.performed -= Prev;
+            Controls.Player.ScrollUp.performed -= Next;
         }
 
         public void Give10Gold(InputAction.CallbackContext context)

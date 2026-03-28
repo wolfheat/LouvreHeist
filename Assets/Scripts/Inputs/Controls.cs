@@ -237,6 +237,78 @@ namespace UnityEngine.InputSystem
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""One"",
+                    ""type"": ""Button"",
+                    ""id"": ""2e81ba0f-89bf-4149-a8e1-98fd28fd3a0d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Two"",
+                    ""type"": ""Button"",
+                    ""id"": ""2d993326-bf0f-44a1-a30e-da0a1516768f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Three"",
+                    ""type"": ""Button"",
+                    ""id"": ""aa5e86d5-8d87-4ea8-920d-812f08bc0ee5"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Four"",
+                    ""type"": ""Button"",
+                    ""id"": ""727a4a75-e2c9-44e3-a99b-9d01f907e6e3"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Five"",
+                    ""type"": ""Button"",
+                    ""id"": ""da099494-96c4-48ef-a322-a3f3b8d0f23c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Six"",
+                    ""type"": ""Button"",
+                    ""id"": ""e953622f-27b2-480d-be53-8849598e7366"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ScrollUp"",
+                    ""type"": ""Value"",
+                    ""id"": ""4cd0a3bb-3d30-4408-8af4-23c1a88db813"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ScrollDown"",
+                    ""type"": ""Value"",
+                    ""id"": ""fda580a1-9ef1-455a-86de-53fca6da5831"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -1009,6 +1081,94 @@ namespace UnityEngine.InputSystem
                     ""action"": ""Space"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""542013f6-4600-4dd3-ba67-896cf96d393c"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""One"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""995146b3-d0fb-4018-9b3d-b301623ed073"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Two"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""207efc19-2781-4879-b6b9-106402b2c760"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Three"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cb51da74-81f1-4b35-b09a-85cb43cfeaf8"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Four"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9263b042-b73f-4aca-9373-de7334b65a9d"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Five"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1091dc25-0525-4f8c-acfc-376c9c65caf7"",
+                    ""path"": ""<Keyboard>/6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Six"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ae748196-0ba9-4452-99e5-628f4a5b3e8d"",
+                    ""path"": ""<Mouse>/scroll/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ScrollDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""37793f1d-4417-4eb3-98aa-2338d9208b1a"",
+                    ""path"": ""<Mouse>/scroll/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ScrollUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -1772,6 +1932,14 @@ namespace UnityEngine.InputSystem
             m_Player_Tilde = m_Player.FindAction("Tilde", throwIfNotFound: true);
             m_Player_Y = m_Player.FindAction("Y", throwIfNotFound: true);
             m_Player_T = m_Player.FindAction("T", throwIfNotFound: true);
+            m_Player_One = m_Player.FindAction("One", throwIfNotFound: true);
+            m_Player_Two = m_Player.FindAction("Two", throwIfNotFound: true);
+            m_Player_Three = m_Player.FindAction("Three", throwIfNotFound: true);
+            m_Player_Four = m_Player.FindAction("Four", throwIfNotFound: true);
+            m_Player_Five = m_Player.FindAction("Five", throwIfNotFound: true);
+            m_Player_Six = m_Player.FindAction("Six", throwIfNotFound: true);
+            m_Player_ScrollUp = m_Player.FindAction("ScrollUp", throwIfNotFound: true);
+            m_Player_ScrollDown = m_Player.FindAction("ScrollDown", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1888,6 +2056,14 @@ namespace UnityEngine.InputSystem
         private readonly InputAction m_Player_Tilde;
         private readonly InputAction m_Player_Y;
         private readonly InputAction m_Player_T;
+        private readonly InputAction m_Player_One;
+        private readonly InputAction m_Player_Two;
+        private readonly InputAction m_Player_Three;
+        private readonly InputAction m_Player_Four;
+        private readonly InputAction m_Player_Five;
+        private readonly InputAction m_Player_Six;
+        private readonly InputAction m_Player_ScrollUp;
+        private readonly InputAction m_Player_ScrollDown;
         /// <summary>
         /// Provides access to input actions defined in input action map "Player".
         /// </summary>
@@ -1964,6 +2140,38 @@ namespace UnityEngine.InputSystem
             /// </summary>
             public InputAction @T => m_Wrapper.m_Player_T;
             /// <summary>
+            /// Provides access to the underlying input action "Player/One".
+            /// </summary>
+            public InputAction @One => m_Wrapper.m_Player_One;
+            /// <summary>
+            /// Provides access to the underlying input action "Player/Two".
+            /// </summary>
+            public InputAction @Two => m_Wrapper.m_Player_Two;
+            /// <summary>
+            /// Provides access to the underlying input action "Player/Three".
+            /// </summary>
+            public InputAction @Three => m_Wrapper.m_Player_Three;
+            /// <summary>
+            /// Provides access to the underlying input action "Player/Four".
+            /// </summary>
+            public InputAction @Four => m_Wrapper.m_Player_Four;
+            /// <summary>
+            /// Provides access to the underlying input action "Player/Five".
+            /// </summary>
+            public InputAction @Five => m_Wrapper.m_Player_Five;
+            /// <summary>
+            /// Provides access to the underlying input action "Player/Six".
+            /// </summary>
+            public InputAction @Six => m_Wrapper.m_Player_Six;
+            /// <summary>
+            /// Provides access to the underlying input action "Player/ScrollUp".
+            /// </summary>
+            public InputAction @ScrollUp => m_Wrapper.m_Player_ScrollUp;
+            /// <summary>
+            /// Provides access to the underlying input action "Player/ScrollDown".
+            /// </summary>
+            public InputAction @ScrollDown => m_Wrapper.m_Player_ScrollDown;
+            /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
             public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -2037,6 +2245,30 @@ namespace UnityEngine.InputSystem
                 @T.started += instance.OnT;
                 @T.performed += instance.OnT;
                 @T.canceled += instance.OnT;
+                @One.started += instance.OnOne;
+                @One.performed += instance.OnOne;
+                @One.canceled += instance.OnOne;
+                @Two.started += instance.OnTwo;
+                @Two.performed += instance.OnTwo;
+                @Two.canceled += instance.OnTwo;
+                @Three.started += instance.OnThree;
+                @Three.performed += instance.OnThree;
+                @Three.canceled += instance.OnThree;
+                @Four.started += instance.OnFour;
+                @Four.performed += instance.OnFour;
+                @Four.canceled += instance.OnFour;
+                @Five.started += instance.OnFive;
+                @Five.performed += instance.OnFive;
+                @Five.canceled += instance.OnFive;
+                @Six.started += instance.OnSix;
+                @Six.performed += instance.OnSix;
+                @Six.canceled += instance.OnSix;
+                @ScrollUp.started += instance.OnScrollUp;
+                @ScrollUp.performed += instance.OnScrollUp;
+                @ScrollUp.canceled += instance.OnScrollUp;
+                @ScrollDown.started += instance.OnScrollDown;
+                @ScrollDown.performed += instance.OnScrollDown;
+                @ScrollDown.canceled += instance.OnScrollDown;
             }
 
             /// <summary>
@@ -2096,6 +2328,30 @@ namespace UnityEngine.InputSystem
                 @T.started -= instance.OnT;
                 @T.performed -= instance.OnT;
                 @T.canceled -= instance.OnT;
+                @One.started -= instance.OnOne;
+                @One.performed -= instance.OnOne;
+                @One.canceled -= instance.OnOne;
+                @Two.started -= instance.OnTwo;
+                @Two.performed -= instance.OnTwo;
+                @Two.canceled -= instance.OnTwo;
+                @Three.started -= instance.OnThree;
+                @Three.performed -= instance.OnThree;
+                @Three.canceled -= instance.OnThree;
+                @Four.started -= instance.OnFour;
+                @Four.performed -= instance.OnFour;
+                @Four.canceled -= instance.OnFour;
+                @Five.started -= instance.OnFive;
+                @Five.performed -= instance.OnFive;
+                @Five.canceled -= instance.OnFive;
+                @Six.started -= instance.OnSix;
+                @Six.performed -= instance.OnSix;
+                @Six.canceled -= instance.OnSix;
+                @ScrollUp.started -= instance.OnScrollUp;
+                @ScrollUp.performed -= instance.OnScrollUp;
+                @ScrollUp.canceled -= instance.OnScrollUp;
+                @ScrollDown.started -= instance.OnScrollDown;
+                @ScrollDown.performed -= instance.OnScrollDown;
+                @ScrollDown.canceled -= instance.OnScrollDown;
             }
 
             /// <summary>
@@ -2585,6 +2841,62 @@ namespace UnityEngine.InputSystem
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnT(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "One" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnOne(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Two" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnTwo(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Three" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnThree(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Four" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnFour(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Five" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnFive(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Six" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnSix(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "ScrollUp" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnScrollUp(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "ScrollDown" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnScrollDown(InputAction.CallbackContext context);
         }
         /// <summary>
         /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

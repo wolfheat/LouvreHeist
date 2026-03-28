@@ -9,7 +9,44 @@ Mar 2026
 
 26/3	* Started with idea for the project
 27/3	* Made some General Gamemechanics work, vehicle interaction
+28/3	* Made Tools Inventory where player can Change between Tools, also Pick Them Up and activating them
+		* Added Safe that is LockPickable, can be opened and closed
 
+		Make safes only accessable from the front.
+		Make the pickable minigame to unlock a safe
+
+		Add Pickable Doors
+		Make different difficulty minigame for door, cabinets?
+
+		IDEAS:
+
+		Have the game be 3 or 5 days, each day is separate mission preparing for the final heist.
+		Previous days is used to gather resources needed to complete the heist.
+			Tools Needed - Truck - Grinder - Outfit - Motorbike
+
+		All days also allows player to gather loot that will be added to the total score
+
+		Maybe have the Hideout in the same position, but different days unlocks new area around it to explore?
+
+		Maybe have breakable walls again with crack, only breakable by hammer (or bombs?)
+
+
+
+		How to decide the core gameloop?
+		
+		Have the first NPC spotting the player start a 5-10 min timer for player to return to hideout or they lose?
+
+		How to hold loot? Unlimited or placed in a backpack/inventory?
+
+		Tools are owned or not
+
+		Day 1 - Outfit?
+		Day 2 - Grinder
+		Day 3 - Motorbike
+		Day 4 - Truck
+		Day 5 - Heist
+
+		Truck is limited to move on streets? Yes
 
 		TODO:
 

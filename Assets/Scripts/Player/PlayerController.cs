@@ -281,6 +281,10 @@ public class PlayerController : MonoBehaviour
                     Debug.Log("Stair has a valid Destination at: "+destination.position);
                     TraverseStair(destination);
                 }
+            }else if (pickupController.LockPickable != null)
+            {
+                Debug.Log("** Interact with lockpickable");
+                InteractWithLockpickable(pickupController.LockPickable);
             }
         }
 
@@ -386,12 +390,15 @@ public class PlayerController : MonoBehaviour
                 Vector3 target = EndPositionForMotion(savedAction);
                 
                 //Debug.Log("Executing step movement = " + savedAction.moveType+" target is "+target);
+                //Debug.Log("Executing step movement = " + savedAction.moveType+" target is "+target);
+                //Debug.Log("LevelCreator = " + (LevelCreator.Instance != null));
+                //Debug.Log("Mock = " + (Mocks.Instance != null));
 
                 if (!LevelCreator.Instance.Occupied(target) && Mocks.Instance.IsTileFree(Convert.V3ToV2Int(target)))
                 {
                     lastAction = savedAction;
                     //Debug.Log("Moving to " + target+" "+savedAction.moveType);
-                    StartCoroutine(Move(target));
+                    StartCoroutine(Move(target));   
                 }
                 else
                 {
@@ -453,6 +460,19 @@ public class PlayerController : MonoBehaviour
                 SoundMaster.Instance.PlaySound(SoundName.LockedDoor);
             }
         }
+    }
+    
+    private void InteractWithLockpickable(LockPickable lockPickable)
+    {
+        Debug.Log("Interacting with a lockpickable - should minigame start here?");
+        
+        // Now have the door open directly? Later make minigame to unlock
+        if(!lockPickable.IsOpen)
+            lockPickable.OpenDoorAnimate();
+        else
+            lockPickable.CloseDoorAnimate();
+
+        return;
     }
     
     private void InteractWithVehicle(Vehicle vehicle)
@@ -598,6 +618,12 @@ public class PlayerController : MonoBehaviour
     {
         // Used to define what player moves above
         //int stepSoundFromTerrain = TerrainChecker.ProminentTerrainType(transform.position,LevelCreator.Instance.ActiveTerrain);
+
+        //Debug.Log("Coroutine Move running");
+
+        //Debug.Log("SoundMaster "+(SoundMaster.Instance != null));
+
+        //Debug.Log("Shop "+(Shop.Instance != null));
 
         // 2 = STONE STEPs
         SoundMaster.Instance.PlayStepSound(2);
