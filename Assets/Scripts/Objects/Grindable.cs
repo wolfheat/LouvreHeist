@@ -16,7 +16,7 @@ public class Grindable : MonoBehaviour
 
         Debug.Log("Glass was successfully Opened ");
 
-        SoundMaster.Instance.PlaySound(SoundName.UnlockChest);
+        SoundMaster.Instance.PlaySound(SoundName.GlassBreak);
 
         // Run Glass destroy animator? Show Shattered glass particles?
         animator.SetBool("Shatter", true);

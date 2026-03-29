@@ -9,6 +9,10 @@ public class Breakable : MonoBehaviour
 
     [SerializeField] private Animator animator;
 
+    protected bool isOpen = false;
+
+    public bool IsOpen => isOpen;
+
     public void Break()
     {
         // Breaks the Item
@@ -25,10 +29,9 @@ public class Breakable : MonoBehaviour
 
         Debug.Log("Creating content at its place, this is pickable");
 
-        SoundMaster.Instance.PlaySound(SoundName.OpenDoor);
-
-
         // Run Glass destroy animator? Show Shattered glass particles?
         animator?.SetBool("Shatter", true);
+
+        isOpen = true;
     }
 }

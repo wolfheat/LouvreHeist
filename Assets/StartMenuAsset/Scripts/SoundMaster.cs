@@ -47,7 +47,11 @@ namespace Wolfheat.StartMenu
         UnlockDoor,
         UnlockChest,
         DoorLockedSound,
-        CloseChest
+        CloseChest,
+        GlassTap,
+        GlassBreak,
+        WoodTap,
+        WoodBreak
     }
 
     public enum MusicName {MenuMusic, OutDoorMusic, IndoorMusic, DeadMusic, CreditsMusic, BossMusic}

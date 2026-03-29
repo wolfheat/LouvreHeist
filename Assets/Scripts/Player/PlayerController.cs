@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 using Wolfheat.Inputs;
 using Wolfheat.StartMenu;
 using static UnityEngine.GraphicsBuffer;
@@ -483,14 +485,23 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Interacting with a grindable - should minigame start here?");
 
-        // Unlock if having correct tool
-        if(ToolsController.Instance.ActiveTool != ToolType.Grinder) return;
+        if (grindable.IsOpen) {
+            //Should not happen since the interactable should be removed when opened?
+            Debug.Log("Should not happen since the interactable should be removed when opened?");
+            return;
+        }
 
-        if (grindable.IsOpen) return;
+        // Unlock if having correct tool
+        if (ToolsController.Instance.ActiveTool != ToolType.Grinder) {
+            SoundMaster.Instance.PlaySound(SoundName.GlassTap);
+            return;
+        }
 
         // Grind Animation
         playerAnimationController.SetState(PlayerState.Hit);
 
+
+        SoundMaster.Instance.PlaySound(SoundName.GlassBreak);
         grindable.GrindOpen();
 
     }
@@ -523,8 +534,17 @@ public class PlayerController : MonoBehaviour
     
     private void InteractWithBreakable(Breakable breakable)
     {
+        if (breakable.IsOpen) {
+            //Should not happen since the interactable should be removed when opened?
+            Debug.Log("Should not happen since the interactable should be removed when opened?");
+            return;
+        }
+
         // Unlock if having correct tool
-        if (ToolsController.Instance.ActiveTool != ToolType.Hammer) return;
+        if (ToolsController.Instance.ActiveTool != ToolType.Hammer) {
+            SoundMaster.Instance.PlaySound(SoundName.WoodTap);
+            return;
+        }
 
         Debug.Log("Interacting with a breakable?");
 
@@ -532,6 +552,8 @@ public class PlayerController : MonoBehaviour
 
         // Now have the door open directly? Later make minigame to unlock
         breakable.Break();
+
+        SoundMaster.Instance.PlaySound(SoundName.WoodBreak);
 
         return;
     }
