@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
 using Wolfheat.StartMenu;
-
 public class Vehicle : MonoBehaviour
 {
     //[SerializeField] GameObject doorPart;

@@ -18,6 +18,7 @@ public class UIController : MonoBehaviour
     [SerializeField] WinScreenScroll winScreen;
     [SerializeField] GameObject helpScreen;
     [SerializeField] OxygenController oxygenPanel;
+    [SerializeField] BriefingsManager briefingsManager;
     [SerializeField] Image mapMask;
     [SerializeField] GameObject bossHealthBar;
 
@@ -66,6 +67,9 @@ public class UIController : MonoBehaviour
         // Player can not toggle pause when dead
         if (Stats.Instance.IsDead) return;
 
+        // Do not Pause if any InfoPanel is open
+        if (UIController.Instance.AnyInfoPanelOpen()) return;
+
         // If buy menu is open close it instead of pause
         if (Shop.Instance.CloseIfOpen())
             return;
@@ -73,6 +77,13 @@ public class UIController : MonoBehaviour
         bool doPause = GameState.state == GameStates.Running;
         Pause(doPause);
         pauseScreen.SetActive(doPause);
+    }
+
+    private bool AnyInfoPanelOpen()
+    {
+        if(briefingsManager.ManagerIsActive)
+            return true;
+        return false;
     }
 
     public void Pause(bool pause = true)
@@ -218,6 +229,7 @@ public class UIController : MonoBehaviour
     }
 
     internal void ActivateMap(bool activate = true) => mapMask.enabled = !activate;
+    internal void ShowHideOutMap() => briefingsManager.OpenHideOutMap();
 
     internal bool MapIsActive() => mapMask != null && mapMask.gameObject.activeSelf;
 

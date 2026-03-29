@@ -226,6 +226,7 @@ public class PlayerController : MonoBehaviour
 
 
         Debug.Log("Checking for a Stair " + (pickupController.Stair!=null));   
+        Debug.Log("Checking for a InfoPanel " + (pickupController.InfoPanel!=null));   
 
         // Interact with closest visible item 
         if (pickupController.ActiveInteractable != null)
@@ -263,6 +264,11 @@ public class PlayerController : MonoBehaviour
 
                 InteractWithVehicle(pickupController.Vehicle);
             }
+            else if (pickupController.InfoPanel != null) {
+                Debug.Log("** Interact with infopanel ahead");
+
+                InteractWithInfoPanel(pickupController.InfoPanel);
+            }
             else if (pickupController.Enemy != null)
             {
                 Debug.Log("Player has an Enemy in front "+pickupController.Enemy, pickupController.Enemy);
@@ -281,10 +287,21 @@ public class PlayerController : MonoBehaviour
                     Debug.Log("Stair has a valid Destination at: "+destination.position);
                     TraverseStair(destination);
                 }
-            }else if (pickupController.LockPickable != null)
+            }
+            else if (pickupController.LockPickable != null)
             {
                 Debug.Log("** Interact with lockpickable");
                 InteractWithLockpickable(pickupController.LockPickable);
+            }
+            else if (pickupController.Breakable != null)
+            {
+                Debug.Log("** Interact with lockpickable");
+                InteractWithBreakable(pickupController.Breakable);
+            }
+            else if (pickupController.Grindable != null)
+            {
+                Debug.Log("** Interact with lockpickable");
+                InteractWithGrindable(pickupController.Grindable);
             }
         }
 
@@ -462,10 +479,39 @@ public class PlayerController : MonoBehaviour
         }
     }
     
+    private void InteractWithGrindable(Grindable grindable)
+    {
+        Debug.Log("Interacting with a grindable - should minigame start here?");
+
+        // Unlock if having correct tool
+        if(ToolsController.Instance.ActiveTool != ToolType.Grinder) return;
+
+        if (grindable.IsOpen) return;
+
+        // Grind Animation
+        playerAnimationController.SetState(PlayerState.Hit);
+
+        grindable.GrindOpen();
+
+    }
+    
     private void InteractWithLockpickable(LockPickable lockPickable)
     {
         Debug.Log("Interacting with a lockpickable - should minigame start here?");
-        
+
+        if (!lockPickable.IsUnLocked) {
+            // Unlock if having correct tool
+            if(ToolsController.Instance.ActiveTool == ToolType.LockPick) {
+                lockPickable.Unlock();
+                playerAnimationController.SetState(PlayerState.Hit);
+            }
+            else {
+                Debug.Log("Its Locked");
+                lockPickable.TryOpenFail();
+            }
+            return;
+        }
+
         // Now have the door open directly? Later make minigame to unlock
         if(!lockPickable.IsOpen)
             lockPickable.OpenDoorAnimate();
@@ -475,6 +521,26 @@ public class PlayerController : MonoBehaviour
         return;
     }
     
+    private void InteractWithBreakable(Breakable breakable)
+    {
+        // Unlock if having correct tool
+        if (ToolsController.Instance.ActiveTool != ToolType.Hammer) return;
+
+        Debug.Log("Interacting with a breakable?");
+
+        playerAnimationController.SetState(PlayerState.Hit);
+
+        // Now have the door open directly? Later make minigame to unlock
+        breakable.Break();
+
+        return;
+    }
+
+    private void InteractWithInfoPanel(InfoPanel panel)
+    {
+        panel.OpenInfoPanel();
+    }
+
     private void InteractWithVehicle(Vehicle vehicle)
     {
         Debug.Log("Interacting with a vehicle");

@@ -10,7 +10,10 @@ public class PickUpController : MonoBehaviour
     public Wall Wall { get; set; }
     public Door Door { get; set; }
     public Vehicle Vehicle { get; set; }
+    public InfoPanel InfoPanel { get; set; }
     public LockPickable LockPickable { get; set; }
+    public Breakable Breakable { get; set; }
+    public Grindable Grindable { get; set; }
     public EnemyController Enemy { get; set; }
     public Mock Mockup { get; set; } = null;
     public Stair Stair { get; set; } = null;
@@ -99,16 +102,20 @@ public class PickUpController : MonoBehaviour
 
         // Get list of interactable items
         Collider[] colliders = Physics.OverlapBox(alignedPos, Game.boxSize,Quaternion.identity, wallAndDoorLayerMask);
+        
+        // Unset all
+        Wall = null;
+        Door = null;
+        Vehicle = null;
+        Stair = null;
+        LockPickable = null;
+        Breakable = null;
+        Grindable = null;
+        InfoPanel = null;
 
+        if(colliders.Length == 0) return;
 
-        if (colliders.Length == 0) {
-            Wall = null;
-            Door = null;
-            Vehicle = null;
-            Stair = null;
-            LockPickable = null;
-        }
-        else if(colliders[0].gameObject.TryGetComponent(out Wall FoundWall)) {
+        if(colliders[0].gameObject.TryGetComponent(out Wall FoundWall)) {
             this.Wall = FoundWall;
             Door = null;
             // Found A wall
@@ -121,14 +128,30 @@ public class PickUpController : MonoBehaviour
             // Found A wall
             this.Vehicle = FoundVehicle;
             Wall = null;
-        }else if (colliders[0].gameObject.TryGetComponent(out LockPickable FoundLockpickable)) {
+        }
+        else if (colliders[0].gameObject.TryGetComponent(out LockPickable FoundLockpickable)) {
             // Found A wall
             this.LockPickable = FoundLockpickable;
+            Wall = null;
+        }
+        else if (colliders[0].gameObject.TryGetComponent(out Breakable FoundBreakable)) {
+            // Found A wall
+            this.Breakable = FoundBreakable;
+            Wall = null;
+        }
+        else if (colliders[0].gameObject.TryGetComponent(out Grindable FoundGrindable)) {
+            // Found A wall
+            this.Grindable = FoundGrindable;
             Wall = null;
         }
         else if (colliders[0].gameObject.TryGetComponent(out Stair FoundStair)) {
             // Found A wall
             this.Stair = FoundStair;
+            Wall = null;
+        }
+        else if (colliders[0].gameObject.TryGetComponent(out InfoPanel FoundInfoPanel)) {
+            // Found A wall
+            this.InfoPanel = FoundInfoPanel;
             Wall = null;
         }
     }

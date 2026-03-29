@@ -42,7 +42,12 @@ namespace Wolfheat.StartMenu
         GemPickup,
         Teleport,
         BossDying,
-        CantAfford
+        CantAfford,
+        OpenChest,
+        UnlockDoor,
+        UnlockChest,
+        DoorLockedSound,
+        CloseChest
     }
 
     public enum MusicName {MenuMusic, OutDoorMusic, IndoorMusic, DeadMusic, CreditsMusic, BossMusic}

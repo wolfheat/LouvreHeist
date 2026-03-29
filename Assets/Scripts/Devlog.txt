@@ -11,6 +11,7 @@ Mar 2026
 27/3	* Made some General Gamemechanics work, vehicle interaction
 28/3	* Made Tools Inventory where player can Change between Tools, also Pick Them Up and activating them
 		* Added Safe that is LockPickable, can be opened and closed
+		* Added BreakableBoxes And Grindable Glass
 
 		Make safes only accessable from the front.
 		Make the pickable minigame to unlock a safe

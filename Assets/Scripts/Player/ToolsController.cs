@@ -11,8 +11,12 @@ public class ToolsController : MonoBehaviour
     public int ActiveToolIndex => (int)ActiveTool;
     public ToolType ActiveTool { get; private set; }
 
-    public bool[] unlockedTool = new bool[6];
+    private bool[] unlockedTool = new bool[6];
     public GameObject[] Tools;
+
+
+
+    internal bool ToolUnlocked(ToolType tool) => unlockedTool[(int)tool];
 
     internal void EquipTool(ToolType tool)
     {
