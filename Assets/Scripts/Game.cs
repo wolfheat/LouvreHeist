@@ -3,8 +3,9 @@ using UnityEngine;
 
 public static class Game
 {
-    public static Vector3 boxSize = new Vector3(0.47f, 0.47f, 0.47f);
-    public static Vector3 smallBoxSize = new Vector3(0.25f, 0.47f, 0.25f);
+    public static Vector3 BoxSize = new Vector3(0.4f, 0.40f, 0.45f);
+    public static Vector3 SmallBoxSize = new Vector3(0.25f, 0.47f, 0.25f);
+    public static float BoxAdjustementTowardsPlayer = 0.05f;
 }
 
 public static class Convert

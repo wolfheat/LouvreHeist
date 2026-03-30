@@ -11,6 +11,7 @@ using static UnityEngine.GraphicsBuffer;
 using static UnityEngine.InputSystem.InputAction;
 
 public enum MoveActionType{Step,SideStep,Rotate,VehicleEnter, VehicleExit, Stair}
+
 public class MoveAction
 {
 
@@ -224,11 +225,13 @@ public class PlayerController : MonoBehaviour
         //toolHolder.ChangeTool(DestructType.Breakable);
 
 
-        Debug.Log("Pick up item ahead is "+ pickupController.ActiveInteractable);   
+        Debug.Log("Pick up item ahead is "+ pickupController.ActiveInteractable);
+
 
 
         Debug.Log("Checking for a Stair " + (pickupController.Stair!=null));   
         Debug.Log("Checking for a InfoPanel " + (pickupController.InfoPanel!=null));   
+        Debug.Log("Checking for a LockPickable " + (pickupController.LockPickable!=null));   
 
         // Interact with closest visible item 
         if (pickupController.ActiveInteractable != null)
@@ -407,13 +410,17 @@ public class PlayerController : MonoBehaviour
             {
 
                 Vector3 target = EndPositionForMotion(savedAction);
-                
+
                 //Debug.Log("Executing step movement = " + savedAction.moveType+" target is "+target);
                 //Debug.Log("Executing step movement = " + savedAction.moveType+" target is "+target);
                 //Debug.Log("LevelCreator = " + (LevelCreator.Instance != null));
                 //Debug.Log("Mock = " + (Mocks.Instance != null));
 
-                if (!LevelCreator.Instance.Occupied(target) && Mocks.Instance.IsTileFree(Convert.V3ToV2Int(target)))
+
+
+
+
+                if (!LevelCreator.Instance.Occupied(target, transform.position) && Mocks.Instance.IsTileFree(Convert.V3ToV2Int(target)))
                 {
                     lastAction = savedAction;
                     //Debug.Log("Moving to " + target+" "+savedAction.moveType);
@@ -522,6 +529,8 @@ public class PlayerController : MonoBehaviour
             }
             return;
         }
+
+        if (lockPickable.IsAnimating) return;
 
         // Now have the door open directly? Later make minigame to unlock
         if(!lockPickable.IsOpen)

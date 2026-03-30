@@ -5,6 +5,7 @@ public class SeatedUIDisplayer : MonoBehaviour
 {
 
     [SerializeField] private TextMeshProUGUI seatedText;
+    [SerializeField] private TextMeshProUGUI PickupText;
 
 
     public static SeatedUIDisplayer Instance { get; private set; }
@@ -19,4 +20,5 @@ public class SeatedUIDisplayer : MonoBehaviour
     }
 
     public void ShowSeated(bool show) => seatedText.gameObject.SetActive(show);
+    public void ShowPickupType(string typeName) => PickupText.text = typeName;
 }

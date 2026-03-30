@@ -97,7 +97,7 @@ public class ItemSpawner : MonoBehaviour
 
     public bool PositionEmpty(Vector3 pos)
     {
-        Collider[] colliders = Physics.OverlapBox(pos, Game.boxSize, Quaternion.identity);
+        Collider[] colliders = Physics.OverlapBox(pos, Game.BoxSize, Quaternion.identity);
         return colliders.Length == 0;
     }
 

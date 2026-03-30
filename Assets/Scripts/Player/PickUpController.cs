@@ -64,7 +64,7 @@ public class PickUpController : MonoBehaviour
     public void UpdateEnemy()
     {
         // Get list of interactable items
-        Collider[] colliders = Physics.OverlapBox(Convert.Align(transform.position), Game.boxSize,Quaternion.identity, enemyLayerMask);
+        Collider[] colliders = Physics.OverlapBox(Convert.Align(transform.position), Game.BoxSize,Quaternion.identity, enemyLayerMask);
 
         //UIController.Instance.UpdateShownItemsUI(colliders.Select(x => x.GetComponentInParent<EnemyController>().EnemyData as ItemData).ToList());
 
@@ -82,7 +82,7 @@ public class PickUpController : MonoBehaviour
 
         // Get enemy mockup
         //Mockup = colliders.Where(x => x.GetComponentInParent<Interactable>() == null).ToArray().Length > 0?true:false;
-        colliders = Physics.OverlapBox(Convert.Align(transform.position), Game.boxSize, Quaternion.identity, mockupLayerMask);
+        colliders = Physics.OverlapBox(Convert.Align(transform.position), Game.BoxSize, Quaternion.identity, mockupLayerMask);
 
         Mock candidate = colliders.Where(x => x.GetComponent<Mock>() != null).ToArray().FirstOrDefault()?.GetComponent<Mock>();
         if (candidate != null && !candidate.IsPlayer)
@@ -101,7 +101,7 @@ public class PickUpController : MonoBehaviour
         Vector3 alignedPos = Convert.Align(transform.position);
 
         // Get list of interactable items
-        Collider[] colliders = Physics.OverlapBox(alignedPos, Game.boxSize,Quaternion.identity, wallAndDoorLayerMask);
+        Collider[] colliders = Physics.OverlapBox(alignedPos, Game.BoxSize,transform.rotation, wallAndDoorLayerMask);
         
         // Unset all
         Wall = null;
@@ -115,51 +115,62 @@ public class PickUpController : MonoBehaviour
 
         if(colliders.Length == 0) return;
 
-        if(colliders[0].gameObject.TryGetComponent(out Wall FoundWall)) {
+        if (colliders[0].gameObject.TryGetComponent(out Wall FoundWall)) {
+            SeatedUIDisplayer.Instance.ShowPickupType("Wallw");
             this.Wall = FoundWall;
             Door = null;
             // Found A wall
-        }else if(colliders[0].gameObject.TryGetComponent(out Door FoundDoor)) {
+        }
+        else if(colliders[0].gameObject.TryGetComponent(out Door FoundDoor)) {
             // Found A wall
+            SeatedUIDisplayer.Instance.ShowPickupType("Door");
              this.Door = FoundDoor;
             Wall = null;
         }
         else if (colliders[0].gameObject.TryGetComponent(out Vehicle FoundVehicle)) {
             // Found A wall
+            SeatedUIDisplayer.Instance.ShowPickupType("Vehicle");
             this.Vehicle = FoundVehicle;
             Wall = null;
         }
         else if (colliders[0].gameObject.TryGetComponent(out LockPickable FoundLockpickable)) {
             // Found A wall
+            SeatedUIDisplayer.Instance.ShowPickupType("LockPickable");
             this.LockPickable = FoundLockpickable;
             Wall = null;
         }
         else if (colliders[0].gameObject.TryGetComponent(out Breakable FoundBreakable)) {
             // Found A wall
+            SeatedUIDisplayer.Instance.ShowPickupType("Breakable");
             this.Breakable = FoundBreakable;
             Wall = null;
         }
         else if (colliders[0].gameObject.TryGetComponent(out Grindable FoundGrindable)) {
             // Found A wall
+            SeatedUIDisplayer.Instance.ShowPickupType("Grindable");
             this.Grindable = FoundGrindable;
             Wall = null;
         }
         else if (colliders[0].gameObject.TryGetComponent(out Stair FoundStair)) {
             // Found A wall
+            SeatedUIDisplayer.Instance.ShowPickupType("Stair");
             this.Stair = FoundStair;
             Wall = null;
         }
         else if (colliders[0].gameObject.TryGetComponent(out InfoPanel FoundInfoPanel)) {
             // Found A wall
+            SeatedUIDisplayer.Instance.ShowPickupType("InfoPanel");
             this.InfoPanel = FoundInfoPanel;
             Wall = null;
         }
+
+
     }
     
     public void UpdateInteractables()
     {
         // Get list of interactable items
-        Collider[] colliders = Physics.OverlapBox(Convert.Align(transform.position), Game.boxSize,Quaternion.identity, itemLayerMask);
+        Collider[] colliders = Physics.OverlapBox(Convert.Align(transform.position), Game.BoxSize,Quaternion.identity, itemLayerMask);
         
         //UIController.Instance.UpdateShownItemsUI(colliders.Select(x => x.GetComponent<InteractableItem>()?.Data).ToList(),true);
         if (colliders.Length == 0)

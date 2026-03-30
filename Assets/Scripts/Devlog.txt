@@ -12,8 +12,12 @@ Mar 2026
 28/3	* Made Tools Inventory where player can Change between Tools, also Pick Them Up and activating them
 		* Added Safe that is LockPickable, can be opened and closed
 29/3	* Tuned Breaking glass and Boxes with sound
+		* Fixed Narrow Walls movement and wall detection
+
+
 
 		Make safes only accessable from the front.
+		Make Items placed in safes etc be pickable - decide to use F or interact to pick them?
 		Make the pickable minigame to unlock a safe
 
 		Add Pickable Doors

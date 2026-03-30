@@ -5,13 +5,15 @@ using Wolfheat.StartMenu;
 
 public class LockPickable : MonoBehaviour
 {
-    
-    protected bool isUnlocked = false;
+
+    [SerializeField] protected bool isUnlocked = false;
+    protected bool isAnimating = false;
     protected bool isOpen = false;
 
     [SerializeField] private Animator animator;
 
     public bool IsOpen => isOpen;
+    public bool IsAnimating => isAnimating;
     public bool IsUnLocked => isUnlocked;
 
     // Have data here that tells what Type it is and what Sound to play?
@@ -30,6 +32,11 @@ public class LockPickable : MonoBehaviour
             SoundMaster.Instance.PlaySound(SoundName.UnlockDoor);
     }
 
+    public void DoorAnimateComplete()
+    {
+        isAnimating = false;
+    }
+    
     public void OpenDoorAnimate()
     {
         Debug.Log("Animate opening door");
@@ -44,6 +51,7 @@ public class LockPickable : MonoBehaviour
         //StartCoroutine(OpenDoorCO());
         //doorPart.transform.Rotate(0, -90, 0);
         animator.SetBool("Open", true);
+        isAnimating = true;
 
         isOpen = true;
 
@@ -56,7 +64,7 @@ public class LockPickable : MonoBehaviour
         SoundMaster.Instance.PlaySound(SoundName.CloseChest);
 
         animator.SetBool("Open", false);
-
+        isAnimating = true;
         isOpen = false;
     }
 
