@@ -13,12 +13,16 @@ Mar 2026
 		* Added Safe that is LockPickable, can be opened and closed
 29/3	* Tuned Breaking glass and Boxes with sound
 		* Fixed Narrow Walls movement and wall detection
-
+		* Maybe fixed pickup catching walls issue
+30/3	* COmpleted more of the Office
+		* Tried to Fix transition between Scenes, kinda working
 
 
 		Make safes only accessable from the front.
 		Make Items placed in safes etc be pickable - decide to use F or interact to pick them?
 		Make the pickable minigame to unlock a safe
+
+		Still issue with pickupcontroller, it detects walls sometimes instead of unlockables etc - Fix
 
 		Add Pickable Doors
 		Make different difficulty minigame for door, cabinets?

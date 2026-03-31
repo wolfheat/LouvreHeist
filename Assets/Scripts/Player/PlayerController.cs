@@ -419,7 +419,9 @@ public class PlayerController : MonoBehaviour
 
 
 
+                // This method is used to tetect if player are able to move to the target position
 
+                // Maybe it can be used to check for pickups as well?
                 if (!LevelCreator.Instance.Occupied(target, transform.position) && Mocks.Instance.IsTileFree(Convert.V3ToV2Int(target)))
                 {
                     lastAction = savedAction;

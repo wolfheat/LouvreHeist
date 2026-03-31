@@ -8,6 +8,8 @@ public class Breakable : MonoBehaviour
     // Have specifik shatter material when breaking?
 
     [SerializeField] private Animator animator;
+    
+    [SerializeField] private Collider collider;
 
     protected bool isOpen = false;
 
@@ -33,5 +35,7 @@ public class Breakable : MonoBehaviour
         animator?.SetBool("Shatter", true);
 
         isOpen = true;
+
+        collider.enabled = false;
     }
 }

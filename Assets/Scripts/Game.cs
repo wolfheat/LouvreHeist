@@ -3,7 +3,9 @@ using UnityEngine;
 
 public static class Game
 {
-    public static Vector3 BoxSize = new Vector3(0.4f, 0.40f, 0.45f);
+    public static Vector3 PickupDetectionBoxSize = new Vector3(0.3f, 0.3f, 0.3f);
+    public static Vector3 WallDetectionBoxSize = new Vector3(0.4f, 0.40f, 0.45f);
+
     public static Vector3 SmallBoxSize = new Vector3(0.25f, 0.47f, 0.25f);
     public static float BoxAdjustementTowardsPlayer = 0.05f;
 }

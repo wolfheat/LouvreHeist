@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 
-public enum InfoPanelTypes{HideoutMap}
+public enum InfoPanelTypes{HideoutMap,OfficeExit}
 
 public class InfoPanel : MonoBehaviour
 {
@@ -9,8 +9,11 @@ public class InfoPanel : MonoBehaviour
 
     public void OpenInfoPanel()
     {
-
         if(panelType == InfoPanelTypes.HideoutMap)
             UIController.Instance.ShowHideOutMap();
+        if (panelType == InfoPanelTypes.OfficeExit) {
+            // Maybe first Show a Information which leads to scene change
+            SceneChanger.Instance.ChangeScene("Hideout");
+        }
     }
 }

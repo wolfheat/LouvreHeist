@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Breakable
   animator: {fileID: 8236396371080564260}
+  collider: {fileID: 6118297037948467849}
 --- !u!1001 &8162894660889802294
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -27,7 +27,7 @@ public class Explosion : MonoBehaviour
             // Particle Effects
             ParticleEffects.Instance.PlayTypeAt(particleType, pos);
             // Destroy Walls affected and hurt player or Enemy nearby
-            Collider[] colliders = Physics.OverlapBox(pos, Game.BoxSize, Quaternion.identity, layerMask);
+            Collider[] colliders = Physics.OverlapBox(pos, Game.PickupDetectionBoxSize, Quaternion.identity, layerMask);
             if(colliders.Length > 0)
             {
                 foreach (var collider in colliders)
@@ -56,7 +56,7 @@ public class Explosion : MonoBehaviour
     public void FireDamage(Vector3 pos)
     {        
         // Destroy Walls affected and hurt player or Enemy nearby
-        Collider[] colliders = Physics.OverlapBox(pos, Game.BoxSize, Quaternion.identity, layerMask);
+        Collider[] colliders = Physics.OverlapBox(pos, Game.PickupDetectionBoxSize, Quaternion.identity, layerMask);
         if(colliders.Length > 0)
         {
             foreach (var collider in colliders)

@@ -7,7 +7,6 @@ using Debug = UnityEngine.Debug;
 public class Stats : MonoBehaviour
 {
     [SerializeField] SledgeHammerFlicker sledgeHammerFlicker;
-    [SerializeField] GameObject itemsHolder;
 
     public float MiningSpeed { get => miningSpeed; }
     private float miningSpeed;
@@ -92,8 +91,7 @@ public class Stats : MonoBehaviour
     }
 
     // coins, bombs, keys, gems, maps
-    private int CountItems() => itemsHolder.transform.GetComponentsInChildren<Usable>(false).ToArray().Length 
-        + itemsHolder.transform.GetComponentsInChildren<PowerUp>(false).ToArray().Length;
+    private int CountItems() => ItemSpawner.Instance.CountAllItems();
     
     //private int CountItems() => itemsHolder.transform.GetComponentsInChildren<Usable>().Where(x => x.gameObject.activeSelf).ToArray().Length 
     //    + itemsHolder.transform.GetComponentsInChildren<PowerUp>().Where(x => x.gameObject.activeSelf).ToArray().Length;

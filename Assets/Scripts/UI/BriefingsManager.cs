@@ -60,5 +60,9 @@ public class BriefingsManager : MonoBehaviour
         if (hideOutMap.gameObject.activeSelf)
             hideOutMap.gameObject.SetActive(false);
 
+
+        // Start The Mission
+        SceneChanger.Instance.ChangeScene("Office");
+
     }
 }

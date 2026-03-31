@@ -26,7 +26,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/DreamsII/DreamsDungeon.unity
     guid: e27ae08622df6a540962c596edb981d4
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/DreamsII/DreamsDungeon2.unity
     guid: 32ed2383b507fd54094f736a78271d5d
   - enabled: 1
@@ -38,6 +38,15 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Synty/PolygonTown/Scenes/Demo.unity
     guid: 54e9644b66e21b441b9a6eb04b6dad58
+  - enabled: 1
+    path: Assets/Scenes/DreamsII/Hideout.unity
+    guid: 115a2689406670144b1f75136e783ca9
+  - enabled: 0
+    path: Assets/Synty/PolygonOffice/Scene/Demo.unity
+    guid: 5363c4650c006d0469bf3eacd9da8533
+  - enabled: 1
+    path: Assets/Scenes/DreamsII/Office.unity
+    guid: e08ce7d7987b44c48be444442b5819ff
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 60a7588858519284d8cbd39f18ea1f16, type: 3}
   m_UseUCBPForAssetBundles: 0

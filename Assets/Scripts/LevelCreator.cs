@@ -44,7 +44,7 @@ public class LevelCreator : MonoBehaviour
     int[,] level = new int[100,100];
     Vector3 gridStartPosition = new Vector3(-50,0,-50);
 
-    GridSpot[] gridSpots;
+    //GridSpot[] gridSpots;
 
 
     [SerializeField] private LayerMask gridDetectionLayerMask;
@@ -75,7 +75,7 @@ public class LevelCreator : MonoBehaviour
         }
         Instance = this;
     
-        gridSpots = new GridSpot[10000];
+        //gridSpots = new GridSpot[10000];
 
         wallLayerMask = LayerMask.GetMask("Wall");
         doorLayerMask = LayerMask.GetMask("Door");
@@ -84,7 +84,7 @@ public class LevelCreator : MonoBehaviour
     }
     private void Start()
     {
-        CreateGrid();
+        //CreateGrid();
     }
 
 #if UNITY_EDITOR
@@ -151,7 +151,7 @@ public class LevelCreator : MonoBehaviour
         gridUpdateTimer += Time.deltaTime;
         if(gridUpdateTimer >= GridUpdateTime)
         {
-            CreateGrid();
+            //CreateGrid();
             gridUpdateTimer -= GridUpdateTime;
         }
     }
@@ -172,7 +172,7 @@ public class LevelCreator : MonoBehaviour
 
     }*/
 
-
+    /*
     private void CreateGrid()
     {
         for(int i=0; i<level.GetLength(0); i++)
@@ -181,7 +181,7 @@ public class LevelCreator : MonoBehaviour
                 Vector3 gridSpotPosition = gridStartPosition + new Vector3(i, 0, j);
 
                 // determine object
-                Collider[] colliders = Physics.OverlapBox(gridSpotPosition, Game.BoxSize, Quaternion.identity, gridDetectionLayerMask);
+                Collider[] colliders = Physics.OverlapBox(gridSpotPosition, Game.PickupDetectionBoxSize, Quaternion.identity, gridDetectionLayerMask);
                 if (colliders.Length == 0) level[i, j] = 0;
                 else if (colliders[0].gameObject.layer == LayerMask.NameToLayer("Wall")) level[i, j] = 1;
                 else if (colliders[0].gameObject.layer == LayerMask.NameToLayer("Enemy")) level[i, j] = 2;
@@ -190,7 +190,7 @@ public class LevelCreator : MonoBehaviour
 
                 gridSpots[i*level.GetLength(0) + j] = new GridSpot() { pos = gridSpotPosition, type = level[i,j] };
             }
-    }
+    }*/
 
     public Stack<Vector2Int> CanReach(Vector2Int from, Vector2Int to)
     {
@@ -399,7 +399,7 @@ public class LevelCreator : MonoBehaviour
 
     public bool TargetHasEnemyOrMockup(Vector3 target)
     {
-        Collider[] colliders = Physics.OverlapBox(target, Game.BoxSize, Quaternion.identity, enemyLayerMask);
+        Collider[] colliders = Physics.OverlapBox(target, Game.PickupDetectionBoxSize, Quaternion.identity, enemyLayerMask);
         return colliders.Length > 0;
 
     }
@@ -407,7 +407,7 @@ public class LevelCreator : MonoBehaviour
     {
         // Check if spot is free
         // Get list of interactable items
-        Collider[] colliders = Physics.OverlapBox(target, Game.BoxSize, Quaternion.identity, enemyLayerMask);
+        Collider[] colliders = Physics.OverlapBox(target, Game.PickupDetectionBoxSize, Quaternion.identity, enemyLayerMask);
 
         //Debug.Log("Recieved Enemy Controllers: " + colliders.Length);
 
@@ -437,7 +437,7 @@ public class LevelCreator : MonoBehaviour
         Vector3 center = gizmosTarget - gizmosDirection * Game.BoxAdjustementTowardsPlayer;
         Quaternion rotation = Quaternion.LookRotation(gizmosDirection, Vector3.up);
 
-        PhysicsDebug.DrawOverlapBox(center, Game.BoxSize, rotation, Color.red);
+        PhysicsDebug.DrawOverlapBox(center, Game.WallDetectionBoxSize, rotation, Color.red);
     }
 
     Vector3 gizmosTarget = new();
@@ -458,20 +458,20 @@ public class LevelCreator : MonoBehaviour
         gizmosTarget = target;
         gizmosDirection = (target - playerPosition).normalized;
 
-        return Physics.OverlapBox(target - gizmosDirection * Game.BoxAdjustementTowardsPlayer, Game.BoxSize, Quaternion.LookRotation(gizmosDirection, Vector3.up), gridDetectionLayerMask).Length > 0;
+        return Physics.OverlapBox(target - gizmosDirection * Game.BoxAdjustementTowardsPlayer, Game.WallDetectionBoxSize, Quaternion.LookRotation(gizmosDirection, Vector3.up), gridDetectionLayerMask).Length > 0;
     }
 
     
 
     public bool Occupied(Vector3 target)
     {
-        return Physics.OverlapBox(target, Game.BoxSize, Quaternion.identity, gridDetectionLayerMask).Length > 0;
+        return Physics.OverlapBox(target, Game.PickupDetectionBoxSize, Quaternion.identity, gridDetectionLayerMask).Length > 0;
     }
 
     public Altar TargetHasAltar(Vector3 target)
     {
         // Check if target is a Door
-        Collider[] colliders = Physics.OverlapBox(target, Game.BoxSize, Quaternion.identity, wallLayerMask);
+        Collider[] colliders = Physics.OverlapBox(target, Game.PickupDetectionBoxSize, Quaternion.identity, wallLayerMask);
 
         if (colliders.Length != 0)
         {
@@ -482,7 +482,7 @@ public class LevelCreator : MonoBehaviour
     public Door TargetHasDoor(Vector3 target)
     {
         // Check if target is a Door
-        Collider[] colliders = Physics.OverlapBox(target, Game.BoxSize, Quaternion.identity, doorLayerMask);
+        Collider[] colliders = Physics.OverlapBox(target, Game.PickupDetectionBoxSize, Quaternion.identity, doorLayerMask);
 
         if (colliders.Length != 0)
         {
@@ -495,7 +495,7 @@ public class LevelCreator : MonoBehaviour
     {
         // Check if spot is free
         // Get list of interactable items
-        Collider[] colliders = Physics.OverlapBox(target, Game.BoxSize, Quaternion.identity, wallLayerMask);
+        Collider[] colliders = Physics.OverlapBox(target, Game.PickupDetectionBoxSize, Quaternion.identity, wallLayerMask);
 
         //Debug.Log("Updating walls for position: " + target+" wall: "+colliders.Length+" "+(colliders.Length>0? colliders[0].gameObject.GetComponent<Wall>().name:""));
 
@@ -537,7 +537,7 @@ public class LevelCreator : MonoBehaviour
 
     internal bool TargetHasPlacedBomb(Vector3 target)
     {
-        Collider[] colliders = Physics.OverlapBox(target, Game.BoxSize, Quaternion.identity, itemsLayerMask).Where(x=>x.GetComponent<Bomb>()!=null).ToArray();
+        Collider[] colliders = Physics.OverlapBox(target, Game.PickupDetectionBoxSize, Quaternion.identity, itemsLayerMask).Where(x=>x.GetComponent<Bomb>()!=null).ToArray();
         return colliders.Length>0;
     }
 

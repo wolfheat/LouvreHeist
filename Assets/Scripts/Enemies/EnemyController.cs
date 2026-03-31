@@ -91,7 +91,7 @@ public class EnemyController : Interactable
 
     private void Start()
     {
-        mock.transform.parent = LevelCreator.Instance.mockHolder?.transform;
+        mock.transform.parent = Mocks.Instance.transform; // LevelCreator.Instance.mockHolder?.transform;
         PlaceMock(transform.position,false);
     }
 
@@ -557,7 +557,7 @@ public class EnemyController : Interactable
         // Attack entire square infront of enemy if player is there its hit
         Vector3 pos = transform.position + transform.forward;
 
-        Collider[] colliders = Physics.OverlapBox(pos, Game.BoxSize, Quaternion.identity, playerLayerMask);
+        Collider[] colliders = Physics.OverlapBox(pos, Game.PickupDetectionBoxSize, Quaternion.identity, playerLayerMask);
         if (colliders.Length > 0)
         {
             //Debug.Log("Enemy Hit Player");
