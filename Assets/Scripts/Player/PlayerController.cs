@@ -1,13 +1,11 @@
 using System;
 using System.Collections;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 using Wolfheat.Inputs;
 using Wolfheat.StartMenu;
-using static UnityEngine.GraphicsBuffer;
 using static UnityEngine.InputSystem.InputAction;
 
 public enum MoveActionType{Step,SideStep,Rotate,VehicleEnter, VehicleExit, Stair}
@@ -47,6 +45,7 @@ public class MoveAction
         vehicle = vehicleExited;
     }
 }
+
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] Mock playerMock;
@@ -98,7 +97,8 @@ public class PlayerController : MonoBehaviour
         TakeFireDamage.PlayerTakeFireDamage += FireDamage;   
 
         playerAnimationController.HitComplete += HitWithTool;
-            
+
+        Reset();
     }
 
     private void OnDisable()
@@ -257,7 +257,7 @@ public class PlayerController : MonoBehaviour
                     Shop.Instance.ShowPanel(altar.MineralAccepted);
                 }                                
                 else {
-                    playerAnimationController.SetState(PlayerState.Hit);
+                    playerAnimationController.SetState(PlayerState.Break);
                 }
             }
             else if (pickupController.Door != null && pickupController.Door.GetComponent<Collider>().enabled) {
@@ -489,7 +489,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    
+
     private void InteractWithGrindable(Grindable grindable)
     {
         Debug.Log("Interacting with a grindable - should minigame start here?");
@@ -506,15 +506,17 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+
+        DoingAction = true;
+
         // Grind Animation
-        playerAnimationController.SetState(PlayerState.Hit);
-
-
-        SoundMaster.Instance.PlaySound(SoundName.GlassBreak);
-        grindable.GrindOpen();
+        playerAnimationController.SetState(PlayerState.Grind);
+        playerAnimationController.GrindableSet = grindable;
 
     }
-    
+
+    public void InteractComplete() => DoingAction = false;
+
     private void InteractWithLockpickable(LockPickable lockPickable)
     {
         Debug.Log("Interacting with a lockpickable - should minigame start here?");
@@ -522,8 +524,9 @@ public class PlayerController : MonoBehaviour
         if (!lockPickable.IsUnLocked) {
             // Unlock if having correct tool
             if(ToolsController.Instance.ActiveTool == ToolType.LockPick) {
-                lockPickable.Unlock();
-                playerAnimationController.SetState(PlayerState.Hit);
+                DoingAction = true;
+                playerAnimationController.SetState(PlayerState.LockPick);
+                playerAnimationController.LockPickableSet = lockPickable;
             }
             else {
                 Debug.Log("Its Locked");
@@ -559,12 +562,10 @@ public class PlayerController : MonoBehaviour
 
         Debug.Log("Interacting with a breakable?");
 
-        playerAnimationController.SetState(PlayerState.Hit);
+        playerAnimationController.BreakableSet = breakable;
+        DoingAction = true;
+        playerAnimationController.SetState(PlayerState.Break);
 
-        // Now have the door open directly? Later make minigame to unlock
-        breakable.Break();
-
-        SoundMaster.Instance.PlaySound(SoundName.WoodBreak);
 
         return;
     }
@@ -663,10 +664,11 @@ public class PlayerController : MonoBehaviour
 
         // Return if no movement input currently held 
         float movement = Inputs.Instance.Controls.Player.Step.ReadValue<float>();
+
         if (movement == 0) return false;
 
         // Special case Do not overwrite with Step if last time player moved it was a Step, and there is a Sidestep stored
-        if(lastAction != null && lastAction.moveType==MoveActionType.Step && savedAction != null && savedAction.moveType == MoveActionType.SideStep)
+        if(lastAction != null && lastAction.moveType == MoveActionType.Step && savedAction != null && savedAction.moveType == MoveActionType.SideStep)
             return false;
         
         // Write or overwrite next action
@@ -918,16 +920,21 @@ public class PlayerController : MonoBehaviour
         // Make sure the coroutines are stopped
         StopAllCoroutines();
 
-        transform.position = new Vector3(Stats.Instance.SavedStartPosition.x, 0 ,Stats.Instance.SavedStartPosition.z);
-        Debug.Log("Player moved to "+transform.position);
+        // If there is a Specified PLacePosition Use that or else set to zero?
+        Transform startTransform = FindFirstObjectByType<PlayerStartPosition>()?.transform;
+        if(startTransform == null) {
 
-        transform.rotation = Quaternion.identity;
-
-        Debug.Log(" Player position " + transform.position);
+            transform.position = new Vector3(Stats.Instance.SavedStartPosition.x, 0 ,Stats.Instance.SavedStartPosition.z);
+            transform.rotation = Quaternion.identity;
+        }
+        else {
+            transform.position = startTransform.position;
+            transform.rotation = startTransform.rotation;
+        }
 
         savedAction = null;
         lastAction = null;
-        Debug.Log("LASTACTION - NULL");
+        
         DoingAction = false;
 
         takeFireDamage.StopFire();

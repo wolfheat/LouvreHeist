@@ -441,7 +441,7 @@ public class LevelCreator : MonoBehaviour
     }
 
     Vector3 gizmosTarget = new();
-    Vector3 gizmosDirection;
+    Vector3 gizmosDirection = new Vector3(0,0,1);
 
     public bool Occupied(Vector3 target, Vector3 playerPosition)
     {
@@ -457,6 +457,8 @@ public class LevelCreator : MonoBehaviour
 
         gizmosTarget = target;
         gizmosDirection = (target - playerPosition).normalized;
+        if (gizmosDirection.magnitude == 0)
+            gizmosDirection = new Vector3(0, 0, 1);
 
         return Physics.OverlapBox(target - gizmosDirection * Game.BoxAdjustementTowardsPlayer, Game.WallDetectionBoxSize, Quaternion.LookRotation(gizmosDirection, Vector3.up), gridDetectionLayerMask).Length > 0;
     }

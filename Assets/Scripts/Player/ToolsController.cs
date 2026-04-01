@@ -42,6 +42,9 @@ public class ToolsController : MonoBehaviour
 
     internal void EquipTool(int v)
     {
+        // Disallow changing tool if doing action
+        if(PlayerController.Instance.DoingAction) return;
+
         // if there is an unlocked tool to the left switch to it
         for (int i = ActiveToolIndex + v; i < 5 && i>=0; i += v) {
             if (unlockedTool[i]) {

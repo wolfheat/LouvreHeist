@@ -1,11 +1,42 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using Wolfheat.StartMenu;
 
-public class LockPickable : MonoBehaviour
+public class ItemPickUpState : MonoBehaviour
 {
+    public bool IsAvailable;
+}
+public class GrindableState : MonoBehaviour
+{
+    public bool IsOpen;
+}
 
+public class BreakableState : MonoBehaviour
+{
+    public bool IsOpen;
+}
+
+public class LockPickableState : MonoBehaviour
+{
+    public bool IsOpen;
+    public bool IsUnLocked;
+}
+
+// Main INterface to get all SaveItems
+public interface ISavable
+{
+    string GUID { get; }
+    object GetState();
+    void RestoreState(object state);
+
+    void SetGUID(string newGUID);
+}
+
+
+public class LockPickable : MonoBehaviour, ISavable
+{
     [SerializeField] protected bool isUnlocked = false;
     protected bool isAnimating = false;
     protected bool isOpen = false;
@@ -16,7 +47,57 @@ public class LockPickable : MonoBehaviour
     public bool IsAnimating => isAnimating;
     public bool IsUnLocked => isUnlocked;
 
-    // Have data here that tells what Type it is and what Sound to play?
+
+
+    
+    #region Savable_Required_Region
+    public string GUID => guid;
+    [SerializeField] private string guid;
+
+    public void SetGUID(string newGUID) => guid = newGUID;
+
+#if UNITY_EDITOR
+private void OnValidate()
+    {
+
+        ISavable[] allItems = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<ISavable>().ToArray();
+                
+        if (string.IsNullOrEmpty(guid) || allItems.Count(x => x.GUID == guid) > 1) {
+            guid = System.Guid.NewGuid().ToString();
+            UnityEditor.EditorUtility.SetDirty(this);
+        }
+    }
+#endif
+
+    public object GetState()
+    {
+        return new LockPickableState()
+        {
+            IsOpen = isOpen,
+            IsUnLocked = isUnlocked
+        };
+    }
+
+    public void RestoreState(object stateObject)
+    {
+        if (stateObject is not LockPickableState) {
+            Debug.Log("Unable to Read Object as LockpickableState");
+            return;
+        }
+        LockPickableState state = (LockPickableState)stateObject;
+
+        isOpen = state.IsOpen;
+        isUnlocked = state.IsUnLocked;
+
+        if (isOpen) {
+            animator.SetBool("Open", true);
+            //animator.CrossFade("Open")
+        }
+
+    }
+
+    # endregion
+    
 
     [SerializeField] private bool data = true; 
 
@@ -72,4 +153,5 @@ public class LockPickable : MonoBehaviour
     {
         SoundMaster.Instance.PlaySound(SoundName.DoorLockedSound);
     }
+
 }

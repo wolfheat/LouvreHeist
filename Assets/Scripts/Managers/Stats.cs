@@ -91,7 +91,7 @@ public class Stats : MonoBehaviour
     }
 
     // coins, bombs, keys, gems, maps
-    private int CountItems() => ItemSpawner.Instance.CountAllItems();
+    private int CountItems() => ItemSpawner.Instance?.CountAllItems() ?? 0;
     
     //private int CountItems() => itemsHolder.transform.GetComponentsInChildren<Usable>().Where(x => x.gameObject.activeSelf).ToArray().Length 
     //    + itemsHolder.transform.GetComponentsInChildren<PowerUp>().Where(x => x.gameObject.activeSelf).ToArray().Length;

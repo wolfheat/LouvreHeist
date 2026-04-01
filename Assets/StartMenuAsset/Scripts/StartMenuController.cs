@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using Unity.VectorGraphics;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -41,10 +43,21 @@ namespace Wolfheat.StartMenu
         public void SetNextMenu(int nextMenuindex) => SetNextMenu((MenuOption)nextMenuindex);
         public void SetNextMenu(MenuOption nextMenuOption)
         {
+
+            FindFirstObjectByType<EventHandelerDisplayer>()?.ShowExtraText("Transition to Option " + nextMenuOption);
+
             //Debug.Log("Set Next: " + Time.realtimeSinceStartup);
             if (menuState == MenuState.Transitioning) return;
             nextMenu = nextMenuOption;
-            SoundMaster.Instance.PlaySound(SoundName.MenuClick);
+
+            if(FindFirstObjectByType<AudioListener>() == null) {
+                FindFirstObjectByType<EventHandelerDisplayer>()?.ShowExtraText("Missing AudioListener In Scene");
+            }
+            else {
+                FindFirstObjectByType<EventHandelerDisplayer>()?.ShowExtraText("Stats is present: "+ (FindFirstObjectByType<Stats>() != null));
+                //SoundMaster.Instance.PlaySound(SoundName.MenuClick);
+            }
+
             CloseCurrent();
         }
 
@@ -149,7 +162,10 @@ namespace Wolfheat.StartMenu
 
         public void ShowMenu(MenuOption menu)
         {
-                Debug.Log("Showing Menu "+menu);
+            Debug.Log("Showing Menu "+menu);
+
+            FindFirstObjectByType<EventHandelerDisplayer>()?.ShowExtraText("Clicked Option "+menu);
+
             switch (menu)
             {
                 case MenuOption.MainMenu:
@@ -219,14 +235,17 @@ namespace Wolfheat.StartMenu
             ActivateDefaultSelectedForCurrentMenu();
             Debug.Log("Initiating start Menu D");
 
+            // Also Clear Any potential Save?
 
+            Debug.Log("Clear All Save Data");
+            SceneStateLoader.Instance.ClearAllData();
         }
 
         private void StartGame()
         {
             Debug.Log("Start Game Pressed");
             //SceneManager.UnloadSceneAsync("StartMenu");
-            SceneChanger.Instance.ChangeScene(SceneChanger.Instance.GameNameString);
+            SceneChanger.Instance.ChangeScene(SceneChanger.Instance.StartLevelName);
         }
 
         private void ShowLeaderboards()
@@ -241,6 +260,7 @@ namespace Wolfheat.StartMenu
         private void ShowSettings()
         {
             Debug.Log("Settings Pressed");
+
             menuState = MenuState.Transitioning;
             settings.gameObject.SetActive(true);
             currentOption = settings;

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Wolfheat.StartMenu;
 
-public class Breakable : MonoBehaviour
+public class Breakable : MonoBehaviour, ISavable
 {
     // Breakable box, when broken generates its content at its place? From Data file SO?
 
@@ -14,6 +14,55 @@ public class Breakable : MonoBehaviour
     protected bool isOpen = false;
 
     public bool IsOpen => isOpen;
+
+
+
+
+    #region Savable_Required_Region
+    public string GUID => guid;
+    [SerializeField] private string guid;
+    public void SetGUID(string newGUID) => guid = newGUID;
+
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        if (string.IsNullOrEmpty(guid)) {
+            guid = System.Guid.NewGuid().ToString();
+            UnityEditor.EditorUtility.SetDirty(this);
+        }
+    }
+#endif
+
+    public object GetState()
+    {
+        return new BreakableState()
+        {
+            IsOpen = isOpen
+        };
+    }
+
+    public void RestoreState(object stateObject)
+    {
+        if (stateObject is not BreakableState) {
+            Debug.Log("Unable to Read Object as LockpickableState");
+            return;
+        }
+        BreakableState state = (BreakableState)stateObject;
+
+        isOpen = state.IsOpen;
+
+        if (isOpen) {
+            Break();
+            //animator.SetBool("brake", true);
+            //animator.CrossFade("Open")
+        }
+
+    }
+
+    #endregion
+
+
+
 
     public void Break()
     {
@@ -32,7 +81,7 @@ public class Breakable : MonoBehaviour
         Debug.Log("Creating content at its place, this is pickable");
 
         // Run Glass destroy animator? Show Shattered glass particles?
-        animator?.SetBool("Shatter", true);
+        animator?.SetBool("break", true);
 
         isOpen = true;
 

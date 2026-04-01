@@ -130,6 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LockPickable
   isUnlocked: 1
   animator: {fileID: 8981324086830430859}
+  guid: 1e9b5d24-dd13-4a59-9f05-c9edd8076730
   data: 1
 --- !u!95 &8981324086830430859
 Animator:

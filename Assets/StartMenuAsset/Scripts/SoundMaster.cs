@@ -51,7 +51,8 @@ namespace Wolfheat.StartMenu
         GlassTap,
         GlassBreak,
         WoodTap,
-        WoodBreak
+        WoodBreak,
+        GrindingSound
     }
 
     public enum MusicName {MenuMusic, OutDoorMusic, IndoorMusic, DeadMusic, CreditsMusic, BossMusic}

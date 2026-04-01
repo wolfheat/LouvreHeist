@@ -11,8 +11,8 @@ public class Interactable : MonoBehaviour
     {        
         SoundMaster.Instance.PlaySound(soundNameOverride == SoundName.None ? soundName : soundNameOverride);
         ParticleEffects.Instance.PlayTypeAt(particleType, transform.position);
-        if(usePool)
-            ItemSpawner.Instance.ReturnItem(this);
+        //if(usePool)
+        //    ItemSpawner.Instance.ReturnItem(this);
         gameObject.SetActive(false);
     }
 }

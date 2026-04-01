@@ -19,6 +19,6 @@ public class SeatedUIDisplayer : MonoBehaviour
         Instance = this;
     }
 
-    public void ShowSeated(bool show) => seatedText.gameObject.SetActive(show);
+    public void ShowSeated(bool show) => seatedText?.gameObject.SetActive(show);
     public void ShowPickupType(string typeName) => PickupText.text = typeName;
 }

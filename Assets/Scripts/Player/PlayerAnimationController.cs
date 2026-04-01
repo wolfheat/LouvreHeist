@@ -2,13 +2,16 @@ using System;
 using UnityEngine;
 using Wolfheat.StartMenu;
 
-public enum PlayerState {Idle,Hit,Drill,Shoot,
-    Attack
+public enum PlayerState {Idle,Break,Drill,Shoot,
+    Attack,
+    Grind,
+    LockPick
 }
 
 public class PlayerAnimationController : MonoBehaviour
 {
     [SerializeField] Animator animator;
+    [SerializeField] Animator grinderPlaterAnimator;
 
     public bool IsAttacking => animator.GetBool("attack");
 
@@ -23,12 +26,26 @@ public class PlayerAnimationController : MonoBehaviour
         {
             case PlayerState.Idle:
                 animator.SetBool("mine", false);
+                animator.SetBool("grind", false);
                 animator.SetBool("attack", false);
                 animator.CrossFade("Idle", 0.1f);
                 break;
-            case PlayerState.Hit:
+            case PlayerState.Grind:
                 animator.SetFloat("mineSpeed", Stats.Instance.MiningSpeed);
-                animator.SetBool("mine", true);
+                animator.SetBool("grind", true);
+
+                // Play Sound Of grinding
+                SoundMaster.Instance.PlaySound(SoundName.GrindingSound);
+
+                grinderPlaterAnimator.SetBool("SpinPlate", true);
+                break;
+            case PlayerState.LockPick:
+                //animator.SetFloat("mineSpeed", Stats.Instance.MiningSpeed);
+                animator.SetBool("lockpick", true);
+                break;
+            case PlayerState.Break:
+                animator.SetFloat("mineSpeed", Stats.Instance.MiningSpeed);
+                animator.SetBool("break", true);
                 break;
             case PlayerState.Drill:
                 animator.CrossFade("Drill", 0.1f);
@@ -47,9 +64,68 @@ public class PlayerAnimationController : MonoBehaviour
         State = newState;
     }
 
+    public void LockPickComplete()
+    {
+        // Play Unlock Sound
+        SoundMaster.Instance.PlaySound(SoundName.UnlockChest);
+
+        activeLockPickable.Unlock();
+        activeLockPickable = null;
+
+        // Is this needed?
+        animator.SetBool("lockpick", false);
+
+        SetState(PlayerState.Idle);
+
+        // Sets the Doing Action to false so imputs are handeled again
+        PlayerController.Instance.InteractComplete();
+    }
+    
+    public void BreakingComplete()
+    {
+        // Play Unlock Sound
+        SoundMaster.Instance.PlaySound(SoundName.WoodBreak);
+
+        activeBreakable.Break();
+        activeBreakable = null;
+
+        // Is this needed?
+        animator.SetBool("break", false);
+
+        SetState(PlayerState.Idle);
+
+        // Sets the Doing Action to false so imputs are handeled again
+        PlayerController.Instance.InteractComplete();
+    }
+
+    
+    public void GrindComplete()
+    {
+        if (activeGrindable == null) return;
+        SoundMaster.Instance.PlaySound(SoundName.GlassBreak);
+
+        activeGrindable.GrindOpen();
+        activeGrindable = null;
+
+        grinderPlaterAnimator.SetBool("SpinPlate", false);
+
+        SetState(PlayerState.Idle);
+
+        // Sets the Doing Action to false so imputs are handeled again
+        PlayerController.Instance.InteractComplete();
+    }
+
+    
+    public Grindable GrindableSet { set { activeGrindable = value; } }
+    public LockPickable LockPickableSet { set { activeLockPickable = value; } }
+    public Breakable BreakableSet { set { activeBreakable = value; } }
+
+    private Grindable activeGrindable;
+    private LockPickable activeLockPickable;
+    private Breakable activeBreakable;
+
     public void MiningPerformed()
     {
-
         //PlayerController.Instance.pickupController.UpdateColliders();
 
         Wall wall = PlayerController.Instance.pickupController.Wall;
@@ -70,11 +146,11 @@ public class PlayerAnimationController : MonoBehaviour
             SoundMaster.Instance.PlaySound(SoundName.Miss);
         }
     }
+
     public void AnyHitCompleted()
     {
         Debug.Log("HIT Completed");
         HitComplete?.Invoke();
-        
     }
 
     public void AttackPerformed()

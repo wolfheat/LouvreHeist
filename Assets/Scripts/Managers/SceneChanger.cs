@@ -1,23 +1,26 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VectorGraphics;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using Wolfheat.Inputs;
+using Scene = UnityEngine.SceneManagement.Scene;
 
 public class SceneChanger : MonoBehaviour
 {
     public static SceneChanger Instance { get; private set; }
 
-    public string GameNameString = "Test"; 
-    public string ActiveGameScene = "Hideout"; 
+    public string StartLevelName = "Hideout";
+
+    public string ActiveGameScene = "Hideout";
+    public string SceneToLoad = "Hideout";
+    public string StartMenu = "StartMenu";
+    public string[] ScenesPriorityActivation = { "Office","Hideout","StartMenu"};
+
+    [SerializeField] private GameObject InGameCamera; 
+    [SerializeField] private GameObject InGameUI; 
 
     private void Start()
     {
-        if (Instance != null)
-        {
+        if (Instance != null) {
             Destroy(gameObject);
             return;
         }
@@ -25,42 +28,57 @@ public class SceneChanger : MonoBehaviour
 
 
 #if UNITY_EDITOR
-        Resources.UnloadUnusedAssets();        
+        Resources.UnloadUnusedAssets();
         CheckedForScenes();
 #else      
-            ChangeScene("StartMenu");            
+            StartCoroutine(InitScenes());            
             // Make game display in second monitor
 
 #endif
     }
 
 
+    public IEnumerator InitScenes()
+    {
+        yield return null;
+        
+        Scene managers = SceneManager.GetSceneByName("Managers");
+
+        if (managers == null || !managers.isLoaded)
+            yield return SceneManager.LoadSceneAsync(managers.name, LoadSceneMode.Single);
+        
+        yield return null;
+
+        yield return SceneManager.LoadSceneAsync(StartMenu, LoadSceneMode.Additive);
+
+        yield return null;
+
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(StartMenu));
+
+        Debug.Log("InitScenes, runs on Builds not unity play mode");
+
+        UpdateActiveSceneUIAndCamera("StartMenu");
+
+        // Store the name of the Scene to change Into
+        ActiveGameScene = StartMenu;
+    }
+
     private void CheckedForScenes()
     {
-        
-        Debug.Log("** Checking Scenes to Set active. **");
-        if (SceneManager.GetSceneByName("StartMenu").IsValid() && SceneManager.GetSceneByName("StartMenu").isLoaded)
-        {
-            if (SceneManager.GetSceneByName(GameNameString).IsValid() && SceneManager.GetSceneByName(GameNameString).isLoaded)
-            {
-                Debug.Log("Both Start and DungeonII is loaded");
-                // If both Menu and Dungeon is loaded unload the menu
-                SceneManager.UnloadSceneAsync("StartMenu");
-                if(!SceneManager.GetSceneByName(GameNameString).isLoaded)
-                    SceneManager.LoadScene(GameNameString);
-                SceneManager.SetActiveScene(SceneManager.GetSceneByName(GameNameString));
-                return;
+        bool UnloadRest = false;
+        // Editor version of starting the game - Check for the highest priority scene that is open and make that the active one
+        foreach(var sceneName in ScenesPriorityActivation) {
+            if(SceneManager.GetSceneByName(sceneName).IsValid() && SceneManager.GetSceneByName(sceneName).isLoaded) {
+                Debug.Log("Scenemanagement: Setting "+sceneName+" as Active");
+                if (!UnloadRest) {
+                    UnloadRest = true;
+                    SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
+                    UpdateActiveSceneUIAndCamera(sceneName);
+                }
+                else {
+                    SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName(sceneName));
+                }
             }
-            Debug.Log("Only Start is loaded");
-            // If only Menu is loaded set it as active
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName("StartMenu"));
-            Debug.Log("  StartMenu is set as active.");
-        }else if (SceneManager.GetSceneByName(GameNameString).IsValid() && SceneManager.GetSceneByName(GameNameString).isLoaded)
-        {
-            Debug.Log("Only Dungeon II is loaded");
-            // If only Dungeon is loaded set it as active            
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName(GameNameString));
-            Debug.Log("  Dungeon is set as active.");
         }
         Resources.UnloadUnusedAssets();
     }
@@ -121,43 +139,158 @@ public class SceneChanger : MonoBehaviour
 
     }
 
-    */
 
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+        //SceneManager.sceneUnloaded += OnSceneUnloaded;
+
     }
 
-    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode mode)
+    private void OnDisable()
     {
-        Debug.Log("Scene Loaded: "+ scene.name);
-        SceneManager.SetActiveScene(scene);
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        //SceneManager.sceneUnloaded -= OnSceneUnloaded;
+
     }
 
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Handles Cameras and UI Visibility
+        bool showIngame = scene.name != "StartMenu";
+
+        Debug.Log("Loaded Scene "+scene.name+" Show the Ingame UI and Camera: "+showIngame);
+        // Hide the In-Game Camera And UI when in the StartMenu
+        InGameCamera.SetActive(showIngame);
+        InGameUI.SetActive(showIngame);
+
+    }
+
+    */
     public void ChangeScene(string name, bool additive = true, bool loadFromSaveFile = true)
     {
-         
-        StartCoroutine(ChangeToActive(name)); // Changing this scene to be the active one
+        // Store the name of the Scene to change Into
+        ActiveGameScene = SceneManager.GetActiveScene().name;
+
+        SaveScene(ActiveGameScene);
+
+        SceneToLoad = name;
+        Debug.Log("Scene: Unloading Scene: " + ActiveGameScene);
+        StartCoroutine(ChangeSceneCO());
     }
 
-    private IEnumerator ChangeToActive(string name)
+    private void SaveScene(string activeGameScene)
     {
-                
-        Debug.Log("Unloading ActiveScene: "+ ActiveGameScene);
-        // Unload the previus scene
-        yield return SceneManager.UnloadSceneAsync(ActiveGameScene);
+        Debug.Log("Saving state of scene "+activeGameScene);
+        SceneStateLoader.Instance.Save(activeGameScene);
+    }
+    
+    private void LoadSceneState(string sceneName)
+    {
+        Debug.Log("Load state of scene "+ sceneName);
+        bool didLoad = SceneStateLoader.Instance.TryLoad(sceneName);
+        Debug.Log("Loaded state " + sceneName +": " + didLoad);
 
-
-        yield return new WaitForSeconds(0.1f);
-
-        Debug.Log("Loading Scene: "+ name);
-        // Load next Scene
-        yield return SceneManager.LoadSceneAsync(name, LoadSceneMode.Additive);
-
-        ActiveGameScene = name;
-        Debug.Log("ActiveScene Set to "+ ActiveGameScene);
     }
 
+    private IEnumerator ChangeSceneCO()
+    {
+        // Short Wait
+        yield return null;
+
+        // Unload
+        Debug.Log("Scene: Unloading Scene: " + ActiveGameScene);
+        yield return SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName(ActiveGameScene));
+        
+        yield return null;
+
+        Debug.Log("Scene: Loading Scene: " + SceneToLoad);
+        yield return SceneManager.LoadSceneAsync(SceneToLoad, LoadSceneMode.Additive);
+
+        yield return null;
+
+        Scene scene = SceneManager.GetSceneByName(SceneToLoad);
+
+        // Load state Data
+        LoadSceneState(SceneToLoad);
+
+        Debug.Log("Scene: Activating Scene: " + SceneToLoad + " Valid: " + scene.IsValid() + " Loaded: " + scene.isLoaded);
+
+        SceneManager.SetActiveScene(scene);
+
+        UpdateActiveSceneUIAndCamera(SceneToLoad);
+
+        PlayerController.Instance.Reset();
+    }
+
+    private void UpdateActiveSceneUIAndCamera(string sceneToLoad)
+    {
+        if (sceneToLoad == "Managers") {
+            Debug.Log("Loaded Scene " + sceneToLoad);
+            return;
+        }
+
+        ActiveGameScene = SceneToLoad;
+
+        bool showIngame = sceneToLoad != "StartMenu";
+
+        Debug.Log("Loaded Scene " + sceneToLoad + " Show the Ingame UI and Camera: " + showIngame);
+        // Hide the In-Game Camera And UI when in the StartMenu
+        InGameCamera.SetActive(showIngame);
+        InGameUI.SetActive(showIngame);
+    }
+
+    /*
+    private void OnSceneUnloaded(UnityEngine.SceneManagement.Scene scene)
+    {
+
+        // We Now Have it Unloaded, Load the New Scene after:
+        Debug.Log("Scene: Scene Unloaded: " + scene.name);
+        StartCoroutine(DelayedLoad());
+    }
+
+    private IEnumerator DelayedLoad()
+    {
+        // Short Wait
+        yield return null;
+
+        // Unload
+        Debug.Log("Scene: Loading Scene: " + SceneToLoad);
+        SceneManager.LoadSceneAsync(SceneToLoad, LoadSceneMode.Additive);
+    }
+    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log("Scene: Scene Loaded: " + scene.name);
+        StartCoroutine(DelayedActivate(scene.name));
+
+    }
+
+    private IEnumerator DelayedActivate(string name)
+    {
+        yield return null;
+        //yield return new WaitForSeconds(2f);
+        Debug.Log("Scene: Setting Scene Active: " + name);
+
+        Debug.Log("Scene: List Of Scenes at this point: ");
+        Debug.Log("Scene: ------------------------------");
+        foreach(var scene in SceneManager.GetAllScenes()) {
+            Debug.Log("Scene: "+scene.name+" Valid: "+scene.IsValid()+" Loaded: "+scene.isLoaded);
+            if(scene.name == name) {
+                while (!scene.isLoaded) {
+                    yield return null;
+                    Debug.Log("Scene: ---------------waiting until its Loaded");
+                }
+                    Debug.Log("Scene: ---------------                  Loaded");
+                SceneManager.SetActiveScene(scene);
+            }
+        }
+        Debug.Log("Scene: -----------------\n");
+
+        // Stor this as the Active One
+        ActiveGameScene = name;
+    }*/
+
+    /*
     private IEnumerator ChangeToActiveOLD(string name, bool additive)
     {        
         string unloadScene = "";
@@ -183,5 +316,5 @@ public class SceneChanger : MonoBehaviour
             SceneManager.UnloadSceneAsync(sceneName);
             Resources.UnloadUnusedAssets();
         }
-    }
+    }*/
 }

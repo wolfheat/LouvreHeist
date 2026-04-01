@@ -9,7 +9,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Shatter
+    m_ConditionEvent: break
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1951776786310945700}
@@ -116,7 +116,7 @@ AnimatorController:
   m_Name: ShatterGlassAnimator
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: Shatter
+  - m_Name: break
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -150,7 +150,7 @@ AnimatorStateTransition:
   m_IsExit: 0
   serializedVersion: 3
   m_TransitionDuration: 0.008730173
-  m_TransitionOffset: 0.008719331
+  m_TransitionOffset: 0
   m_ExitTime: 0.99417984
   m_HasExitTime: 1
   m_HasFixedDuration: 1

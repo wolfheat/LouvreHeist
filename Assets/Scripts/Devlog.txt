@@ -16,37 +16,72 @@ Mar 2026
 		* Maybe fixed pickup catching walls issue
 30/3	* COmpleted more of the Office
 		* Tried to Fix transition between Scenes, kinda working
+31/3	* Fixed SceneManagement Issue
+		
+1/4		- Removed the Seen Mock at startmenu
+		* Made Grinder Animation Play when Using grinder, added sound
+		* Make LockPick Animation PLay when Unlocking with lockpicks, (Add minigame later?)
+		* Made specific animation for breaking and lockpick
+		* Disallowing change of tool or movement during animation
+		* Fixed exiting to Main Menu
+		* Fixed Saving States for Objects and Items when changing scenes
+		* Clearing Of Data On Start Menu fixed
+		* Made StartPosition for Player on Each Scene
 
 
-		Make safes only accessable from the front.
+		* Need to handle the opening phase of cabinettes and safes when entering a scene and replaying them. Do it instant, or speed up and dim the view for player?
+
+
+		* Make Visited Scenes ie Hideout keep its state when reentering? How to do this. Store the state of everything?
+		* Make Sure Starting game from Start Menu, Starts with clean scenes
+
+
+		MUST FIX
+
 		Make Items placed in safes etc be pickable - decide to use F or interact to pick them?
+
+		All days also allows player to gather loot that will be added to the total score
+
+		How to hold loot? Unlimited or placed in a backpack/inventory?
+
+		LIKE TO FIX
+		Truck Movement - Fixed to Streets? And Faster?
+		Make Liftcar drivable? Optional, can also be placed by itself before player spawn in?
+
+
 		Make the pickable minigame to unlock a safe
-
-		Still issue with pickupcontroller, it detects walls sometimes instead of unlockables etc - Fix
-
-		Add Pickable Doors
 		Make different difficulty minigame for door, cabinets?
-
-		IDEAS:
 
 		Have the game be 3 or 5 days, each day is separate mission preparing for the final heist.
 		Previous days is used to gather resources needed to complete the heist.
 			Tools Needed - Truck - Grinder - Outfit - Motorbike
 
-		All days also allows player to gather loot that will be added to the total score
-
-		Maybe have the Hideout in the same position, but different days unlocks new area around it to explore?
-
-		Maybe have breakable walls again with crack, only breakable by hammer (or bombs?)
-
-
-
-		How to decide the core gameloop?
-		
 		Have the first NPC spotting the player start a 5-10 min timer for player to return to hideout or they lose?
 
-		How to hold loot? Unlimited or placed in a backpack/inventory?
+		Lift and Car sounds
 
+		Add Sound Settings menu available from ingame
+
+		PROB NOT VITAL TO FIX
+		Make safes only accessable from the front.
+		Maybe have breakable walls again with crack, only breakable by hammer (or bombs?)
+		Add Moving cars and people? With colliders?
+		Some stuff that limits the player but gives some other benefit?
+		Hungry, Bad bladder, Bad Stamina, Slow etc
+
+
+		FIXED?
+		Still issue with pickupcontroller, it detects walls sometimes instead of unlockables etc - Fix
+		Add Pickable Doors
+		Maybe have the Hideout in the same position, but different days unlocks new area around it to explore?
+		Add Tool and Toolbar, so player can use different tools to complete tasks or attack NPCs
+
+
+
+		IDEAS:
+
+		How to decide the core gameloop? WHat is this game een supposed to be?
+		
 		Tools are owned or not
 
 		Day 1 - Outfit?
@@ -58,30 +93,11 @@ Mar 2026
 		Truck is limited to move on streets? Yes
 
 		TODO:
-
-		Fix exiting to Main Menu
-
-		Add Sound Settings menu available from ingame
-
-		Game
-		Add Moving cars and people? With colliders?
-
-		Make LiftCar interactable maybe also engine sound when used?
-
-		Make Liftcar drivable? Optional, can also be placed by itself before player spawn in?
-
-		Have perks?
-		Some stuff that limits the player but gives some other benefit?
-		
-		
-		Hungry, Bad bladder, Bad Stamina, Slow etc
-
-		Faster, Stronger, Special Skill?
-
-		Add Tool and Toolbar, so player can use different tools to complete tasks or attack NPCs
 		
 
 		POST JAM
+
+		Stuff to fix post jam here
 
 
 

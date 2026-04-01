@@ -27,10 +27,12 @@ public class PauseController : MonoBehaviour, IPointerMoveHandler
         }
 
         // Send Analytics for Game Abandoned
-        UGS_Analytics.Instance.GameAbandonedEvent();
+        //UGS_Analytics.Instance.GameAbandonedEvent();
 
         UIController.Instance.ToMainMenu();
-        
+
+        // Also Close this page
+        CloseClicked();
     }
     public void SetActive(bool doSetActive)
     {
