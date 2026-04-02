@@ -89,6 +89,7 @@ public class PlayerController : MonoBehaviour
         Inputs.Instance.Controls.Player.SideStep.performed += SideStep;
         Inputs.Instance.Controls.Player.Turn.performed += TurnPerformed;    
         Inputs.Instance.Controls.Player.Click.performed += InterractWith;   
+        //Inputs.Instance.Controls.Player.F.performed += InteractWithLootableItem;   
         Inputs.Instance.Controls.Player.Space.performed += InterractWith;   
         Inputs.Instance.Controls.UI.Enter.performed += InterractWith;   
         Inputs.Instance.Controls.Player.RightClick.performed += RightClick;
@@ -108,6 +109,7 @@ public class PlayerController : MonoBehaviour
         Inputs.Instance.Controls.Player.SideStep.performed -= SideStep;
         Inputs.Instance.Controls.Player.Turn.performed -= TurnPerformed;
         Inputs.Instance.Controls.Player.Click.performed -= InterractWith;
+        //Inputs.Instance.Controls.Player.F.performed -= InteractWithLootableItem;   
         Inputs.Instance.Controls.Player.Space.performed -= InterractWith;   
         Inputs.Instance.Controls.UI.Enter.performed -= InterractWith;   
         Inputs.Instance.Controls.Player.RightClick.performed -= RightClick;   
@@ -126,13 +128,15 @@ public class PlayerController : MonoBehaviour
     {
         if(Stats.Instance.IsDead || GameState.IsPaused)
             return; 
-        Debug.Log("Right Click Place Bomb");
+
+        Debug.Log("Right Click Take Loot, ie secondary action");
 
         if (IsSeated) {
             IterractWithVehicleEngine();
             return;
         }
-        PlaceBomb();
+        //PlaceBomb();
+        InteractWithLootableItem();
     }
 
     private void IterractWithVehicleEngine()
@@ -188,7 +192,35 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Interract");
         InterractWith(true);
     }
-    
+
+
+    public void InteractWithLootableItem()
+    {
+        if (Stats.Instance.IsDead || GameState.IsPaused) return;
+
+        // Check if item exists to pick up
+        if (EventSystem.current.IsPointerOverGameObject() && Mouse.current.leftButton.IsPressed()) {
+            // Only check for this if not in shop - prob should only do if interact was performed by mouse
+            Debug.Log("Interacting over UI element");
+            return;
+        }
+
+        if (pickupController.ActiveInteractable == null)
+            return;
+        // Interact with closest visible item         
+        Debug.Log("Pick up item ahead is " + pickupController.ActiveInteractable);
+
+
+
+        // Do what you do with this item
+        if(pickupController.ActiveInteractable is InteractableItem item) {
+            // Read its value and add it to player 
+            int value = item.Data.value;
+            Debug.Log("Picking Up " + item.Data.itemName + " with a value of " + value);
+        }
+        pickupController.ActiveInteractable.InteractWith();
+
+    }
 
     public void InterractWith(bool mouseSource = false)
     {
@@ -222,94 +254,79 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        //toolHolder.ChangeTool(DestructType.Breakable);
-
-
-        Debug.Log("Pick up item ahead is "+ pickupController.ActiveInteractable);
-
-
-
         Debug.Log("Checking for a Stair " + (pickupController.Stair!=null));   
         Debug.Log("Checking for a InfoPanel " + (pickupController.InfoPanel!=null));   
         Debug.Log("Checking for a LockPickable " + (pickupController.LockPickable!=null));   
 
-        // Interact with closest visible item 
-        if (pickupController.ActiveInteractable != null)
+        if (pickupController.Wall != null)
         {
-            Debug.Log("OLD pickupController.InteractWithActiveItem");
-        }
-        else
-        {
-            if (pickupController.Wall != null)
-            {
 
-                Debug.Log("** Interact with item, but wall ahead");
-                if (!Stats.Instance.HasSledgeHammer && pickupController.Wall.GetComponent<Door>() != null)
-                {
-                    Debug.Log("ICantBreakThisWithMyBareHands");
-                    //SoundMaster.Instance.PlaySound(SoundName.ICantBreakThisWithMyBareHands);
-                    return;
-                }
-                else if (pickupController.Wall.gameObject.TryGetComponent(out Door door)) {
-                    InteractWithDoor(door);
-                }                
-                else if (pickupController.Wall.gameObject.TryGetComponent(out Altar altar)) {
-                    Shop.Instance.ShowPanel(altar.MineralAccepted);
-                }                                
-                else {
-                    playerAnimationController.SetState(PlayerState.Break);
-                }
-            }
-            else if (pickupController.Door != null && pickupController.Door.GetComponent<Collider>().enabled) {
-                Debug.Log("Player has a Door in front "+pickupController.Door, pickupController.Door);
-                InteractWithDoor(pickupController.Door);
-            }
-            else if (pickupController.Vehicle != null) {
-                Debug.Log("** Interact with vehicle ahead");
-
-                InteractWithVehicle(pickupController.Vehicle);
-            }
-            else if (pickupController.InfoPanel != null) {
-                Debug.Log("** Interact with infopanel ahead");
-
-                InteractWithInfoPanel(pickupController.InfoPanel);
-            }
-            else if (pickupController.Enemy != null)
+            Debug.Log("** Interact with item, but wall ahead");
+            if (!Stats.Instance.HasSledgeHammer && pickupController.Wall.GetComponent<Door>() != null)
             {
-                Debug.Log("Player has an Enemy in front "+pickupController.Enemy, pickupController.Enemy);
-                playerAnimationController.SetState(PlayerState.Attack);
+                Debug.Log("ICantBreakThisWithMyBareHands");
+                //SoundMaster.Instance.PlaySound(SoundName.ICantBreakThisWithMyBareHands);
+                return;
             }
-            else if (pickupController.Mockup != null)
-            {
-                Debug.Log("Hit Enemy Mock "+pickupController.Mockup.name, pickupController.Mockup); 
-                playerAnimationController.SetState(PlayerState.Attack);
-            }
-            else if (pickupController.Stair != null)
-            {
-                Debug.Log("** Interact with stair ahead");
-                Debug.Log("Entering a Stair ");
-                if (pickupController.Stair.TryUseStair(out Transform destination)) {
-                    Debug.Log("Stair has a valid Destination at: "+destination.position);
-                    TraverseStair(destination);
-                }
-            }
-            else if (pickupController.LockPickable != null)
-            {
-                Debug.Log("** Interact with lockpickable");
-                InteractWithLockpickable(pickupController.LockPickable);
-            }
-            else if (pickupController.Breakable != null)
-            {
-                Debug.Log("** Interact with lockpickable");
-                InteractWithBreakable(pickupController.Breakable);
-            }
-            else if (pickupController.Grindable != null)
-            {
-                Debug.Log("** Interact with lockpickable");
-                InteractWithGrindable(pickupController.Grindable);
+            else if (pickupController.Wall.gameObject.TryGetComponent(out Door door)) {
+                InteractWithDoor(door);
+            }                
+            else if (pickupController.Wall.gameObject.TryGetComponent(out Altar altar)) {
+                Shop.Instance.ShowPanel(altar.MineralAccepted);
+            }                                
+            else {
+                playerAnimationController.SetState(PlayerState.Break);
             }
         }
+        else if (pickupController.Door != null && pickupController.Door.GetComponent<Collider>().enabled) {
+            Debug.Log("Player has a Door in front "+pickupController.Door, pickupController.Door);
+            InteractWithDoor(pickupController.Door);
+        }
+        else if (pickupController.Vehicle != null) {
+            Debug.Log("** Interact with vehicle ahead");
 
+            InteractWithVehicle(pickupController.Vehicle);
+        }
+        else if (pickupController.InfoPanel != null) {
+            Debug.Log("** Interact with infopanel ahead");
+
+            InteractWithInfoPanel(pickupController.InfoPanel);
+        }
+        else if (pickupController.Enemy != null)
+        {
+            Debug.Log("Player has an Enemy in front "+pickupController.Enemy, pickupController.Enemy);
+            playerAnimationController.SetState(PlayerState.Attack);
+        }
+        else if (pickupController.Mockup != null)
+        {
+            Debug.Log("Hit Enemy Mock "+pickupController.Mockup.name, pickupController.Mockup); 
+            playerAnimationController.SetState(PlayerState.Attack);
+        }
+        else if (pickupController.Stair != null)
+        {
+            Debug.Log("** Interact with stair ahead");
+            Debug.Log("Entering a Stair ");
+            if (pickupController.Stair.TryUseStair(out Transform destination)) {
+                Debug.Log("Stair has a valid Destination at: "+destination.position);
+                TraverseStair(destination);
+            }
+        }
+        else if (pickupController.LockPickable != null)
+        {
+            Debug.Log("** Interact with lockpickable");
+            InteractWithLockpickable(pickupController.LockPickable);
+        }
+        else if (pickupController.Breakable != null)
+        {
+            Debug.Log("** Interact with lockpickable");
+            InteractWithBreakable(pickupController.Breakable);
+        }
+        else if (pickupController.Grindable != null)
+        {
+            Debug.Log("** Interact with lockpickable");
+            InteractWithGrindable(pickupController.Grindable);
+        }
+    
     }
 
     private void TraverseStair(Transform destination)

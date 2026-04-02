@@ -58,7 +58,7 @@ public class Grindable : MonoBehaviour, ISavable
 
 
 
-    public void GrindOpen()
+    public void GrindCompleteOpen()
     {
         isOpen = true;
 

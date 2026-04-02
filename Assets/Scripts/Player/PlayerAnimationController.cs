@@ -86,6 +86,11 @@ public class PlayerAnimationController : MonoBehaviour
         // Play Unlock Sound
         SoundMaster.Instance.PlaySound(SoundName.WoodBreak);
 
+        if(activeBreakable == null) {
+            Debug.Log("No Breakable is Stored, should be one to reach this point");
+            return;
+        }
+
         activeBreakable.Break();
         activeBreakable = null;
 
@@ -104,15 +109,16 @@ public class PlayerAnimationController : MonoBehaviour
         if (activeGrindable == null) return;
         SoundMaster.Instance.PlaySound(SoundName.GlassBreak);
 
-        activeGrindable.GrindOpen();
+        activeGrindable.GrindCompleteOpen();
         activeGrindable = null;
 
         grinderPlaterAnimator.SetBool("SpinPlate", false);
 
-        SetState(PlayerState.Idle);
 
         // Sets the Doing Action to false so imputs are handeled again
         PlayerController.Instance.InteractComplete();
+
+        SetState(PlayerState.Idle);
     }
 
     

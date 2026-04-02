@@ -16,6 +16,20 @@ public class ToolsController : MonoBehaviour
 
 
 
+    internal void Reset()
+    {
+        unlockedTool = new bool[6];
+        UnlockTool(ToolType.Hands);
+
+        // Initiate with bare hands
+        EquipTool(ToolType.Hands);
+
+        UIController.Instance.ToolsUIReset();
+        UIController.Instance.BriefingsReset();
+
+
+    }
+
     internal bool ToolUnlocked(ToolType tool) => unlockedTool[(int)tool];
 
     internal void EquipTool(ToolType tool)
@@ -67,14 +81,7 @@ public class ToolsController : MonoBehaviour
 
     private void Start()
     {
-
-        UnlockTool(ToolType.Hands);
-        //UnlockTool(ToolType.LockPick);
-        //UnlockTool(ToolType.Hammer);
-        //UnlockTool(ToolType.Grinder);
-
-        // Initiate with bare hands
-        EquipTool(ToolType.Hands);
+        Reset();
     }
 
     public void UnlockTool(ToolType tool)

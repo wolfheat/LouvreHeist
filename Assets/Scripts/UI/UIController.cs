@@ -237,4 +237,6 @@ public class UIController : MonoBehaviour
 
     internal void SetToolsUIActiveTool(ToolType tool) => toolsUIController.ShowActiveTool(tool);
     internal void ActivateToolsUITool(ToolType tool) => toolsUIController.ActivateTool(tool);
+    internal void ToolsUIReset() => toolsUIController.Reset();
+    internal void BriefingsReset () => briefingsManager.Reset();
 }

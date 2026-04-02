@@ -6,7 +6,7 @@ using Wolfheat.StartMenu;
 using Random = UnityEngine.Random;
 
 public enum MineralType{Gold,Silver,Copper, Flesh, DarkSoil, Stone, Chess, Coal, Sand, Moss,Coin}
-public enum UsableType {Bomb,SledgeHammer,Compass,Map,Key,Gem,Other, Grinder, LockPick}
+public enum UsableType {Bomb,SledgeHammer,Compass,Map,Key,Gem,Other, Grinder, LockPick, Money}
 public enum PowerUpType { Speed,Damage,Health,Coin,Banana}
 public class ItemSpawner : MonoBehaviour
 {

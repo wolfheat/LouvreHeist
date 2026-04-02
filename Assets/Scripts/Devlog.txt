@@ -27,13 +27,21 @@ Mar 2026
 		* Fixed Saving States for Objects and Items when changing scenes
 		* Clearing Of Data On Start Menu fixed
 		* Made StartPosition for Player on Each Scene
+		* Reseting Player Tools on restart fixed
+2/4		* Made Destination Map For missions a bit better
+		* Added Loot to containers, they need to be a bit away from th ground and borders since the pickupArea is smaller in all directions than one tile
+		* Made Office Door Openable, issue with closing it remains since the collider for pickup is smaller than the narrow doorwall collider (maybe leave in)
+		
 
+		* Got an issue with the office door when reentering, it does not save correctly, or load? I can open the door first time entering but not close it, then close it the second time and not open it. fix
 
+		* Need to Be able to place items in storage units and for player to take them
+
+		
 		* Need to handle the opening phase of cabinettes and safes when entering a scene and replaying them. Do it instant, or speed up and dim the view for player?
 
 
-		* Make Visited Scenes ie Hideout keep its state when reentering? How to do this. Store the state of everything?
-		* Make Sure Starting game from Start Menu, Starts with clean scenes
+
 
 
 		MUST FIX
@@ -84,10 +92,23 @@ Mar 2026
 		
 		Tools are owned or not
 
+			Get SledgeHammer in Hideout?
+
 		Day 1 - Outfit?
+			Tool - LockPick
+			Item - Outfit
+
 		Day 2 - Grinder
+			Tool - LockPick
+			Item - Grinder
+
 		Day 3 - Motorbike
+			Tool - LockPick
+			Item - Outfit
+
 		Day 4 - Truck
+			Tool - 
+			Item - Truck
 		Day 5 - Heist
 
 		Truck is limited to move on streets? Yes

@@ -239,6 +239,7 @@ namespace Wolfheat.StartMenu
 
             Debug.Log("Clear All Save Data");
             SceneStateLoader.Instance.ClearAllData();
+            ToolsController.Instance.Reset();
         }
 
         private void StartGame()

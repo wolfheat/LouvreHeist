@@ -15,7 +15,7 @@ public class ToolsUIController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        ShowActiveTool(ActiveToolIndex);
+        Reset();
     }
 
     internal void SetAsAvailable(bool a) => available = a;
@@ -39,5 +39,12 @@ public class ToolsUIController : MonoBehaviour
 
         // Just Update all Tools, but with one new Available
         ShowActiveTool(ActiveToolIndex);
+    }
+
+    internal void Reset()
+    {
+        ActiveToolIndex = 0;
+        activatedTools = new bool[6];
+        ActivateTool(ToolType.Hands);
     }
 }

@@ -33,10 +33,9 @@ public interface ISavable
 
     void SetGUID(string newGUID);
 }
-
-
 public class LockPickable : MonoBehaviour, ISavable
 {
+    [SerializeField] protected bool walkableWhenOpen = false;
     [SerializeField] protected bool isUnlocked = false;
     protected bool isAnimating = false;
     protected bool isOpen = false;
@@ -46,6 +45,7 @@ public class LockPickable : MonoBehaviour, ISavable
     public bool IsOpen => isOpen;
     public bool IsAnimating => isAnimating;
     public bool IsUnLocked => isUnlocked;
+    public bool Walkable => walkableWhenOpen && isOpen;
 
 
 
@@ -131,12 +131,20 @@ private void OnValidate()
 
         //StartCoroutine(OpenDoorCO());
         //doorPart.transform.Rotate(0, -90, 0);
+        Debug.Log("Animate to open Door");
         animator.SetBool("Open", true);
         isAnimating = true;
 
+
         isOpen = true;
-
-
+        // Maybe dont need this, can check if its open when deciding if it is walkable instead?
+        //if(TryGetComponent(out Collider collider)) {
+        //    Debug.Log("Found a Collider, disabling it");
+        //    collider.enabled = false;
+        //}
+        // Changing this to door layer when opened
+        if (walkableWhenOpen && isOpen)
+            gameObject.layer = LayerMask.NameToLayer("Door");
     }
     public void CloseDoorAnimate()
     {
@@ -147,6 +155,9 @@ private void OnValidate()
         animator.SetBool("Open", false);
         isAnimating = true;
         isOpen = false;
+
+        if (walkableWhenOpen && !isOpen)
+            gameObject.layer = LayerMask.NameToLayer("Wall");
     }
 
     internal void TryOpenFail()

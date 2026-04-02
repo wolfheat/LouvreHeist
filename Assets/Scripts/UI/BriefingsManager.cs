@@ -6,23 +6,50 @@ public class BriefingsManager : MonoBehaviour
 {
     [SerializeField] private HideOutMap hideOutMap; 
     [SerializeField] private GameObject[] briefingsPages; 
+    [SerializeField] private GameObject StartMissionButton; 
 
     private int activeBriefingIndex = 0;
 
     public void SetNextBriefingStage() => activeBriefingIndex++;
+    
+    public void SetMissionAsActive(int index)
+    {
+        activeBriefingIndex = index;
+        Debug.Log("Setting Mission "+index+" as active.");
+        hideOutMap.ActivateActiveCircle(activeBriefingIndex);
+
+        bool isLocked = hideOutMap.Locked(activeBriefingIndex);
+        Debug.Log("Mission "+index+" is "+(isLocked?"Locked":"Not Locked"));
+
+        // Show the start Button if its not locked
+        StartMissionButton.SetActive(!isLocked);
+    }
+
     public bool ManagerIsActive => hideOutMap.gameObject.activeSelf;
+
+    public void UnlockDestination(int index)
+    {
+        hideOutMap.UnlockDestination(index);
+    }
+
+    public void Reset()
+    {
+        hideOutMap.Reset();
+    }
 
     public void OpenHideOutMap()
     {
-        if (hideOutMap.gameObject.activeSelf) return; // allready open exit
+        if (hideOutMap.gameObject.activeSelf) return; // already open exit
 
         Debug.Log("Opening the HideOut Map");
         // Opens the map and sets the current step as active
         hideOutMap.gameObject.SetActive(true);
-        hideOutMap.ActivateActiveCircle(activeBriefingIndex);
+
+        SetMissionAsActive(activeBriefingIndex);
+        
     }
     
-    public void HideOutMapShowActiveBriefing()
+    public void ShowBriefing()
     {
         // Opens the map and sets the current step as active
         OpenBriefingPage(activeBriefingIndex);

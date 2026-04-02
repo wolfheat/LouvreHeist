@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class PickUpController : MonoBehaviour
 {
@@ -48,8 +46,8 @@ public class PickUpController : MonoBehaviour
     public void UpdateColliders(bool wait = false)
     {
         //Debug.Log("* Updating Colliders "+(wait?" after waiting *":"*"));
-        UpdateInteractables();
         UpdateWall();        
+        UpdateInteractables();
         UpdateEnemy();        
     }
 
@@ -115,67 +113,91 @@ public class PickUpController : MonoBehaviour
 
         if(colliders.Length == 0) return;
 
-        if (colliders[0].gameObject.TryGetComponent(out Wall FoundWall)) {
-            SeatedUIDisplayer.Instance.ShowPickupType("Wallw");
-            this.Wall = FoundWall;
-            Door = null;
-            // Found A wall
-        }
-        else if(colliders[0].gameObject.TryGetComponent(out Door FoundDoor)) {
-            // Found A wall
-            SeatedUIDisplayer.Instance.ShowPickupType("Door");
-             this.Door = FoundDoor;
-            Wall = null;
-        }
-        else if (colliders[0].gameObject.TryGetComponent(out Vehicle FoundVehicle)) {
-            // Found A wall
-            SeatedUIDisplayer.Instance.ShowPickupType("Vehicle");
-            this.Vehicle = FoundVehicle;
-            Wall = null;
-        }
-        else if (colliders[0].gameObject.TryGetComponent(out LockPickable FoundLockpickable)) {
-            // Found A wall
-            SeatedUIDisplayer.Instance.ShowPickupType("LockPickable");
-            this.LockPickable = FoundLockpickable;
-            Wall = null;
-        }
-        else if (colliders[0].gameObject.TryGetComponent(out Breakable FoundBreakable)) {
-            // Found A wall
-            SeatedUIDisplayer.Instance.ShowPickupType("Breakable");
-            this.Breakable = FoundBreakable;
-            Wall = null;
-        }
-        else if (colliders[0].gameObject.TryGetComponent(out Grindable FoundGrindable)) {
-            // Found A wall
-            SeatedUIDisplayer.Instance.ShowPickupType("Grindable");
-            this.Grindable = FoundGrindable;
-            Wall = null;
-        }
-        else if (colliders[0].gameObject.TryGetComponent(out Stair FoundStair)) {
-            // Found A wall
-            SeatedUIDisplayer.Instance.ShowPickupType("Stair");
-            this.Stair = FoundStair;
-            Wall = null;
-        }
-        else if (colliders[0].gameObject.TryGetComponent(out InfoPanel FoundInfoPanel)) {
-            // Found A wall
-            SeatedUIDisplayer.Instance.ShowPickupType("InfoPanel");
-            this.InfoPanel = FoundInfoPanel;
-            Wall = null;
-        }
 
+        int AnythingButWallFound = 0;
+
+        string foundItems = "";
+
+        foreach (Collider collider in colliders) {
+
+            if (collider.gameObject.TryGetComponent(out Wall FoundWall)) {
+                // Found A wall
+                foundItems += " Wall";
+                this.Wall = FoundWall;
+                Door = null;
+            }
+            else if(collider.gameObject.TryGetComponent(out Door FoundDoor)) {
+                foundItems +=  " Door";
+                this.Door = FoundDoor;
+                AnythingButWallFound++;
+            }
+            else if (collider.gameObject.TryGetComponent(out Vehicle FoundVehicle)) {
+                // Found A wall
+                foundItems +=  " Vehicle";
+                this.Vehicle = FoundVehicle;
+               AnythingButWallFound++;
+            }
+            else if (collider.gameObject.TryGetComponent(out LockPickable FoundLockpickable)) {
+                // Found A wall
+                foundItems +=  " LockPickable";
+                this.LockPickable = FoundLockpickable;
+               AnythingButWallFound++;
+            }
+            else if (collider.gameObject.TryGetComponent(out Breakable FoundBreakable)) {
+                // Found A wall
+                foundItems +=  " Breakable";
+                this.Breakable = FoundBreakable;
+               AnythingButWallFound++;
+            }
+            else if (collider.gameObject.TryGetComponent(out Grindable FoundGrindable)) {
+                // Found A wall
+                foundItems +=  " Grindable";
+                this.Grindable = FoundGrindable;
+               AnythingButWallFound++;
+            }
+            else if (collider.gameObject.TryGetComponent(out Stair FoundStair)) {
+                // Found A wall
+                foundItems +=  " Stair";
+                this.Stair = FoundStair;
+               AnythingButWallFound++;
+            }
+            else if (collider.gameObject.TryGetComponent(out InfoPanel FoundInfoPanel)) {
+                // Found A wall
+                foundItems +=  " InfoPanel";
+                this.InfoPanel = FoundInfoPanel;
+                AnythingButWallFound++;
+            }
+        }
+        if (AnythingButWallFound > 0)
+            Wall = null;
+
+        SeatedUIDisplayer.Instance.ShowPickupType(foundItems);
 
     }
-    
+
     public void UpdateInteractables()
     {
+
+        // If there is an lockpickable Item that is not open disregard any attemp to get an item inside
+        if (LockPickable != null && !LockPickable.IsOpen) {
+            //Debug.Log("Lockpickable ahead that is not open, unset any loot");
+            ActiveInteractable = null;
+            return;
+        }
+        // Also if there is a grindable Item that is not open disregard any attemp to get an item inside
+        if (Grindable != null && !Grindable.IsOpen) {
+            //Debug.Log("Grindable ahead that is not open, unset any loot");
+            ActiveInteractable = null;
+            return;
+        } 
+
         // Get list of interactable items
         Collider[] colliders = Physics.OverlapBox(Convert.Align(transform.position), Game.PickupDetectionBoxSize,Quaternion.identity, itemLayerMask);
         
         //UIController.Instance.UpdateShownItemsUI(colliders.Select(x => x.GetComponent<InteractableItem>()?.Data).ToList(),true);
         if (colliders.Length == 0)
         {
-            //Debug.LogError("No Interactable found. box centered at "+transform.position+" size "+Game.boxSize);
+            //Debug.LogError("No Interactable found.");
             ActiveInteractable = null;
         }
         else {
