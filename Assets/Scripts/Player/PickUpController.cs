@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
@@ -97,9 +98,15 @@ public class PickUpController : MonoBehaviour
         // Align box with grid before casting
 
         Vector3 alignedPos = Convert.Align(transform.position);
+        Vector3 posBetweenPLayerAndPickupPosition = transform.position + (PlayerController.Instance.transform.position - transform.position)/2;
 
         // Get list of interactable items
         Collider[] colliders = Physics.OverlapBox(alignedPos, Game.PickupDetectionBoxSize,transform.rotation, wallAndDoorLayerMask);
+
+        // Also Include close Doors in separate ColliderOverlap?
+        Collider[] collidersDoors = Physics.OverlapBox(posBetweenPLayerAndPickupPosition, Game.PickupDetectionBoxSize,transform.rotation, wallAndDoorLayerMask);
+
+        colliders = colliders.Concat(collidersDoors).ToArray();
         
         // Unset all
         Wall = null;

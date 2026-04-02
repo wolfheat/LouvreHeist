@@ -537,6 +537,8 @@ public class PlayerController : MonoBehaviour
     private void InteractWithLockpickable(LockPickable lockPickable)
     {
         Debug.Log("Interacting with a lockpickable - should minigame start here?");
+        Debug.Log("Unlocked: " + lockPickable.IsUnLocked);
+        Debug.Log("Open: " + lockPickable.IsOpen);
 
         if (!lockPickable.IsUnLocked) {
             // Unlock if having correct tool

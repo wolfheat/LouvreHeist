@@ -65112,6 +65112,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: WallSegmentC_DoorInner
       objectReference: {fileID: 0}
+    - target: {fileID: 5032539827101117168, guid: 136263b07c93ecb4d902f1d9ed2404a7, type: 3}
+      propertyPath: m_Size.z
+      value: 0.225721
+      objectReference: {fileID: 0}
+    - target: {fileID: 5032539827101117168, guid: 136263b07c93ecb4d902f1d9ed2404a7, type: 3}
+      propertyPath: m_Center.z
+      value: 0.023070276
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

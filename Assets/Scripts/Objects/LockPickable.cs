@@ -88,7 +88,7 @@ private void OnValidate()
 
         isOpen = state.IsOpen;
         isUnlocked = state.IsUnLocked;
-
+        
         if (isOpen) {
             animator.SetBool("Open", true);
             //animator.CrossFade("Open")
@@ -116,6 +116,8 @@ private void OnValidate()
     public void DoorAnimateComplete()
     {
         isAnimating = false;
+        if (walkableWhenOpen && isOpen)
+            gameObject.layer = LayerMask.NameToLayer("Door");
     }
     
     public void OpenDoorAnimate()
@@ -143,8 +145,6 @@ private void OnValidate()
         //    collider.enabled = false;
         //}
         // Changing this to door layer when opened
-        if (walkableWhenOpen && isOpen)
-            gameObject.layer = LayerMask.NameToLayer("Door");
     }
     public void CloseDoorAnimate()
     {

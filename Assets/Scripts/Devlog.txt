@@ -29,9 +29,12 @@ Mar 2026
 		* Made StartPosition for Player on Each Scene
 		* Reseting Player Tools on restart fixed
 2/4		* Made Destination Map For missions a bit better
-		* Added Loot to containers, they need to be a bit away from th ground and borders since the pickupArea is smaller in all directions than one tile
+		* Added Loot to containers, they need to be a bit away from the ground and borders since the pickupArea is smaller in all directions than one tile
 		* Made Office Door Openable, issue with closing it remains since the collider for pickup is smaller than the narrow doorwall collider (maybe leave in)
-		
+		* Door Office is fixed
+
+
+		* Make the Heading "Missions" also from Postit?
 
 		* Got an issue with the office door when reentering, it does not save correctly, or load? I can open the door first time entering but not close it, then close it the second time and not open it. fix
 
