@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Start Game
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 9766fd5cd970dcf4a9c1419ddaf135a1, type: 2}
-  m_sharedMaterial: {fileID: 1527479749558565102, guid: 9766fd5cd970dcf4a9c1419ddaf135a1, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d52855ace9efb6542b544d12c24373b8, type: 2}
+  m_sharedMaterial: {fileID: 1527479749558565102, guid: d52855ace9efb6542b544d12c24373b8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -103,6 +103,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -199,7 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.066037714, g: 0.066037714, b: 0.066037714, a: 0.6039216}
+  m_Color: {r: 0.16981131, g: 0.08943396, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -284,6 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d94dbb5fd71cd2d408ab8001854a7c71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMenubutton: 1
 --- !u!95 &1397398023732212004
 Animator:
   serializedVersion: 7
@@ -364,7 +366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.26415092, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.56078434, g: 0.24705884, b: 0.050980397, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

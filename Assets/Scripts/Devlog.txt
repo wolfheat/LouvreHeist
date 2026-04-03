@@ -42,8 +42,14 @@ Mar 2026
 		* Fixed Transistion darkening between scenes.
 		* Player limited from moving when in Info / Map and transitioning?
 
+		* Created Itch page for uploads, basic layout instructions and screenshot
+		* Adjusted the StartMenu with new look, background, colors and Credits first version update
+
+
+
 		* Rewrite the Credits screen with all used assets from this project
 
+		* Make new Star Menu background, how about corridor in the office that player camera transends? Maybe just still image to begin with?
 
 		* Fix so the Timer resets everytime player starts game from Start Menu
 		* Fix the Complete percent to reflect the actual items collected
@@ -159,34 +165,6 @@ Mar 2026
 		* New release 0.0.14
 
 
-		// Add sound settings option in-game
-
-		// Should holding key when opening door allow continious movement forward? Maybe better to have player repress key?
-
-
-		// Some in responsiveness when moving at boss, why?
-
-		// Have my times hidden when below 10 or 15 in the list???
-		
-
-		// WANTS
-		// Make better postprocessing
-		
-		// Joined jam 16/2 - 2025 17:45, with 4 days left on jam.
-
-		// Player can get coins in the dungeon and use them to buy usable items
-		// Items
-		// * Keys
-		// * Oxygen Tank
-		// * Health
-		// * Weapon?
-		// * Map
-		// * Compass?
-
-		// Goal for player is to get out of the dungeon . might end up meeting a final boss there?
-
-
-
 <b>Credits
 </b>
 
@@ -194,58 +172,60 @@ A game by wolfheat
 
 
 
+
+
+
+
+
+
+
 A variety of assets were used to create this game.
 
-<b>Graphics
-</b>
+
+<b>Graphic</b>
 3D
-Pure Poly - Ultimate Low Poly Mining
-BitGem - Hand Painted Series
-Siuniaev - Gambler Cat
-Instant Zoomies - Horror Starter Pack Free
-Synty - Ancient Empire
+Synty Studio - Office, Kids, NightClub, Construction, Mini City, Town, Asset Packs
+				
+
+//Pure Poly - Ultimate Low Poly Mining
+//BitGem - Hand Painted Series
+//Siuniaev - Gambler Cat
+//Synty - Ancient Empire
 
 2D
-Vector Dividers Collection
-upklyak (freepik) - Ground cracks on land isolated
-Kenney - Board Game Icons
+Vector Dividers Collection -  Start menu Dividers
+Kenney - Icons from sefferent asset packs
 
 VFX
 Unity Technologies - Particle Pack
 
-<b>Audio
-</b>
-Freesound - Various Sounds
-Pixabay - Various Sounds
+<b>Audio</b>
+
+FreeSounds,Pixabay - Various Sounds assets
 Uppbeat - Music
 
-<b>Music
-</b>
+<b>Music</b>
 Brock Hewitt - In The Silence
 Monument Music - Love Story
 
-<b>Fonts
-</b>
+<b>Fonts</b>
 Prida01 - gluk
 
-<b>AI Tools
-</b>
-Playground AI - 2D art
-Craiyon - 2D art
-Piclumen - 2D art
-Suno - Music
+<b>AI Tools</b>
+//Playground AI - 2D art
+//Craiyon - 2D art
+//Piclumen - 2D art
+??Suno - Music
 
-<b>Other Tools Used
-</b>
+<b>Other Tools Used</b>
 Audacity
 Gimp
 Blender
 Unity
 
-<b>Game Jam
-</b>
+<b>Game Jam</b>
 This game was created for the
-Dungeon Crawler Game Jam 2025
+Dungeon Crawler Game Jam 2026
 
 
 Thank you for playing!
