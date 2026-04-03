@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 
-public enum InfoPanelTypes{HideoutMap,OfficeExit}
+public enum InfoPanelTypes{HideoutMap,OfficeExit,MarketExit,BuildSiteExit,LouvreExit}
 
 public class InfoPanel : MonoBehaviour
 {
@@ -11,7 +11,14 @@ public class InfoPanel : MonoBehaviour
     {
         if(panelType == InfoPanelTypes.HideoutMap)
             UIController.Instance.ShowHideOutMap();
-        if (panelType == InfoPanelTypes.OfficeExit) {
+        else if (panelType != InfoPanelTypes.LouvreExit) {
+            Debug.Log("Exiting any but the Louvre Scene");
+            // Maybe first Show a Information which leads to scene change
+            SceneChanger.Instance.ChangeScene("Hideout");
+        }
+        else{
+            // Exiting Louvre - maybe have end scene here
+            Debug.Log("Exiting Louvre Scene");
             // Maybe first Show a Information which leads to scene change
             SceneChanger.Instance.ChangeScene("Hideout");
         }

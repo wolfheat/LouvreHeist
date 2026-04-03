@@ -41,6 +41,10 @@ public class HealthUIController : MonoBehaviour
     {
         int max = Stats.Instance.CurrentMaxHealth;
         //Debug.Log("Max hearts is "+max+" currently "+heartsList.Count+ " hearts ");
+
+        // Issue when some hearts are removed?
+        
+
         while (max > heartsList.Count)
         {
             heartsList.Add(Instantiate(heartPrefab, heartsHolder.transform));

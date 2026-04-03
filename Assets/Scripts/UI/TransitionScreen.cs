@@ -39,11 +39,14 @@ public class TransitionScreen : MonoBehaviour
 
     public void Lighten()
     {
+        Debug.Log("Transition: Enter here Lighten" ); 
         StartCoroutine(Animate(darkColor, lightColor));
     }
 
     public void Darken(Action callback, float transitionTime)
     {
+        Debug.Log("Transition: Enter here Darken");
+
         AnimationTime = transitionTime;
         callbackMethod = callback;
         StartCoroutine(Animate(lightColor,darkColor));
@@ -51,6 +54,7 @@ public class TransitionScreen : MonoBehaviour
 
     public void Darken()    
     {
+        Debug.Log("Transition: Enter here Darken (no Callbak set)");
         AnimationTime = AnimationTimeDefault;
         StartCoroutine(Animate(lightColor,darkColor));
     }

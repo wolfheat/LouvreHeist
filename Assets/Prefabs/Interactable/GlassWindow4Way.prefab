@@ -583,6 +583,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Grindable
   animator: {fileID: 6671438277211107581}
+  walkableWhenBroken: 1
   guid: ad575e5b-68e3-4923-a5aa-b7ced00ef19f
 --- !u!95 &6671438277211107581
 Animator:

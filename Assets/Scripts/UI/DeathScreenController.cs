@@ -47,7 +47,7 @@ public class DeathScreenController : MonoBehaviour
         }
 
         // Send Analytics for Game Abandoned
-        UGS_Analytics.Instance.GameAbandonedEvent();
+        //UGS_Analytics.Instance.GameAbandonedEvent();
 
         UIController.Instance.ToMainMenu();
     }

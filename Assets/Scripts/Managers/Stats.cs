@@ -76,7 +76,7 @@ public class Stats : MonoBehaviour
         // Start Timer
         stopwatch.Start();
 
-        startAmountItems = CountItems();
+        //startAmountItems = CountItems();
         Debug.Log("Start Children Items = "+startAmountItems+" This is the amount the player need to collect to achieve the Completionist");
     }
     internal void StoreBossStartTime() => bossStartTime = stopwatch.Elapsed;

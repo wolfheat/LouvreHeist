@@ -32,25 +32,39 @@ Mar 2026
 		* Added Loot to containers, they need to be a bit away from the ground and borders since the pickupArea is smaller in all directions than one tile
 		* Made Office Door Openable, issue with closing it remains since the collider for pickup is smaller than the narrow doorwall collider (maybe leave in)
 		* Door Office is fixed
+		* Added Money Stats to show value of all picked up stuff to the player
+		* Decreased Time for player to be able to walk through office door after opening it.
+		* Now able to walk on Shattered glass in bool for it is set
+		* Made the Heading "Missions" also from Postit And added some Extras for fun
+		* Fixed Issue with not updating pickup items after going to main menu.
+3/4		* Kinda got HelpInstructions to work
 
 
-		* Make the Heading "Missions" also from Postit?
-
-		* Got an issue with the office door when reentering, it does not save correctly, or load? I can open the door first time entering but not close it, then close it the second time and not open it. fix
-
-		* Need to Be able to place items in storage units and for player to take them
-
+		HelpInstructions issues
+		* Can see through open containers from side and back. 
+		* The Breakable box allows player to loot without breaking
 		
-		* Need to handle the opening phase of cabinettes and safes when entering a scene and replaying them. Do it instant, or speed up and dim the view for player?
 
 
+		* Should the player be able to pickup items from shelfes on the tiles they are standing on, also the office main desk is walkable, should it pickup directly or be prompted with loot key?
 
+		* Handle each days loot spearately? Added to total when at Hideout? 
+
+		* Have a statsPage in hideout showing the gain from each location?
+
+		* Have a Highscore list for everyone completing the game? With their time and Loot value.
+										
+		* Doors opening phase entering scene Speedup/Fix?
+
+		* Dragon Implementation? Have a special Dragon door that player can walk through and have a fight with a dragon for extra loot? 
+		* Just have a dragon room in the louvre with dragon loot?
+
+		* Add A endgame scene where player sails awaiy towards the horizon and end credits play?
 
 
 		MUST FIX
 
-		Make Items placed in safes etc be pickable - decide to use F or interact to pick them?
-
+		
 		All days also allows player to gather loot that will be added to the total score
 
 		How to hold loot? Unlimited or placed in a backpack/inventory?

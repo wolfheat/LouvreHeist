@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using Wolfheat.StartMenu;
 public class Vehicle : MonoBehaviour
@@ -9,6 +10,14 @@ public class Vehicle : MonoBehaviour
     [SerializeField] Transform exitPositionTransform;
     [SerializeField] Animator vehicleAnimator;
     [SerializeField] string EngineUseParameterName = "StartEngine";
+    [SerializeField] string EngageInstruction = "EngageInstruction";
+    [SerializeField] string DisEngageInstruction = "DisEngageInstruction";
+    [SerializeField] Vehicle EngageNeededToEngage;
+    [SerializeField] GameObject EngagedObjectActivated;
+
+    public string GetEngageInstructions => EngageInstruction;
+    public string GetDisEngageInstructions => DisEngageInstruction;
+    public bool Engaged { get; set; } = false;
 
     public Transform GetSeatedTransform => seatedPositionTransform;
     public Transform GetExitTransform => exitPositionTransform;
@@ -41,39 +50,42 @@ public class Vehicle : MonoBehaviour
 
         // Animated opening of door
         //StartCoroutine(OpenDoorCO());
+        // Clear on Exit
 
         return  seatedPositionTransform;
     }
-    
-    public void ExitVehicle()
+            
+    public bool Engage()
     {
-        Debug.Log("Exiting The Vehicle");
-                
-        SoundMaster.Instance.PlaySound(SoundName.OpenDoor);
+        Debug.Log("Using Engine of Vehicle "+name);
 
-        // Should I send the coordinates to player for when entering? SHould not be able to move inside but rotate?
-        // Or should the vehicle handle the player when it is inside?
-
-        // Animated opening of door
-        //StartCoroutine(OpenDoorCO());
-    }
-    
-    public void StartEngine()
-    {
-        Debug.Log("Using Engine of Vihecle "+name);
+        if(EngageNeededToEngage != null && !EngageNeededToEngage.Engaged) {
+            Debug.Log("Can not engage Vehicle, prerequirements not met at "+EngageNeededToEngage.name);
+            return false;
+        }
 
         SoundMaster.Instance.PlaySound(SoundName.OpenDoor);
-
 
         vehicleAnimator.SetBool(EngineUseParameterName, true);
+
+        Engaged = true;
+        if(EngagedObjectActivated != null)
+            EngagedObjectActivated?.SetActive(Engaged);
+
+        return true;
     }
-    public void StopEngine()
+    public void DisEngage()
     {
-        Debug.Log("Stopping Engine of Vihecle "+name);
+        Debug.Log("Stopping Engine of Vehicle "+name);
 
         SoundMaster.Instance.PlaySound(SoundName.OpenDoor);
 
         vehicleAnimator.SetBool(EngineUseParameterName, false);
+
+        Engaged = false;
+        if (EngagedObjectActivated != null)
+            EngagedObjectActivated?.SetActive(Engaged);
+
     }
 
     public void OpenDoorAnimate()

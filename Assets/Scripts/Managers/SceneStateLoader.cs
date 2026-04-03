@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VectorGraphics;
 using UnityEngine;
 
 
@@ -27,11 +28,13 @@ public class SceneStateLoader : MonoBehaviour
     {
         if (!scenesData.ContainsKey(sceneName)) {
             Debug.Log("Scene is not stored in the Dictionary so cant load any, use Defaults");
+            DebugPanel.Instance.AddMessage("StateLoader: Scene is not stored in the Dictionary. "+sceneName);
             return false;
         }
 
+            
         // Use the file to load the data
-        LoadSceneData(scenesData[sceneName]);
+        LoadSceneData(sceneName);
 
         return true;
     }
@@ -54,13 +57,15 @@ public class SceneStateLoader : MonoBehaviour
         scenesData[sceneName] = data;        
     }
 
-    private void LoadSceneData(Dictionary<string, object> value)
+    private void LoadSceneData(string sceneName)
     {
+        // Get The scenes data
+        Dictionary<string, object> sceneSpecificData = scenesData[sceneName];
 
         ISavable[] allItems = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<ISavable>().ToArray();
 
         // Has a valid data file here, use it to load all items to its states
-        foreach (var itemData in value) {
+        foreach (var itemData in sceneSpecificData) {
             // Find the Object
             foreach (var itemIngame in allItems) {
                 if(itemIngame.GUID == itemData.Key) {
@@ -70,5 +75,7 @@ public class SceneStateLoader : MonoBehaviour
                 }
             }
         }
+
+        DebugPanel.Instance.AddMessage("StateLoader: Scene info loaded from " + sceneName+" Items: "+sceneSpecificData.Count);
     }
 }

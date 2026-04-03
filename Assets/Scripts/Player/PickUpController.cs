@@ -23,6 +23,19 @@ public class PickUpController : MonoBehaviour
     private LayerMask doorLayerMask;
     private LayerMask itemLayerMask;
 
+
+    public static PickUpController Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null) {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
+
+
     private void Start()
     {
         doorLayerMask = LayerMask.GetMask("Door");
@@ -30,7 +43,13 @@ public class PickUpController : MonoBehaviour
         enemyLayerMask = LayerMask.GetMask("Enemy");
         mockupLayerMask = LayerMask.GetMask("Mock");
         itemLayerMask = LayerMask.GetMask("Items","ItemsSeeThrough") ;
+        Restart();
+    }
+
+    public void Restart()
+    {
         UpdateColliders();
+        StopAllCoroutines();
         StartCoroutine(UpdateCollidersInterval());
     }
 
@@ -107,7 +126,13 @@ public class PickUpController : MonoBehaviour
         Collider[] collidersDoors = Physics.OverlapBox(posBetweenPLayerAndPickupPosition, Game.PickupDetectionBoxSize,transform.rotation, wallAndDoorLayerMask);
 
         colliders = colliders.Concat(collidersDoors).ToArray();
-        
+        /*
+        bool hadStair = Stair != null;
+        bool hadVehicle = Vehicle != null;
+        bool hadLockPick = LockPickable != null;
+        bool hadBreakable = Breakable != null;
+        bool hadGrindable = Grindable != null;
+        */
         // Unset all
         Wall = null;
         Door = null;
@@ -118,73 +143,120 @@ public class PickUpController : MonoBehaviour
         Grindable = null;
         InfoPanel = null;
 
-        if(colliders.Length == 0) return;
+        if(colliders.Length > 0) {
 
+            int AnythingButWallFound = 0;
 
-        int AnythingButWallFound = 0;
+            string foundItems = "";
 
-        string foundItems = "";
+            foreach (Collider collider in colliders) {
 
-        foreach (Collider collider in colliders) {
+                if (collider.gameObject.TryGetComponent(out Wall FoundWall)) {
+                    // Found A wall
+                    foundItems += " Wall";
+                    this.Wall = FoundWall;
+                    Door = null;
+                }
+                else if(collider.gameObject.TryGetComponent(out Door FoundDoor)) {
+                    foundItems +=  " Door";
+                    this.Door = FoundDoor;
+                    AnythingButWallFound++;
+                }
+                else if (collider.gameObject.TryGetComponent(out Vehicle FoundVehicle)) {
+                    // Found A wall
+                    foundItems +=  " Vehicle";
+                    this.Vehicle = FoundVehicle;
+                   AnythingButWallFound++;
+                }
+                else if (collider.gameObject.TryGetComponent(out LockPickable FoundLockpickable)) {
+                    // Found A wall
+                    foundItems +=  " LockPickable";
+                    this.LockPickable = FoundLockpickable;
+                   AnythingButWallFound++;
+                }
+                else if (collider.gameObject.TryGetComponent(out Breakable FoundBreakable)) {
+                    // Found A wall
+                    foundItems +=  " Breakable";
+                    this.Breakable = FoundBreakable;
+                   AnythingButWallFound++;
+                }
+                else if (collider.gameObject.TryGetComponent(out Grindable FoundGrindable)) {
+                    // Found A wall
+                    foundItems +=  " Grindable";
+                    this.Grindable = FoundGrindable;
+                   AnythingButWallFound++;
+                }
+                else if (collider.gameObject.TryGetComponent(out Stair FoundStair)) {
+                    // Found A wall
+                    foundItems +=  " Stair";
+                    this.Stair = FoundStair;
+                   AnythingButWallFound++;
+                }
+                else if (collider.gameObject.TryGetComponent(out InfoPanel FoundInfoPanel)) {
+                    // Found A wall
+                    foundItems +=  " InfoPanel";
+                    this.InfoPanel = FoundInfoPanel;
+                    AnythingButWallFound++;
+                }
+            }
+            if (AnythingButWallFound > 0)
+                Wall = null;
 
-            if (collider.gameObject.TryGetComponent(out Wall FoundWall)) {
-                // Found A wall
-                foundItems += " Wall";
-                this.Wall = FoundWall;
-                Door = null;
-            }
-            else if(collider.gameObject.TryGetComponent(out Door FoundDoor)) {
-                foundItems +=  " Door";
-                this.Door = FoundDoor;
-                AnythingButWallFound++;
-            }
-            else if (collider.gameObject.TryGetComponent(out Vehicle FoundVehicle)) {
-                // Found A wall
-                foundItems +=  " Vehicle";
-                this.Vehicle = FoundVehicle;
-               AnythingButWallFound++;
-            }
-            else if (collider.gameObject.TryGetComponent(out LockPickable FoundLockpickable)) {
-                // Found A wall
-                foundItems +=  " LockPickable";
-                this.LockPickable = FoundLockpickable;
-               AnythingButWallFound++;
-            }
-            else if (collider.gameObject.TryGetComponent(out Breakable FoundBreakable)) {
-                // Found A wall
-                foundItems +=  " Breakable";
-                this.Breakable = FoundBreakable;
-               AnythingButWallFound++;
-            }
-            else if (collider.gameObject.TryGetComponent(out Grindable FoundGrindable)) {
-                // Found A wall
-                foundItems +=  " Grindable";
-                this.Grindable = FoundGrindable;
-               AnythingButWallFound++;
-            }
-            else if (collider.gameObject.TryGetComponent(out Stair FoundStair)) {
-                // Found A wall
-                foundItems +=  " Stair";
-                this.Stair = FoundStair;
-               AnythingButWallFound++;
-            }
-            else if (collider.gameObject.TryGetComponent(out InfoPanel FoundInfoPanel)) {
-                // Found A wall
-                foundItems +=  " InfoPanel";
-                this.InfoPanel = FoundInfoPanel;
-                AnythingButWallFound++;
-            }
+            SeatedUIDisplayer.Instance.ShowPickupType(foundItems);
         }
-        if (AnythingButWallFound > 0)
-            Wall = null;
+        /*
+        // Show Help text for stairs
+        if (Stair != null) {
+            Debug.Log("Stair Present");
+            HelpInstructions.Instance.ShowInstruction("Climb Stairs");
 
-        SeatedUIDisplayer.Instance.ShowPickupType(foundItems);
+        }else if (hadStair) {
+            Debug.Log("Clearinstructions");
+            HelpInstructions.Instance.ClearInstructions();
+        }
+        
+        // Show Help text for vehicle
+        if (LockPickable != null) {
+            
+            HelpInstructions.Instance.ShowInstruction(LockPickable.IsUnLocked?"Open/Close": "Pick Lock");
+
+        }else if (hadLockPick) {
+            HelpInstructions.Instance.ClearInstructions();
+        }
+        
+        // Show Help text for vehicle
+        if (Grindable != null) {
+            HelpInstructions.Instance.ShowInstruction("Grind");
+
+        }else if (hadGrindable) {
+            HelpInstructions.Instance.ClearInstructions();
+        }
+        
+        // Show Help text for vehicle
+        if (Breakable != null) {
+            HelpInstructions.Instance.ShowInstruction("Break");
+
+        }else if (hadBreakable) {
+            HelpInstructions.Instance.ClearInstructions();
+        }
+        
+        // Show Help text for vehicle
+        if (Vehicle != null) {
+            Debug.Log("Vehicle Present");
+            HelpInstructions.Instance.ShowInstruction("Enter Vehicle");
+
+        }else if (hadVehicle) {
+            Debug.Log("Clearinstructions");
+            HelpInstructions.Instance.ClearInstructions();
+        }
+        */
 
     }
 
     public void UpdateInteractables()
     {
-
+        //Debug.Log("Loot Update");   
+        bool hadInteractable = ActiveInteractable != null;
         // If there is an lockpickable Item that is not open disregard any attemp to get an item inside
         if (LockPickable != null && !LockPickable.IsOpen) {
             //Debug.Log("Lockpickable ahead that is not open, unset any loot");
@@ -196,7 +268,9 @@ public class PickUpController : MonoBehaviour
             //Debug.Log("Grindable ahead that is not open, unset any loot");
             ActiveInteractable = null;
             return;
-        } 
+        }
+
+        //Debug.Log("Updating Loot");
 
         // Get list of interactable items
         Collider[] colliders = Physics.OverlapBox(Convert.Align(transform.position), Game.PickupDetectionBoxSize,Quaternion.identity, itemLayerMask);
@@ -204,11 +278,13 @@ public class PickUpController : MonoBehaviour
         //UIController.Instance.UpdateShownItemsUI(colliders.Select(x => x.GetComponent<InteractableItem>()?.Data).ToList(),true);
         if (colliders.Length == 0)
         {
+            //Debug.Log("No Loot");
             //Debug.LogError("No Interactable found.");
             ActiveInteractable = null;
         }
         else {
             //Debug.Log("Active Interactable set to: " + colliders[0].name);
+            //Debug.Log("Loot " + colliders[0].name);
             ActiveInteractable = colliders[0].gameObject.GetComponent<Interactable>();
         }
     }

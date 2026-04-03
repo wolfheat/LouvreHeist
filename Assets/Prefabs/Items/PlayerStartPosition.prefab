@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3051584303621924944}
   - component: {fileID: 2325488177444098019}
+  - component: {fileID: 1778622231982534789}
   m_Layer: 0
   m_Name: arrowUp
   m_TagString: Untagged
@@ -91,6 +92,18 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &1778622231982534789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2725458160644540727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37f14d6995650cf4c868a5b699d1ac70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DeleteInGame
 --- !u!1 &6381422822037174003
 GameObject:
   m_ObjectHideFlags: 0

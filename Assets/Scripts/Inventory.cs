@@ -11,10 +11,14 @@ public class Inventory : MonoBehaviour
     [SerializeField] private TextMeshProUGUI others;
 
     [SerializeField] private TextMeshProUGUI coins;
+    [SerializeField] private TextMeshProUGUI money;
 
     [SerializeField] private GemInventory gemInventory;
 
 public static Inventory Instance { get; private set; }
+    public int MoneyHeld { get; private set;} = 0;
+
+
     public int KeysHeld { get; private set; } = 0;
     public int BombsHeld { get; private set; } = 0;
     public int OthersHeld { get; private set;} = 0;
@@ -28,6 +32,23 @@ public static Inventory Instance { get; private set; }
         UpdateInventory();
     }
 
+    internal void AddMoney(int value=1)
+    {
+        MoneyHeld += value;
+        UpdateInventory();
+    }
+    
+    internal bool RemoveMoney(int value)
+    {
+        if(MoneyHeld < value) {
+            //SoundMaster.Instance.PlaySound(SoundName.CantAfford);
+            return false;
+        }
+        MoneyHeld -= value;
+        UpdateInventory();
+        return true;
+    }
+    
     internal void AddCoins(int value=1)
     {
         CoinsHeld+=value;
@@ -120,6 +141,7 @@ public static Inventory Instance { get; private set; }
         bombs.text = BombsHeld.ToString();
         others.text = OthersHeld.ToString();
         coins.text = CoinsHeld.ToString();
+        money.text = MoneyHeld.ToString();
     }
 
     internal void Gem(int gemtype)

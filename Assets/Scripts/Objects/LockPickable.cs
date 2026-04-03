@@ -118,6 +118,10 @@ private void OnValidate()
         isAnimating = false;
         if (walkableWhenOpen && isOpen)
             gameObject.layer = LayerMask.NameToLayer("Door");
+
+        // Call for updte of pickupColliders here
+
+
     }
     
     public void OpenDoorAnimate()

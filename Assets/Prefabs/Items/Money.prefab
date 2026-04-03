@@ -127,8 +127,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7ce9882b4eaa1548810753230303faa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  usePool: 1
-  soundNameOverride: 59
+  usePool: 0
+  soundNameOverride: 24
   Data: {fileID: 11400000, guid: 72832cbd8a91a304cbc278eb1fc11275, type: 2}
   meshFilter: {fileID: 0}
   meshRenderer: {fileID: 0}

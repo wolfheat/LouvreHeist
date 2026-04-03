@@ -7,6 +7,7 @@ public class Grindable : MonoBehaviour, ISavable
     protected bool isOpen = false;
 
     [SerializeField] private Animator animator;
+    [SerializeField] private bool walkableWhenBroken = false;
 
     public bool IsOpen => isOpen;
 
@@ -48,7 +49,7 @@ public class Grindable : MonoBehaviour, ISavable
         isOpen = state.IsOpen;
 
         if (isOpen) {
-            animator.SetBool("break", true);
+            SetToOpenState();
         }
 
     }
@@ -56,7 +57,14 @@ public class Grindable : MonoBehaviour, ISavable
     #endregion
 
 
+    private void SetToOpenState()
+    {
+        // Run Glass destroy animator? Show Shattered glass particles?
+        animator.SetBool("break", true);
 
+        if (walkableWhenBroken && TryGetComponent<Collider>(out Collider collider))
+            collider.enabled = false;
+    }
 
     public void GrindCompleteOpen()
     {
@@ -66,8 +74,7 @@ public class Grindable : MonoBehaviour, ISavable
 
         SoundMaster.Instance.PlaySound(SoundName.GlassBreak);
 
-        // Run Glass destroy animator? Show Shattered glass particles?
-        animator.SetBool("break", true);
+        SetToOpenState();
     }
 
 }

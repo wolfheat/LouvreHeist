@@ -172,7 +172,8 @@ public class SceneChanger : MonoBehaviour
         // Store the name of the Scene to change Into
         ActiveGameScene = SceneManager.GetActiveScene().name;
 
-        SaveScene(ActiveGameScene);
+        if(name != StartMenu) // Do not save when exiting game
+            SaveScene(ActiveGameScene);
 
         SceneToLoad = name;
         Debug.Log("Scene: Unloading Scene: " + ActiveGameScene);

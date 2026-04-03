@@ -7,6 +7,7 @@ public class BriefingsManager : MonoBehaviour
     [SerializeField] private HideOutMap hideOutMap; 
     [SerializeField] private GameObject[] briefingsPages; 
     [SerializeField] private GameObject StartMissionButton; 
+    private string[] SceneNames = {"Office","Market","Buildsite","Louvre" }; 
 
     private int activeBriefingIndex = 0;
 
@@ -89,7 +90,7 @@ public class BriefingsManager : MonoBehaviour
 
 
         // Start The Mission
-        SceneChanger.Instance.ChangeScene("Office");
+        SceneChanger.Instance.ChangeScene(SceneNames[activeBriefingIndex]);
 
     }
 }

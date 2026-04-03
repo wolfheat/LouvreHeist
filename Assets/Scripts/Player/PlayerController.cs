@@ -142,7 +142,15 @@ public class PlayerController : MonoBehaviour
     private void IterractWithVehicleEngine()
     {
         Debug.Log("Interacting with Engine of "+ActiveVehicle.name);
-        ActiveVehicle.StartEngine();
+        if (ActiveVehicle.Engaged) {
+            ActiveVehicle.DisEngage();
+        }
+        else {
+            bool didEngage = ActiveVehicle.Engage();
+            if (!didEngage) {
+                Debug.Log("Could Not Use Engine");
+            }
+        }
     }
 
     private void PlaceBomb()
@@ -217,6 +225,8 @@ public class PlayerController : MonoBehaviour
             // Read its value and add it to player 
             int value = item.Data.value;
             Debug.Log("Picking Up " + item.Data.itemName + " with a value of " + value);
+            Inventory.Instance.AddMoney(item.Data.value);
+            // Also Show some info to player what was picked up and its value?
         }
         pickupController.ActiveInteractable.InteractWith();
 
@@ -615,7 +625,7 @@ public class PlayerController : MonoBehaviour
     private void ExitVehicle()
     {
         Debug.Log("Exiting a vehicle: "+ (ActiveVehicle!=null));
-        
+
         // Write or overwrite next action
         MoveAction moveAction;
         moveAction = new MoveAction(MoveActionType.VehicleExit, ActiveVehicle);
@@ -925,11 +935,15 @@ public class PlayerController : MonoBehaviour
     public void Reset()
     {
         Debug.Log("Reset Player");
-
-        ResetPlayerPosition(); 
-        
-        Stats.Instance.Revive();
+        ResetPlayerPosition();         
         PlaceMock(transform.position);
+        pickupController.Restart();
+    }
+    
+    public void Revive()
+    {
+        Reset();
+        Stats.Instance.Revive();
     }
 
     private void ResetPlayerPosition()
