@@ -41,22 +41,26 @@ Mar 2026
 		* Fixed End Credits transition
 		* Fixed Transistion darkening between scenes.
 		* Player limited from moving when in Info / Map and transitioning?
-
 		* Created Itch page for uploads, basic layout instructions and screenshot
 		* Adjusted the StartMenu with new look, background, colors and Credits first version update
+		* Pressing ESC on end credits opens pause screen, it should just go to main menu - Fixed
+		* Added - addedMoney shown for a brief second when gained
+		* Completed some overhaul of the hideout, needs more though
 
 
 
-		* Rewrite the Credits screen with all used assets from this project
 
-		* Make new Star Menu background, how about corridor in the office that player camera transends? Maybe just still image to begin with?
+		* Show Message when player picks up a tool so he knows he aquired it
 
 		* Fix so the Timer resets everytime player starts game from Start Menu
 		* Fix the Complete percent to reflect the actual items collected
+
+
 		* Fix Last level shown a brief moment after creditsscreen is done - FIX 
-
 			* Would need to prolong the UI used ingame until StartMenu is fully loaded to avoid this
+		* Finalize the Credits screen with all used assets from this project
 
+		
 		HelpInstructions issues
 		* Can see through open containers from side and back. 
 		* The Breakable box allows player to loot without breaking

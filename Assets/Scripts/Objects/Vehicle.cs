@@ -61,6 +61,7 @@ public class Vehicle : MonoBehaviour
 
         if(EngageNeededToEngage != null && !EngageNeededToEngage.Engaged) {
             Debug.Log("Can not engage Vehicle, prerequirements not met at "+EngageNeededToEngage.name);
+            HelpInstructions.Instance.ShowInstruction("Can not engage, prerequirements not met!", HelpButtonType.Info);
             return false;
         }
 
@@ -69,7 +70,10 @@ public class Vehicle : MonoBehaviour
         vehicleAnimator.SetBool(EngineUseParameterName, true);
 
         Engaged = true;
-        if(EngagedObjectActivated != null)
+
+        HelpInstructions.Instance.ShowInstruction("System Engaged", HelpButtonType.Info);
+
+        if (EngagedObjectActivated != null)
             EngagedObjectActivated?.SetActive(Engaged);
 
         return true;
@@ -83,6 +87,9 @@ public class Vehicle : MonoBehaviour
         vehicleAnimator.SetBool(EngineUseParameterName, false);
 
         Engaged = false;
+
+        HelpInstructions.Instance.ShowInstruction("System Disengaged", HelpButtonType.Info);
+
         if (EngagedObjectActivated != null)
             EngagedObjectActivated?.SetActive(Engaged);
 

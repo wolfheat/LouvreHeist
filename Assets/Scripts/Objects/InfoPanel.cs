@@ -25,6 +25,8 @@ public class InfoPanel : MonoBehaviour
 
             UIController.Instance.ShowWinScreen();
             PlayerController.Instance.DoingAction = true;
+            // Set PLayer to Dead disables  pause on ESC?
+            Stats.Instance.IsDead = true;
         }
     }
 }

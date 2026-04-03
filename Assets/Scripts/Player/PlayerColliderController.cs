@@ -38,9 +38,13 @@ public class PlayerColliderController : MonoBehaviour
             Shop.Instance.HidePanel();
         }
     }
-
+    /*
     private void OnTriggerEnter(Collider other)
     {
+
+        // Maybe Disable all collider pickups? Had Issue this didnt call the addmoney method, disable to bypass.
+
+
         //Debug.Log("Colliding with "+other.name+" ID:"+other.gameObject.GetInstanceID()+" player ID: "+this.gameObject.GetInstanceID());
         
         if ((1<<other.gameObject.layer & itemsLayerMask) != 0)
@@ -96,5 +100,5 @@ public class PlayerColliderController : MonoBehaviour
             Shop.Instance.ShowPanel();
         }
     }
-
+    */
 }

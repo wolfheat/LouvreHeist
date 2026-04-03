@@ -10,7 +10,7 @@ public class HelpInstructions : MonoBehaviour
 
     private float infoTimer = 0f;
     private float updateTimer = 0f;
-    private const float InfoTime = 5f;
+    private const float InfoTime = 2.5f;
     private const float UpdateTime = 0.2f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

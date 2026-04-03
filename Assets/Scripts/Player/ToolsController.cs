@@ -6,7 +6,7 @@ public enum ToolType { Hands, LockPick, Hammer, Grinder, Skull, Skull2 }
 
 public class ToolsController : MonoBehaviour
 {
-	public static ToolsController Instance { get; private set; }
+    public static ToolsController Instance { get; private set; }
 
     public int ActiveToolIndex => (int)ActiveTool;
     public ToolType ActiveTool { get; private set; }
@@ -14,6 +14,7 @@ public class ToolsController : MonoBehaviour
     private bool[] unlockedTool = new bool[6];
     public GameObject[] Tools;
 
+    private string[] unlockedToolInstructions = new string[]{"You can now pick up loot!","You can now pick locks!","You can now crush stuff!","You can now break tempered glass!", "You can now do Skull 1 actions!", "You can now do Skull 2 actions!" };
 
 
     internal void Reset()
@@ -88,5 +89,8 @@ public class ToolsController : MonoBehaviour
     {
         unlockedTool[(int)tool] = true;
         UIController.Instance.ActivateToolsUITool(tool);
+
+        // Show Instruction Help Notice
+        HelpInstructions.Instance.ShowInstruction(tool+ " Aquired - " + unlockedToolInstructions[(int)tool], HelpButtonType.Info);
     }
 }

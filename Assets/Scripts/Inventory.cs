@@ -14,10 +14,11 @@ public class Inventory : MonoBehaviour
     [SerializeField] private TextMeshProUGUI money;
 
     [SerializeField] private GemInventory gemInventory;
+    [SerializeField] private GameObject addedMoneyHolder;
+    [SerializeField] private AddedMoneyVisualizer addedMoneyVisualizerPrefab;
 
 public static Inventory Instance { get; private set; }
     public int MoneyHeld { get; private set;} = 0;
-
 
     public int KeysHeld { get; private set; } = 0;
     public int BombsHeld { get; private set; } = 0;
@@ -35,6 +36,10 @@ public static Inventory Instance { get; private set; }
     internal void AddMoney(int value=1)
     {
         MoneyHeld += value;
+
+        AddedMoneyVisualizer moneyAddedInstance = Instantiate(addedMoneyVisualizerPrefab, addedMoneyHolder.transform);
+        moneyAddedInstance.SetValue(value);
+
         UpdateInventory();
     }
     
