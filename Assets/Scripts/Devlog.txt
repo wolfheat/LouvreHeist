@@ -38,12 +38,23 @@ Mar 2026
 		* Made the Heading "Missions" also from Postit And added some Extras for fun
 		* Fixed Issue with not updating pickup items after going to main menu.
 3/4		* Kinda got HelpInstructions to work
+		* Fixed End Credits transition
+
+
 
 
 		HelpInstructions issues
 		* Can see through open containers from side and back. 
 		* The Breakable box allows player to loot without breaking
 		
+
+		Sounds
+
+		Picking Up Money Sound more caching sound?
+
+		Have different music on the different levelst? At least another music when police timer is on?
+
+
 
 
 		* Should the player be able to pickup items from shelfes on the tiles they are standing on, also the office main desk is walkable, should it pickup directly or be prompted with loot key?

@@ -5,6 +5,7 @@ using UnityEngine;
 public class ThankYouStayOnScreen : MonoBehaviour
 {
     [SerializeField] private GameObject centerParent;
+    [SerializeField] private GameObject thankYouOriginalParent;
     private float centerPosition = 0f;
     private bool rising = true;
 
@@ -12,6 +13,13 @@ public class ThankYouStayOnScreen : MonoBehaviour
     {
         rising = true;
         centerPosition = Screen.height / 2;                    
+    }
+    public void Reset()
+    {
+        transform.SetParent(thankYouOriginalParent.transform);
+        transform.localScale = new Vector3(1, 1, 1);
+        transform.localPosition = new Vector3(0, 0, 0);
+        rising = true;
     }
 
     void Update()

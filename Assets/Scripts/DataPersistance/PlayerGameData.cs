@@ -165,6 +165,6 @@ public class GameSettingsData
             // Wont send leaderboard data when player has teleported during the playthrough
             return;
         }
-        LeaderboardConnect.Instance.AddPlayerScoreAsync(SavingUtility.gameSettingsData.PlayerName,timeMs,completePercent);
+        //LeaderboardConnect.Instance.AddPlayerScoreAsync(SavingUtility.gameSettingsData.PlayerName,timeMs,completePercent);
     }
 }

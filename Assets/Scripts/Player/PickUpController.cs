@@ -46,6 +46,11 @@ public class PickUpController : MonoBehaviour
         Restart();
     }
 
+    private void OnEnable()
+    {
+        Restart();
+    }
+
     public void Restart()
     {
         UpdateColliders();

@@ -16,13 +16,13 @@ public class HelpInstructions : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Debug.Log("HelpInstructions: Timed Update Of Help Instructions");
+        //Debug.Log("HelpInstructions: Timed Update Of Help Instructions");
         ClearInstructions();
     }
 
     public void ClearInstructions(HelpButtonType button)
     {
-        Debug.Log("HelpInstructions: Clearing Instruction");
+        //Debug.Log("HelpInstructions: Clearing Instruction");
         if(button == HelpButtonType.LMB)
             LMB.gameObject.SetActive(false);
         if(button == HelpButtonType.RMB)
@@ -33,14 +33,14 @@ public class HelpInstructions : MonoBehaviour
     
     public void ClearInstructions()
     {
-        Debug.Log("HelpInstructions: Clearing Instructions all");
+        //Debug.Log("HelpInstructions: Clearing Instructions all");
         LMB.gameObject.SetActive(false);
         RMB.gameObject.SetActive(false);
     }
 
     public void ShowInstruction(string stringText, HelpButtonType type = HelpButtonType.LMB)
     {
-        Debug.Log("HelpInstructions: show "+stringText);
+        //Debug.Log("HelpInstructions: show "+stringText);
         if(type == HelpButtonType.LMB) {
             LMB.gameObject.SetActive(true);
             LMB.HelpText.text = stringText;
@@ -74,12 +74,12 @@ public class HelpInstructions : MonoBehaviour
     }
     private void TimedUpdateOfKeys()
     {
-        Debug.Log("Timed Update Of Help Instructions");
+        //Debug.Log("Timed Update Of Help Instructions");
         Stair stair = PickUpController.Instance.Stair;
         LockPickable lockPickable = PickUpController.Instance.LockPickable;
         Grindable grindable = PickUpController.Instance.Grindable;
         Breakable breakable = PickUpController.Instance.Breakable;
-        Vehicle vehicle = PickUpController.Instance.Vehicle;
+        Vehicle vehicle = PlayerController.Instance.ActiveVehicle ?? PickUpController.Instance.Vehicle;
         Interactable interactable = PickUpController.Instance.ActiveInteractable;
 
         bool anyAvailableleft = stair != null || lockPickable != null || grindable != null || breakable != null || vehicle != null ;

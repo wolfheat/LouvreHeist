@@ -103,6 +103,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -391,6 +392,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -424,6 +426,42 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &1788647663673397959
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1921221846515027322}
+  m_Layer: 27
+  m_Name: ThankYouPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1921221846515027322
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788647663673397959}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6307085234701117533}
+  m_Father: {fileID: 6340911599038766099}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -2976.7}
+  m_SizeDelta: {x: 1174, y: 36.008}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1912325985319652383
 GameObject:
   m_ObjectHideFlags: 0
@@ -527,6 +565,7 @@ MonoBehaviour:
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -897,6 +936,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -1033,6 +1073,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -1248,6 +1289,7 @@ MonoBehaviour:
   panel: {fileID: 2711804817638177296}
   panelHider: {fileID: 1490349331375097038}
   allText: {fileID: 8540367257600405206}
+  thankYou: {fileID: 8574097087229237912}
   scroll: {fileID: 2700062306573550123}
   UIInvisibleLayer:
     serializedVersion: 2
@@ -1441,7 +1483,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 6340911599038766099}
+    m_TransformParent: {fileID: 1921221846515027322}
     m_Modifications:
     - target: {fileID: 5781487198385989966, guid: c5146402ccb695c43b28291e80f6e2db, type: 3}
       propertyPath: m_Pivot.x
@@ -1525,7 +1567,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5781487198385989966, guid: c5146402ccb695c43b28291e80f6e2db, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -217.27441
+      value: 0.029296875
       objectReference: {fileID: 0}
     - target: {fileID: 5781487198385989966, guid: c5146402ccb695c43b28291e80f6e2db, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1614,6 +1656,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   centerParent: {fileID: 3749257688374748316}
+  thankYouOriginalParent: {fileID: 1788647663673397959}
 --- !u!1001 &559720109453604189
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1892,7 +1935,7 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5781487198385989966, guid: c5146402ccb695c43b28291e80f6e2db, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6307085234701117533}
+      addedObject: {fileID: 1921221846515027322}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8161081888337419147, guid: c5146402ccb695c43b28291e80f6e2db, type: 3}
       insertIndex: -1

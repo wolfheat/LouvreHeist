@@ -20,7 +20,9 @@ public class InfoPanel : MonoBehaviour
             // Exiting Louvre - maybe have end scene here
             Debug.Log("Exiting Louvre Scene");
             // Maybe first Show a Information which leads to scene change
-            SceneChanger.Instance.ChangeScene("Hideout");
+            //SceneChanger.Instance.ChangeScene("Hideout");
+
+            UIController.Instance.ShowWinScreen();
         }
     }
 }

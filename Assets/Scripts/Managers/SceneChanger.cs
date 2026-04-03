@@ -13,10 +13,12 @@ public class SceneChanger : MonoBehaviour
     public string ActiveGameScene = "Hideout";
     public string SceneToLoad = "Hideout";
     public string StartMenu = "StartMenu";
+    public string Managers = "Managers";
     public string[] ScenesPriorityActivation = { "Office","Hideout","StartMenu"};
 
     [SerializeField] private GameObject InGameCamera; 
     [SerializeField] private GameObject InGameUI; 
+    [SerializeField] private GameObject InGameEventSystem; 
 
     private void Start()
     {
@@ -199,9 +201,13 @@ public class SceneChanger : MonoBehaviour
         // Short Wait
         yield return null;
 
+        bool comingFromStartMenu = ActiveGameScene == StartMenu;
+        bool comingFromManagers = ActiveGameScene == Managers;
+
         // Unload
         Debug.Log("Scene: Unloading Scene: " + ActiveGameScene);
-        yield return SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName(ActiveGameScene));
+        if(!comingFromManagers) // Never Unload Managers
+            yield return SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName(ActiveGameScene));
         
         yield return null;
 
@@ -213,15 +219,21 @@ public class SceneChanger : MonoBehaviour
         Scene scene = SceneManager.GetSceneByName(SceneToLoad);
 
         // Load state Data
-        LoadSceneState(SceneToLoad);
+        if(!comingFromStartMenu)
+            LoadSceneState(SceneToLoad);
 
         Debug.Log("Scene: Activating Scene: " + SceneToLoad + " Valid: " + scene.IsValid() + " Loaded: " + scene.isLoaded);
-
+        
         SceneManager.SetActiveScene(scene);
 
         UpdateActiveSceneUIAndCamera(SceneToLoad);
 
-        PlayerController.Instance.Reset();
+        yield return null;
+
+        if(comingFromStartMenu)
+            PlayerController.Instance.ResetFromStartMenu();
+        else
+            PlayerController.Instance.Reset();
     }
 
     private void UpdateActiveSceneUIAndCamera(string sceneToLoad)
@@ -239,6 +251,7 @@ public class SceneChanger : MonoBehaviour
         // Hide the In-Game Camera And UI when in the StartMenu
         InGameCamera.SetActive(showIngame);
         InGameUI.SetActive(showIngame);
+        InGameEventSystem.SetActive(showIngame);
     }
 
     /*

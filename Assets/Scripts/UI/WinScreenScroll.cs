@@ -20,6 +20,7 @@ public class WinScreenScroll : MonoBehaviour
     [SerializeField] GameObject panel;
     [SerializeField] GameObject panelHider;
     [SerializeField] GameObject allText;
+    [SerializeField] GameObject thankYou;
     [SerializeField] GameObject scroll;
 
     [SerializeField] private LayerMask UIInvisibleLayer;
@@ -92,6 +93,9 @@ public class WinScreenScroll : MonoBehaviour
         yield return null;
         rect.anchoredPosition = new Vector3(0, StartPosition);
 
+        // Reset Thank You
+        thankYou.GetComponent<ThankYouStayOnScreen>().Reset();
+
         yield return null;
 
         float textBoxHeight = rect.rect.height;
@@ -140,14 +144,12 @@ public class WinScreenScroll : MonoBehaviour
 
     private void ExitWinScrollMenu()
     {
-        if (startMenuView)
-            Hide();
-        else {
+        Hide();
+        if (!startMenuView) { 
             Debug.Log("TO MAIN MENU - ONLY FROM GAME NOT CREDITS VIEW");
             UIController.Instance.ToMainMenu();
         }
         StopAllCoroutines();
-
         panelHider.SetActive(false);
     }
 

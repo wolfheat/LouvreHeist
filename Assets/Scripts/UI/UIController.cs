@@ -124,7 +124,7 @@ public class UIController : MonoBehaviour
         Stats.Instance.StopGameTimer();
 
         // Send Analytics for Game Complete
-        UGS_Analytics.Instance.GameCompletedEvent();
+        //UGS_Analytics.Instance.GameCompletedEvent();
 
         int completePercent = Stats.Instance.GetCompletePercent();
         if (completePercent== 100) {

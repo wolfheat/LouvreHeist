@@ -28,7 +28,7 @@ public class SceneStateLoader : MonoBehaviour
     {
         if (!scenesData.ContainsKey(sceneName)) {
             Debug.Log("Scene is not stored in the Dictionary so cant load any, use Defaults");
-            DebugPanel.Instance.AddMessage("StateLoader: Scene is not stored in the Dictionary. "+sceneName);
+            DebugPanel.Instance?.AddMessage("StateLoader: Scene is not stored in the Dictionary. "+sceneName);
             return false;
         }
 

@@ -937,7 +937,26 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Reset Player");
         ResetPlayerPosition();         
         PlaceMock(transform.position);
-        pickupController.Restart();
+        //pickupController?.Restart();
+    }
+    
+
+    public void ResetFromStartMenu()
+    {
+
+        DoingAction = false;
+        ActiveVehicle = null;
+
+        savedAction = null;
+        lastAction = null;
+
+        Stats.Instance.IsDead = false;
+
+
+        Debug.Log("Reset Player");
+        ResetPlayerPosition();         
+        PlaceMock(transform.position);
+        pickupController?.Restart();
     }
     
     public void Revive()
