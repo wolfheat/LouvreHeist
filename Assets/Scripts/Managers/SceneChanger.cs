@@ -18,7 +18,9 @@ public class SceneChanger : MonoBehaviour
 
     [SerializeField] private GameObject InGameCamera; 
     [SerializeField] private GameObject InGameUI; 
-    [SerializeField] private GameObject InGameEventSystem; 
+    [SerializeField] private GameObject InGameEventSystem;
+
+    public static Action SceneChanged;
 
     private void Start()
     {
@@ -169,7 +171,7 @@ public class SceneChanger : MonoBehaviour
     }
 
     */
-    public void ChangeScene(string name, bool additive = true, bool loadFromSaveFile = true)
+    public void ChangeScene(string name, bool additive = true, bool loadFromSaveFile = true, bool useTransitionDarkening = true)
     {
         // Store the name of the Scene to change Into
         ActiveGameScene = SceneManager.GetActiveScene().name;
@@ -179,6 +181,14 @@ public class SceneChanger : MonoBehaviour
 
         SceneToLoad = name;
         Debug.Log("Scene: Unloading Scene: " + ActiveGameScene);
+        // Do the Darkening?
+        if(useTransitionDarkening && ActiveGameScene != StartMenu)
+            TransitionScreen.Instance.Darken(ChangeSceneWhenDark, 0.6f);
+        else
+            StartCoroutine(ChangeSceneCO());
+    }
+    public void ChangeSceneWhenDark()
+    {
         StartCoroutine(ChangeSceneCO());
     }
 
@@ -211,6 +221,7 @@ public class SceneChanger : MonoBehaviour
         
         yield return null;
 
+        
         Debug.Log("Scene: Loading Scene: " + SceneToLoad);
         yield return SceneManager.LoadSceneAsync(SceneToLoad, LoadSceneMode.Additive);
 
@@ -234,6 +245,8 @@ public class SceneChanger : MonoBehaviour
             PlayerController.Instance.ResetFromStartMenu();
         else
             PlayerController.Instance.Reset();
+
+        SceneChanged?.Invoke();
     }
 
     private void UpdateActiveSceneUIAndCamera(string sceneToLoad)

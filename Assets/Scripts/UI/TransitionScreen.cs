@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using static System.TimeZoneInfo;
 
 public class TransitionScreen : MonoBehaviour
 {
@@ -15,6 +14,7 @@ public class TransitionScreen : MonoBehaviour
 
     private float animationTimer = 0;
     private float AnimationTime = 4f;
+    private const float AnimationStayDarkTime = 0.5f;
     private const float AnimationTimeDefault = 4f;
 
     public static Action AnimationComplete;
@@ -35,6 +35,11 @@ public class TransitionScreen : MonoBehaviour
     {
         //Darken();
         //AnimationComplete += Lighten;
+    }
+
+    public void Reset()
+    {
+        screen.SetActive(false);
     }
 
     public void Lighten()
@@ -71,14 +76,27 @@ public class TransitionScreen : MonoBehaviour
             yield return null;
         }
         image.color = toColor;
-        screen.SetActive(false);
+
+        animationTimer = 0;
+
+
         if(callbackMethod != null) {
             callbackMethod();
             callbackMethod = null;
+
+            // Added Dark Part
+            while (animationTimer < AnimationStayDarkTime) {
+                animationTimer += Time.unscaledDeltaTime;
+                yield return null;
+            }
             Lighten();
         }
-        else
+        else {
+            screen.SetActive(false);
             AnimationComplete?.Invoke();
+        }
+
+
     }
 
 

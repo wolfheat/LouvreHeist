@@ -56,6 +56,8 @@ public class WinScreenScroll : MonoBehaviour
             StartMenuInputs.Instance.Controls.UI.ESC.performed -= ESCAPE;
         if (Inputs.Instance != null)
             Inputs.Instance.Controls.Player.Esc.performed -= ESCAPE;
+
+        panelHider.SetActive(false);
     }
 
     public void ShowFromStartMenu()
@@ -86,7 +88,7 @@ public class WinScreenScroll : MonoBehaviour
 
     private IEnumerator Animate()
     {
-        panelHider.SetActive(true);
+        panelHider.SetActive(true); // Makes the panel not shown before the panel is repositioned at its start position
         RectTransform rect = scroll.GetComponent<RectTransform>();
         yield return null;
         panel.SetActive(true);
@@ -113,7 +115,7 @@ public class WinScreenScroll : MonoBehaviour
 
         yield return null;
 
-        panelHider.SetActive(false);
+        panelHider.SetActive(false); // Panel is now viewable 
 
         Debug.Log("Text box height = " + textBoxHeight);
         Debug.Log("Text box anchored pos = " + rect.anchoredPosition);
@@ -144,14 +146,16 @@ public class WinScreenScroll : MonoBehaviour
 
     private void ExitWinScrollMenu()
     {
+        
         Hide();
         if (!startMenuView) { 
             Debug.Log("TO MAIN MENU - ONLY FROM GAME NOT CREDITS VIEW");
             UIController.Instance.ToMainMenu();
         }
+        //panelHider.SetActive(false);
         StopAllCoroutines();
-        panelHider.SetActive(false);
     }
+
 
     public void Hide()
     {

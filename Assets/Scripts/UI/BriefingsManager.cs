@@ -47,7 +47,9 @@ public class BriefingsManager : MonoBehaviour
         hideOutMap.gameObject.SetActive(true);
 
         SetMissionAsActive(activeBriefingIndex);
-        
+
+        PlayerController.Instance.DoingAction = true;
+
     }
     
     public void ShowBriefing()
@@ -76,8 +78,10 @@ public class BriefingsManager : MonoBehaviour
         // Exits the briefing if its open, else closes the map
         if(briefingsPages[activeBriefingIndex].activeSelf)
             briefingsPages[activeBriefingIndex].SetActive(false);
-        else if(hideOutMap.gameObject.activeSelf)
+        else if (hideOutMap.gameObject.activeSelf) {
+            PlayerController.Instance.DoingAction = false;
             hideOutMap.gameObject.SetActive(false);
+        }
     }
     public void StartMission()
     {

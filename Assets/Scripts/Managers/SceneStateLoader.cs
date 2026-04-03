@@ -76,6 +76,6 @@ public class SceneStateLoader : MonoBehaviour
             }
         }
 
-        DebugPanel.Instance.AddMessage("StateLoader: Scene info loaded from " + sceneName+" Items: "+sceneSpecificData.Count);
+        DebugPanel.Instance?.AddMessage("StateLoader: Scene info loaded from " + sceneName+" Items: "+sceneSpecificData.Count);
     }
 }

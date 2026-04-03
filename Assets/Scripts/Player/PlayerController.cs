@@ -937,6 +937,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Reset Player");
         ResetPlayerPosition();         
         PlaceMock(transform.position);
+        DoingAction = false;
         //pickupController?.Restart();
     }
     
@@ -957,6 +958,7 @@ public class PlayerController : MonoBehaviour
         ResetPlayerPosition();         
         PlaceMock(transform.position);
         pickupController?.Restart();
+        TransitionScreen.Instance.Reset();
     }
     
     public void Revive()

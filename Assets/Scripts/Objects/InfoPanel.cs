@@ -15,6 +15,7 @@ public class InfoPanel : MonoBehaviour
             Debug.Log("Exiting any but the Louvre Scene");
             // Maybe first Show a Information which leads to scene change
             SceneChanger.Instance.ChangeScene("Hideout");
+            PlayerController.Instance.DoingAction = true;
         }
         else{
             // Exiting Louvre - maybe have end scene here
@@ -23,6 +24,7 @@ public class InfoPanel : MonoBehaviour
             //SceneChanger.Instance.ChangeScene("Hideout");
 
             UIController.Instance.ShowWinScreen();
+            PlayerController.Instance.DoingAction = true;
         }
     }
 }

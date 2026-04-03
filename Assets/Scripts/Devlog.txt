@@ -39,9 +39,17 @@ Mar 2026
 		* Fixed Issue with not updating pickup items after going to main menu.
 3/4		* Kinda got HelpInstructions to work
 		* Fixed End Credits transition
+		* Fixed Transistion darkening between scenes.
+		* Player limited from moving when in Info / Map and transitioning?
+
+		* Rewrite the Credits screen with all used assets from this project
 
 
+		* Fix so the Timer resets everytime player starts game from Start Menu
+		* Fix the Complete percent to reflect the actual items collected
+		* Fix Last level shown a brief moment after creditsscreen is done - FIX 
 
+			* Would need to prolong the UI used ingame until StartMenu is fully loaded to avoid this
 
 		HelpInstructions issues
 		* Can see through open containers from side and back. 
@@ -55,51 +63,45 @@ Mar 2026
 		Have different music on the different levelst? At least another music when police timer is on?
 
 
+		* Dragon Implementation? Have a special Dragon door that player can walk through and have a fight with a dragon for extra loot? 
+			* Just have a dragon room in the louvre with dragon loot?
+		* Have a Highscore list for everyone completing the game? With their time and Loot value.- YES
 
 
+		* Add A endgame scene where player sails awaiy towards the horizon and end credits play? - MAYBE
+		* Make the pickable minigame to unlock a safe -MAYBE
+		Have the first NPC spotting the player start a 5-10 min timer for player to return to hideout or they lose? - MAYBE NPC INTERACTIONS
+		Add Sound Settings menu available from ingame - MAYBE would be nice
+
+		Make safes only accessable from the front. -MAYBE not VITAL
+
+		UNSURE
 		* Should the player be able to pickup items from shelfes on the tiles they are standing on, also the office main desk is walkable, should it pickup directly or be prompted with loot key?
 
-		* Handle each days loot spearately? Added to total when at Hideout? 
+		* Handle each days loot spearately? Added to total when at Hideout? - NO not important enough
+		* Have a statsPage in hideout showing the gain from each location? - NO not important enough, Display result at credits screen instead
 
-		* Have a statsPage in hideout showing the gain from each location?
-
-		* Have a Highscore list for everyone completing the game? With their time and Loot value.
 										
-		* Doors opening phase entering scene Speedup/Fix?
-
-		* Dragon Implementation? Have a special Dragon door that player can walk through and have a fight with a dragon for extra loot? 
-		* Just have a dragon room in the louvre with dragon loot?
-
-		* Add A endgame scene where player sails awaiy towards the horizon and end credits play?
+		* Doors opening phase entering scene Speedup/Fix? FIXED by Darkening
 
 
-		MUST FIX
-
-		
-		All days also allows player to gather loot that will be added to the total score
-
-		How to hold loot? Unlimited or placed in a backpack/inventory?
+		MUST FIX		
+		* All days also allows player to gather loot that will be added to the total score - NAH
+		How to hold loot? Unlimited or placed in a backpack/inventory? UNLIMITED ONLY SCORE
+		Truck Movement - Fixed to Streets? And Faster? SKIP MOVEMEN OF VEHICLES
+		Make Liftcar drivable? Optional, can also be placed by itself before player spawn in? SKIP
 
 		LIKE TO FIX
-		Truck Movement - Fixed to Streets? And Faster?
-		Make Liftcar drivable? Optional, can also be placed by itself before player spawn in?
-
-
-		Make the pickable minigame to unlock a safe
 		Make different difficulty minigame for door, cabinets?
+		Have the game be 3 or 5 days, each day is separate mission preparing for the final heist. - GOT A FEW
 
-		Have the game be 3 or 5 days, each day is separate mission preparing for the final heist.
-		Previous days is used to gather resources needed to complete the heist.
+		Previous days is used to gather resources needed to complete the heist. - MAYBE NOT, JUST THE TRUCK, AND TOOLS
 			Tools Needed - Truck - Grinder - Outfit - Motorbike
 
-		Have the first NPC spotting the player start a 5-10 min timer for player to return to hideout or they lose?
 
 		Lift and Car sounds
 
-		Add Sound Settings menu available from ingame
-
 		PROB NOT VITAL TO FIX
-		Make safes only accessable from the front.
 		Maybe have breakable walls again with crack, only breakable by hammer (or bombs?)
 		Add Moving cars and people? With colliders?
 		Some stuff that limits the player but gives some other benefit?
