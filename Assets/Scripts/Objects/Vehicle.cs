@@ -13,18 +13,27 @@ public class Vehicle : MonoBehaviour
     [SerializeField] string EngageInstruction = "EngageInstruction";
     [SerializeField] string DisEngageInstruction = "DisEngageInstruction";
     [SerializeField] Vehicle EngageNeededToEngage;
+    [SerializeField] Vehicle DisengageNeededToDisengage;
     [SerializeField] GameObject EngagedObjectActivated;
+    [SerializeField] bool StartEngaged = false;
+    [SerializeField] bool completeLevelWhenDisengaging = false;
 
     public string GetEngageInstructions => EngageInstruction;
     public string GetDisEngageInstructions => DisEngageInstruction;
     public bool Engaged { get; set; } = false;
-
+    
     public Transform GetSeatedTransform => seatedPositionTransform;
     public Transform GetExitTransform => exitPositionTransform;
 
     protected bool bossDoor = false;
 
-
+    private void Start()
+    {
+        if (StartEngaged) {
+            // Set it into Engaged by force
+            ForceEngage();
+        }
+    }
 
     public virtual bool IsBossDoor => false;
 
@@ -55,6 +64,14 @@ public class Vehicle : MonoBehaviour
         return  seatedPositionTransform;
     }
             
+    public void ForceEngage()
+    {
+        vehicleAnimator.SetBool(EngineUseParameterName, true);
+        Engaged = true;
+        if (EngagedObjectActivated != null)
+            EngagedObjectActivated?.SetActive(Engaged);
+    }
+
     public bool Engage()
     {
         Debug.Log("Using Engine of Vehicle "+name);
@@ -64,7 +81,7 @@ public class Vehicle : MonoBehaviour
             HelpInstructions.Instance.ShowInstruction("Can not engage, prerequirements not met!", HelpButtonType.Info);
             return false;
         }
-
+        
         SoundMaster.Instance.PlaySound(SoundName.OpenDoor);
 
         vehicleAnimator.SetBool(EngineUseParameterName, true);
@@ -82,6 +99,12 @@ public class Vehicle : MonoBehaviour
     {
         Debug.Log("Stopping Engine of Vehicle "+name);
 
+        if (DisengageNeededToDisengage != null && DisengageNeededToDisengage.Engaged) {
+            Debug.Log("Can not disengage Vehicle, prerequirements not met at " + DisengageNeededToDisengage.name);
+            HelpInstructions.Instance.ShowInstruction("Can not disengage, prerequirements not met!", HelpButtonType.Info);
+            return;
+        }
+
         SoundMaster.Instance.PlaySound(SoundName.OpenDoor);
 
         vehicleAnimator.SetBool(EngineUseParameterName, false);
@@ -92,6 +115,17 @@ public class Vehicle : MonoBehaviour
 
         if (EngagedObjectActivated != null)
             EngagedObjectActivated?.SetActive(Engaged);
+
+        if (completeLevelWhenDisengaging) {
+
+            Debug.Log("Exiting any but the Louvre Scene");
+            // Maybe first Show a Information which leads to scene change
+            SceneChanger.Instance.ChangeScene("Hideout");
+            PlayerController.Instance.DoingAction = true;
+
+            // Unlock the Louvre mission here
+            Debug.Log("UNLOCK LOUVRE MISSION");
+        }
 
     }
 

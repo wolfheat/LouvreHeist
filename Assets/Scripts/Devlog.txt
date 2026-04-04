@@ -46,7 +46,14 @@ Mar 2026
 		* Pressing ESC on end credits opens pause screen, it should just go to main menu - Fixed
 		* Added - addedMoney shown for a brief second when gained
 		* Completed some overhaul of the hideout, needs more though
+4/4		* Got a working BuildSite
+		* Player is now forced to pull down lift before retracting stands. After retracting it automatically steals it and returns to hidout.
 
+		
+		* Need to make sure the crane is stolen when returning to the buildsite. Also have a separate exit way, move out of the gate?
+
+
+		* Maybe make a swift animation of stealing it before darkening and return to hideout
 
 
 
