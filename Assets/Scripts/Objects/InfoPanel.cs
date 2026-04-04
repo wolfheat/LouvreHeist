@@ -12,6 +12,7 @@ public class InfoPanel : MonoBehaviour
         if(panelType == InfoPanelTypes.HideoutMap)
             UIController.Instance.ShowHideOutMap();
         else if (panelType != InfoPanelTypes.LouvreExit) {
+                        
             Debug.Log("Exiting any but the Louvre Scene");
             // Maybe first Show a Information which leads to scene change
             SceneChanger.Instance.ChangeScene("Hideout");

@@ -48,99 +48,62 @@ Mar 2026
 		* Completed some overhaul of the hideout, needs more though
 4/4		* Got a working BuildSite
 		* Player is now forced to pull down lift before retracting stands. After retracting it automatically steals it and returns to hidout.
-
-		
-		* Need to make sure the crane is stolen when returning to the buildsite. Also have a separate exit way, move out of the gate?
-
-
-		* Maybe make a swift animation of stealing it before darkening and return to hideout
+		* BuildSite now removes the truck after stealing it. Adds a door in its place in the building instead so player can return.
 
 
 
-		* Show Message when player picks up a tool so he knows he aquired it
-
-		* Fix so the Timer resets everytime player starts game from Start Menu
-		* Fix the Complete percent to reflect the actual items collected
 
 
-		* Fix Last level shown a brief moment after creditsscreen is done - FIX 
-			* Would need to prolong the UI used ingame until StartMenu is fully loaded to avoid this
+		VITAL - 1
 		* Finalize the Credits screen with all used assets from this project
 
-		
-		HelpInstructions issues
-		* Can see through open containers from side and back. 
-		* The Breakable box allows player to loot without breaking
-		
-
-		Sounds
-
-		Picking Up Money Sound more caching sound?
-
-		Have different music on the different levelst? At least another music when police timer is on?
-
+		* Have the game be 3 or 5 days, each day is separate mission preparing for the final heist. - GOT A FEW
 
 		* Dragon Implementation? Have a special Dragon door that player can walk through and have a fight with a dragon for extra loot? 
 			* Just have a dragon room in the louvre with dragon loot?
-		* Have a Highscore list for everyone completing the game? With their time and Loot value.- YES
 
+		IMPORTANT - 2
+		* Fix so the Timer resets everytime player starts game from Start Menu
+		* Fix the Complete percent to reflect the actual items collected
 
-		* Add A endgame scene where player sails awaiy towards the horizon and end credits play? - MAYBE
-		* Make the pickable minigame to unlock a safe -MAYBE
+		SHOULD HAVE - 3
+		* Make player have to wait when interacting with the vehicle, now its to fast?
+		Have different music on the different levels? At least another music when police timer is on?
+
 		Have the first NPC spotting the player start a 5-10 min timer for player to return to hideout or they lose? - MAYBE NPC INTERACTIONS
-		Add Sound Settings menu available from ingame - MAYBE would be nice
 
-		Make safes only accessable from the front. -MAYBE not VITAL
+		WANT TO HAVE - 4
+		* Add so Only viewable Items and containers are shown and interactable (from front)
+		* Maybe make a swift animation of stealing it before darkening and return to hideout - Not Vital
+		* Fix Last level shown a brief moment after creditsscreen is done - FIX 
+			* Would need to prolong the UI used ingame until StartMenu is fully loaded to avoid this
+		Picking Up Money Sound more caching sound?
+		* Have a Highscore list for everyone completing the game? With their time and Loot value.- YES
+		* Add Sound Settings menu available from ingame - MAYBE would be nice
 
-		UNSURE
-		* Should the player be able to pickup items from shelfes on the tiles they are standing on, also the office main desk is walkable, should it pickup directly or be prompted with loot key?
+		* Make the pickable minigame to unlock a safe -MAYBE
+		* Add A endgame scene where player sails awaiy towards the horizon and end credits play? - MAYBE
+		* Lift and Car sounds
 
+		* Add Moving cars and people? With colliders?
+
+		UNNECCESSARY - 5
+		* The Breakable box allows player to loot without breaking - Dont place items there
 		* Handle each days loot spearately? Added to total when at Hideout? - NO not important enough
 		* Have a statsPage in hideout showing the gain from each location? - NO not important enough, Display result at credits screen instead
-
-										
-		* Doors opening phase entering scene Speedup/Fix? FIXED by Darkening
-
-
-		MUST FIX		
-		* All days also allows player to gather loot that will be added to the total score - NAH
-		How to hold loot? Unlimited or placed in a backpack/inventory? UNLIMITED ONLY SCORE
-		Truck Movement - Fixed to Streets? And Faster? SKIP MOVEMEN OF VEHICLES
-		Make Liftcar drivable? Optional, can also be placed by itself before player spawn in? SKIP
-
-		LIKE TO FIX
+		* Truck Movement - Fixed to Streets? And Faster? SKIP MOVEMEN OF VEHICLES
+		* Make Liftcar drivable? Optional, can also be placed by itself before player spawn in? SKIP
 		Make different difficulty minigame for door, cabinets?
-		Have the game be 3 or 5 days, each day is separate mission preparing for the final heist. - GOT A FEW
+		* Some stuff that limits the player but gives some other benefit?
 
-		Previous days is used to gather resources needed to complete the heist. - MAYBE NOT, JUST THE TRUCK, AND TOOLS
-			Tools Needed - Truck - Grinder - Outfit - Motorbike
-
-
-		Lift and Car sounds
-
-		PROB NOT VITAL TO FIX
-		Maybe have breakable walls again with crack, only breakable by hammer (or bombs?)
-		Add Moving cars and people? With colliders?
-		Some stuff that limits the player but gives some other benefit?
-		Hungry, Bad bladder, Bad Stamina, Slow etc
-
-
-		FIXED?
-		Still issue with pickupcontroller, it detects walls sometimes instead of unlockables etc - Fix
-		Add Pickable Doors
-		Maybe have the Hideout in the same position, but different days unlocks new area around it to explore?
-		Add Tool and Toolbar, so player can use different tools to complete tasks or attack NPCs
-
-
-
-		IDEAS:
+		DONE
+		* How to hold loot? Unlimited or placed in a backpack/inventory? UNLIMITED ONLY SCORE
+		* Maybe have the Hideout in the same position, but different days unlocks new area around it to explore?
+		* Add Tool and Toolbar, so player can use different tools to complete tasks or attack NPCs
 
 		How to decide the core gameloop? WHat is this game een supposed to be?
 		
-		Tools are owned or not
-
-			Get SledgeHammer in Hideout?
-
+		
 		Day 1 - Outfit?
 			Tool - LockPick
 			Item - Outfit

@@ -14,7 +14,7 @@ public class SceneChanger : MonoBehaviour
     public string SceneToLoad = "Hideout";
     public string StartMenu = "StartMenu";
     public string Managers = "Managers";
-    public string[] ScenesPriorityActivation = { "Office","Hideout","StartMenu"};
+    public string[] ScenesPriorityActivation = {"Louvre","BuildSite", "Office","Hideout","StartMenu"};
 
     [SerializeField] private GameObject InGameCamera; 
     [SerializeField] private GameObject InGameUI; 
@@ -180,9 +180,10 @@ public class SceneChanger : MonoBehaviour
             SaveScene(ActiveGameScene);
 
         SceneToLoad = name;
-        Debug.Log("Scene: Unloading Scene: " + ActiveGameScene);
+        Debug.Log("Scene: Unloading Scene: " + ActiveGameScene +" And Loading Scene "+SceneToLoad);
+        //{"Office","Market","Buildsite","Louvre" }; 
         // Do the Darkening?
-        if(useTransitionDarkening && ActiveGameScene != StartMenu)
+        if (useTransitionDarkening && ActiveGameScene != StartMenu)
             TransitionScreen.Instance.Darken(ChangeSceneWhenDark, 0.6f);
         else
             StartCoroutine(ChangeSceneCO());

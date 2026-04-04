@@ -7,7 +7,7 @@ public class BriefingsManager : MonoBehaviour
     [SerializeField] private HideOutMap hideOutMap; 
     [SerializeField] private GameObject[] briefingsPages; 
     [SerializeField] private GameObject StartMissionButton; 
-    private string[] SceneNames = {"Office","Market","Buildsite","Louvre" }; 
+    private string[] SceneNames = {"Office","Market","BuildSite","Louvre" }; 
 
     private int activeBriefingIndex = 0;
 

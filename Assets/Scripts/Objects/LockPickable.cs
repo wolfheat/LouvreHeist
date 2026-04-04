@@ -4,6 +4,10 @@ using System.Linq;
 using UnityEngine;
 using Wolfheat.StartMenu;
 
+public class VehicleAvailableState : MonoBehaviour
+{
+    public bool IsAvailable;
+}
 public class ItemPickUpState : MonoBehaviour
 {
     public bool IsAvailable;

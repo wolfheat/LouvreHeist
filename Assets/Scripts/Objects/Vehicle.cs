@@ -118,7 +118,12 @@ public class Vehicle : MonoBehaviour
 
         if (completeLevelWhenDisengaging) {
 
-            Debug.Log("Exiting any but the Louvre Scene");
+            Debug.Log("Inactivating the Vehicle");
+
+            // Inactivate the Vehicle - This will make it not present on next entry
+            FindFirstObjectByType<VehicleAvailability>()?.gameObject.SetActive(false);
+
+
             // Maybe first Show a Information which leads to scene change
             SceneChanger.Instance.ChangeScene("Hideout");
             PlayerController.Instance.DoingAction = true;
