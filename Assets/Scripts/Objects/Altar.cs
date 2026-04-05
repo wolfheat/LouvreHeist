@@ -5,20 +5,27 @@ public class Altar : MonoBehaviour
 {
     [SerializeField] GameObject ownCrystalactivation;
     [SerializeField] GameObject mineralObject;
-    [SerializeField] int acceptsMineralID;
+    [SerializeField] int acceptsDragonID;
     public bool HasMineral { get { return mineralObject.activeSelf; }}
-    public int MineralAccepted { get { return acceptsMineralID;}}
+    public int MineralAccepted { get { return acceptsDragonID;}}
 
-    public static Action AltarActivated;
+    //public static Action AltarActivated;
 
     private void OnEnable()
     {
-        Stats.MineralsUpdate += SetAsOwned;
+        Stats.DragonOwnedUpdate += UpdateOwnedStatus;
     }
-    
-    private void OnDisable()
+
+
+private void OnDisable()
     {
-        Stats.MineralsUpdate -= SetAsOwned;
+        Stats.DragonOwnedUpdate -= UpdateOwnedStatus;
+    }
+
+
+    private void Start()
+    {
+        UpdateOwnedStatus();
     }
 
     public void RemoveItemFromPillar()
@@ -26,19 +33,13 @@ public class Altar : MonoBehaviour
         mineralObject.SetActive(false);
     }
     
-    private void SetAsOwned()
+    private void UpdateOwnedStatus()
     {
-        if (Stats.Instance.MineralsOwned[acceptsMineralID])
-            ownCrystalactivation.SetActive(true);
+        //ownCrystalactivation.SetActive(Stats.Instance?.DragonsOwned[acceptsDragonID] ?? false);
+        mineralObject.SetActive(Stats.Instance?.DragonsOwned[acceptsDragonID] ?? false);
     }
 
-    internal void AddItemToPillar()
-    {
-        mineralObject.SetActive(true);
-    }
+    internal void AddItemToPillar() => mineralObject.SetActive(true);
 
-    internal bool IsAvailable()
-    {
-        return mineralObject.activeSelf;
-    }
+    internal bool IsAvailable() => mineralObject.activeSelf;
 }

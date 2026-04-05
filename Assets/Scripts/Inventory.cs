@@ -33,6 +33,11 @@ public static Inventory Instance { get; private set; }
         UpdateInventory();
     }
 
+    internal void Clear()
+    {
+        MoneyHeld = 0;
+        UpdateInventory();
+    }
     internal void AddMoney(int value=1)
     {
         MoneyHeld += value;
@@ -153,4 +158,5 @@ public static Inventory Instance { get; private set; }
     {
         gemInventory.ActivateGem(gemtype);
     }
+
 }

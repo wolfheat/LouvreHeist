@@ -35,7 +35,7 @@ public class Explosion : MonoBehaviour
                     if (collider.gameObject.TryGetComponent(out Wall wall))
                     {
                         Debug.Log("Bomb destroys wall at position "+pos+ " name: "+collider.name);
-                        wall.Damage(explosionDamage);
+                        //wall.Damage(explosionDamage);
                     }
                     else if(collider.gameObject.TryGetComponent(out PlayerColliderController playerColliderController))
                     {
@@ -64,7 +64,7 @@ public class Explosion : MonoBehaviour
                 if (collider.gameObject.TryGetComponent(out Wall wall))
                 {
                     Debug.Log("Fire destroys wall at position "+pos+ " name: "+collider.name);
-                    wall.Damage(explosionDamage);
+                    //wall.Damage(explosionDamage);
                 }
                 else if(collider.gameObject.TryGetComponent(out PlayerColliderController playerColliderController))
                 {

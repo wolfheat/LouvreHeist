@@ -158,13 +158,15 @@ public class GameSettingsData
         GameSettingsUpdated?.Invoke();
     }
 
-    internal void SendScoreToLeaderboard(int timeMs, int completePercent)
+    internal void SendScoreToLeaderboard(int timeMs, int totalLootAmount)
     {
+        UnityEngine.Debug.Log("Send Score to Leaderboard, Time(ms): "+timeMs+" Loot: "+totalLootAmount);
+
         // Only affects Leaderboard
         if (Stats.Instance.HasTeleported) {
             // Wont send leaderboard data when player has teleported during the playthrough
             return;
         }
-        //LeaderboardConnect.Instance.AddPlayerScoreAsync(SavingUtility.gameSettingsData.PlayerName,timeMs,completePercent);
+        LeaderboardConnect.Instance.AddPlayerScoreAsync(SavingUtility.gameSettingsData.PlayerName,timeMs,totalLootAmount);
     }
 }

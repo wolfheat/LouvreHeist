@@ -21,7 +21,6 @@ namespace Wolfheat.Inputs
             //SavingUtility.LoadingComplete += LoadingComplete;
 
 #if UNITY_EDITOR
-    Controls.Player.T.performed += JumpToNextEntryPoint;
     Controls.Player.Y.performed += Give10Gold;
 #endif
         }
@@ -47,6 +46,13 @@ namespace Wolfheat.Inputs
             Controls.Player.Six.performed += Six;
             Controls.Player.ScrollDown.performed += Prev;
             Controls.Player.ScrollUp.performed += Next;
+            Controls.Player.T.performed += UnsetDoingActionFailsafe;
+        }
+
+        private void UnsetDoingActionFailsafe(InputAction.CallbackContext context)
+        {
+            Debug.Log("Unsetting Doing action fail safe");
+            PlayerController.Instance.DoingAction = false;
         }
 
         private void One(InputAction.CallbackContext c) => ToolsController.Instance.EquipTool(ToolType.Hands);
@@ -62,7 +68,7 @@ namespace Wolfheat.Inputs
         {
             Controls.Player.M.performed -= SoundMaster.Instance.ToggleAllAudio;
             Controls.Player.N.performed -= SoundMaster.Instance.ToggleMusic;
-            Controls.Player.T.performed -= JumpToNextEntryPoint;
+            //Controls.Player.T.performed -= JumpToNextEntryPoint;
             Controls.Player.Y.performed -= Give10Gold;
             Controls.Disable();
 
@@ -83,13 +89,14 @@ namespace Wolfheat.Inputs
             Debug.Log("Player Gets 10g");
             Inventory.Instance.AddCoins(10);
         }
-        
+        /*
         public void JumpToNextEntryPoint(InputAction.CallbackContext context)
         {
             Stats.Instance.HasTeleported = true;
             Debug.Log("Jumping to Next Exit point");
             PlayerController.Instance.GotoNextStartPosition();
         }
+        */
 
         // Start is called before the first frame update
         void Awake()

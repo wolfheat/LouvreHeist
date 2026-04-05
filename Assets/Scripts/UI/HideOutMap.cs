@@ -21,9 +21,10 @@ public class HideOutMap : MonoBehaviour
 
     internal void Reset()
     {
+        Debug.Log("Unlocking Destination 0");
         // Locks All destinations but the first one
         for (int i = 0; i < destinations.Length; i++) {
-            destinations[i].Lock(i > 1);
+            destinations[i].Lock(i > 0);
         }
     }
 }

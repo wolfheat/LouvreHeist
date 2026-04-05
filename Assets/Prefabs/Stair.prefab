@@ -179,6 +179,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DirectionArrow
       objectReference: {fileID: 0}
+    - target: {fileID: 5550687610339145384, guid: c53e33de89d3aa246a9717a57ad4e955, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

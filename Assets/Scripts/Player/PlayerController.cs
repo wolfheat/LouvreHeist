@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Mock playerMock;
     [SerializeField] PlayerAnimationController playerAnimationController;
     [SerializeField] PlayerLanternController playerLanternController;
+    [SerializeField] UIController UIController;
     [SerializeField] TakeFireDamage takeFireDamage;
 
     public PickUpController pickupController;
@@ -227,6 +228,20 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Picking Up " + item.Data.itemName + " with a value of " + value);
             Inventory.Instance.AddMoney(item.Data.value);
             // Also Show some info to player what was picked up and its value?
+            if(item is Usable usable) {
+                if (usable.Data.itemName == "DragonBlue") {
+                    Debug.Log("Unlock Blue Dragon in stats");
+                    Stats.Instance.UnlockDragonPerk(0); 
+                }else if (usable.Data.itemName == "DragonRed") {
+                    Debug.Log("Unlock Red Dragon in stats");
+                    Stats.Instance.UnlockDragonPerk(1);
+                }
+                else if(usable.Data.itemName == "DragonGreen") {
+                    Debug.Log("Unlock Green Dragon in stats");
+                    Stats.Instance.UnlockDragonPerk(2);
+
+                }
+            }
         }
         pickupController.ActiveInteractable.InteractWith();
 
@@ -270,8 +285,8 @@ public class PlayerController : MonoBehaviour
 
         if (pickupController.Wall != null)
         {
-
-            Debug.Log("** Interact with item, but wall ahead");
+            /*
+            Debug.Log("** Interact with item, but wall ahead"); 
             if (!Stats.Instance.HasSledgeHammer && pickupController.Wall.GetComponent<Door>() != null)
             {
                 Debug.Log("ICantBreakThisWithMyBareHands");
@@ -280,13 +295,11 @@ public class PlayerController : MonoBehaviour
             }
             else if (pickupController.Wall.gameObject.TryGetComponent(out Door door)) {
                 InteractWithDoor(door);
-            }                
-            else if (pickupController.Wall.gameObject.TryGetComponent(out Altar altar)) {
-                Shop.Instance.ShowPanel(altar.MineralAccepted);
             }                                
             else {
                 playerAnimationController.SetState(PlayerState.Break);
             }
+            */
         }
         else if (pickupController.Door != null && pickupController.Door.GetComponent<Collider>().enabled) {
             Debug.Log("Player has a Door in front "+pickupController.Door, pickupController.Door);
@@ -335,6 +348,10 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("** Interact with lockpickable");
             InteractWithGrindable(pickupController.Grindable);
+        }else if (pickupController.Altar != null)
+        {
+            Debug.Log("** Interact with Altar");
+            InteractWithAltar(pickupController.Altar);
         }
     
     }
@@ -376,7 +393,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
 
-        SeatedUIDisplayer.Instance.ShowSeated(IsSeated);
+        SeatedUIDisplayer.Instance?.ShowSeated(IsSeated);
 
         if (DoingAction) return;
 
@@ -468,10 +485,10 @@ public class PlayerController : MonoBehaviour
                     if (door != null) {
                         InteractWithDoor(door);
                     }
-                    else if (altar != null) {
-                        Debug.Log("Entering Shop");
-                        Shop.Instance.ShowPanel(altar.MineralAccepted);
-                    }
+                    //else if (altar != null) {
+                    //    Debug.Log("Entering Shop");
+                    //    Shop.Instance.ShowPanel(altar.MineralAccepted);
+                    //}
 
                 }
 
@@ -539,6 +556,16 @@ public class PlayerController : MonoBehaviour
         // Grind Animation
         playerAnimationController.SetState(PlayerState.Grind);
         playerAnimationController.GrindableSet = grindable;
+
+    }
+    
+    private void InteractWithAltar(Altar altar)
+    {
+        Debug.Log("Interacting with an Altar");
+
+        if (altar.HasMineral) {
+            Stats.Instance.ActivateDragonPerk(altar.MineralAccepted);
+        }
 
     }
 
@@ -919,26 +946,32 @@ public class PlayerController : MonoBehaviour
         DoingAction = false;
     }   
 
-
-    public void GotoNextStartPosition()
-    {
-        Debug.Log("NEXT POSITIOON");
-        if (Stats.Instance.GetNextStartPosition()) {
-            UIController.Instance.ShowWinScreen();
-        }
-        else {
-            ResetPlayerPosition();
-            //Stats.Instance.DeActivateMap();
-        }
-    }
-
+    //
+    //public void GotoNextStartPosition()
+    //{
+    //    Debug.Log("NEXT POSITIOON");
+    //    if (Stats.Instance.GetNextStartPosition()) {
+    //        UIController.Instance.ShowWinScreen();
+    //    }
+    //    else {
+    //        ResetPlayerPosition();
+    //        //Stats.Instance.DeActivateMap();
+    //    }
+    //}
+    //
     public void Reset()
     {
         Debug.Log("Reset Player");
         ResetPlayerPosition();         
         PlaceMock(transform.position);
         DoingAction = false;
+        Stats.Instance.IsDead = false;
+        //Inventory.Instance.Clear();
         //pickupController?.Restart();
+        UIController.Instance.Pause(false);
+        PoliceTimer.Instance.Reset();
+        UIController.HideDeathScreenInstant();
+
     }
     
 
@@ -955,10 +988,12 @@ public class PlayerController : MonoBehaviour
 
 
         Debug.Log("Reset Player");
+        Inventory.Instance.Clear();
         ResetPlayerPosition();         
         PlaceMock(transform.position);
         pickupController?.Restart();
         TransitionScreen.Instance.Reset();
+        UIController.HideDeathScreenInstant();
     }
     
     public void Revive()
@@ -1001,7 +1036,7 @@ public class PlayerController : MonoBehaviour
         playerMock.pos = Convert.V3ToV2Int(position);        
         playerMock.transform.position = position;
     }
-
+    /*
     internal void GotoStartPosition()
     {
         Stats.Instance.SetSpecificPosition(0);
@@ -1014,4 +1049,5 @@ public class PlayerController : MonoBehaviour
         ResetPlayerPosition();
         //Stats.Instance.DeActivateMap();
     }
+    */
 }

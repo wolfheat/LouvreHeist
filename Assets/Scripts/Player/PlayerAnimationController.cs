@@ -8,6 +8,8 @@ public enum PlayerState {Idle,Break,Drill,Shoot,
     LockPick
 }
 
+
+
 public class PlayerAnimationController : MonoBehaviour
 {
     [SerializeField] Animator animator;
@@ -18,6 +20,20 @@ public class PlayerAnimationController : MonoBehaviour
     public PlayerState State{ get; private set; }
 
     public Action HitComplete;
+
+
+    public static PlayerAnimationController Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null) {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
+
+
 
     public void SetState(PlayerState newState)
     {
@@ -31,7 +47,7 @@ public class PlayerAnimationController : MonoBehaviour
                 animator.CrossFade("Idle", 0.1f);
                 break;
             case PlayerState.Grind:
-                animator.SetFloat("mineSpeed", Stats.Instance.MiningSpeed);
+                //animator.SetFloat("mineSpeed", Stats.Instance.MiningSpeed);
                 animator.SetBool("grind", true);
 
                 // Play Sound Of grinding
@@ -41,11 +57,11 @@ public class PlayerAnimationController : MonoBehaviour
                 break;
             case PlayerState.LockPick:
                 //animator.SetFloat("mineSpeed", Stats.Instance.MiningSpeed);
-                animator.SetBool("lockpick", true);
+                animator.SetTrigger("lockpick");
                 break;
             case PlayerState.Break:
-                animator.SetFloat("mineSpeed", Stats.Instance.MiningSpeed);
-                animator.SetBool("break", true);
+                //animator.SetFloat("mineSpeed", Stats.Instance.MiningSpeed);
+                animator.SetTrigger("break");
                 break;
             case PlayerState.Drill:
                 animator.CrossFade("Drill", 0.1f);
@@ -54,7 +70,7 @@ public class PlayerAnimationController : MonoBehaviour
                 animator.CrossFade("Shoot", 0.1f);
                 break;
             case PlayerState.Attack:
-                animator.SetFloat("attackSpeed", Stats.Instance.MiningSpeed);
+                //animator.SetFloat("attackSpeed", Stats.Instance.MiningSpeed);
                 animator.SetBool("attack", true);
                 //animator.CrossFade("Attack", 0.1f);
                 break;
@@ -95,7 +111,7 @@ public class PlayerAnimationController : MonoBehaviour
         activeBreakable = null;
 
         // Is this needed?
-        animator.SetBool("break", false);
+        //animator.SetTrigger("break");
 
         SetState(PlayerState.Idle);
 
@@ -183,4 +199,6 @@ public class PlayerAnimationController : MonoBehaviour
             SoundMaster.Instance.PlaySound(SoundName.Miss);
         }
     }
+
+    internal void SetToolSpeedMultiplier(float newToolSpeed) => animator.SetFloat("toolSpeed", newToolSpeed);
 }

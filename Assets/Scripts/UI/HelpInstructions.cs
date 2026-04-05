@@ -79,11 +79,16 @@ public class HelpInstructions : MonoBehaviour
         LockPickable lockPickable = PickUpController.Instance.LockPickable;
         Grindable grindable = PickUpController.Instance.Grindable;
         Breakable breakable = PickUpController.Instance.Breakable;
+        Altar altar = PickUpController.Instance.Altar;
         Vehicle vehicle = PlayerController.Instance.ActiveVehicle ?? PickUpController.Instance.Vehicle;
         Interactable interactable = PickUpController.Instance.ActiveInteractable;
-
-        bool anyAvailableleft = stair != null || lockPickable != null || grindable != null || breakable != null || vehicle != null ;
+        
+        bool anyAvailableleft = stair != null || lockPickable != null || grindable != null || breakable != null || vehicle != null || altar != null;
         bool anyAvailableright = vehicle != null || interactable != null;
+
+        if(altar != null)
+        Debug.Log("TimedUpdate: Altar accepts:"+  altar?.MineralAccepted+ " Stats.Instance.ActiveDragon: "+ Stats.Instance?.ActiveDragon);
+
 
         if (stair != null) {
             ShowInstruction("Climb Stairs");
@@ -96,6 +101,11 @@ public class HelpInstructions : MonoBehaviour
         }
         if (breakable != null) {
             ShowInstruction("Break");
+        }
+        if (altar != null && altar.HasMineral) {
+            //&& altar.IsAvailable()
+            Debug.Log("Showing Altar Instructions");
+            ShowInstruction(Stats.Instance.ActiveDragon == altar.MineralAccepted ? "Remove Perk" : "Activate Perk");
         }
         
         if (interactable != null) {

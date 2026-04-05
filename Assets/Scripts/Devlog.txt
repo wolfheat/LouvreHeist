@@ -49,43 +49,57 @@ Mar 2026
 4/4		* Got a working BuildSite
 		* Player is now forced to pull down lift before retracting stands. After retracting it automatically steals it and returns to hidout.
 		* BuildSite now removes the truck after stealing it. Adds a door in its place in the building instead so player can return.
+		* Dragon wall now shows instructions, dragons are unlocked correctly and loaded correctly on re-enter
+5/4		* Louvre room built need some more filling
+		* Display cases and more available to loot
+		* Added light in the apollon to make it shine
+		* Moved the container beside the lift its wrong
+		* Remove boxes fully when destroyed
+		* Added T as escape, but it does not seem to work on issue. Might be cause the wall items have a crack item which breaks the normal crushing	
+		* Yes, Highscores seems to work now.
+		* Fixed Text prompting player to change name in settings.
+		* Fixed the Map Page and unlocking of levels
+		* Wrote kinda better mission descriptions
+		* Blue and Green Dragon should work
+		* FIxed issue with leaderboard
+		* Lose screen now working
+		* Fix money not zeroed at restart
+		* Make a timer
+		* Fix the Perks working
 
 
 
+
+		* Fix better lights in hideout
+		* Make harbour boat place etc to escape louvre?
+		* Make more variations of loot in the Louvre
+		* Should have cut scene or text telling player they stole the vehicle, its to fast to the hideout atm
+
+		LASK CHECK
+		* Disable all UI debug screens
+		* Disable all color from transparent walls
+		* Disable all Arrows on Stairs
+		* Remove Extra debug-button to reach any Level at briefing screen
+		* Fore new GUIDs for all items to make sure no conflicts
 
 
 		VITAL - 1
 		* Finalize the Credits screen with all used assets from this project
 
-		* Have the game be 3 or 5 days, each day is separate mission preparing for the final heist. - GOT A FEW
-
-		* Dragon Implementation? Have a special Dragon door that player can walk through and have a fight with a dragon for extra loot? 
-			* Just have a dragon room in the louvre with dragon loot?
-
-		IMPORTANT - 2
-		* Fix so the Timer resets everytime player starts game from Start Menu
-		* Fix the Complete percent to reflect the actual items collected
-
-		SHOULD HAVE - 3
 		* Make player have to wait when interacting with the vehicle, now its to fast?
 		Have different music on the different levels? At least another music when police timer is on?
 
-		Have the first NPC spotting the player start a 5-10 min timer for player to return to hideout or they lose? - MAYBE NPC INTERACTIONS
-
-		WANT TO HAVE - 4
-		* Add so Only viewable Items and containers are shown and interactable (from front)
+		* Add so Only viewable Items and containers are shown and interactable (from front) - SKip
 		* Maybe make a swift animation of stealing it before darkening and return to hideout - Not Vital
 		* Fix Last level shown a brief moment after creditsscreen is done - FIX 
 			* Would need to prolong the UI used ingame until StartMenu is fully loaded to avoid this
+		
 		Picking Up Money Sound more caching sound?
-		* Have a Highscore list for everyone completing the game? With their time and Loot value.- YES
 		* Add Sound Settings menu available from ingame - MAYBE would be nice
-
 		* Make the pickable minigame to unlock a safe -MAYBE
 		* Add A endgame scene where player sails awaiy towards the horizon and end credits play? - MAYBE
 		* Lift and Car sounds
 
-		* Add Moving cars and people? With colliders?
 
 		UNNECCESSARY - 5
 		* The Breakable box allows player to loot without breaking - Dont place items there
@@ -138,15 +152,12 @@ Mar 2026
 
 		* New release 0.0.14
 
-
+///////////////////////////////////////////////////////////////////////////
 <b>Credits
 </b>
 
+
 A game by wolfheat
-
-
-
-
 
 
 
@@ -158,17 +169,21 @@ A variety of assets were used to create this game.
 
 <b>Graphic</b>
 3D
-Synty Studio - Office, Kids, NightClub, Construction, Mini City, Town, Asset Packs
-				
+Synty Studio Asset Packs
+Ancient Empire
+Construction
+Kids
+Mini City
+NightClub
+Office
+Town
 
-//Pure Poly - Ultimate Low Poly Mining
-//BitGem - Hand Painted Series
-//Siuniaev - Gambler Cat
-//Synty - Ancient Empire
+Gece Studio - Dragon Head
 
 2D
 Vector Dividers Collection -  Start menu Dividers
-Kenney - Icons from sefferent asset packs
+Kenney - Icons from asset packs
+Zooperdan - Printer Display Image
 
 VFX
 Unity Technologies - Particle Pack
@@ -185,13 +200,7 @@ Monument Music - Love Story
 <b>Fonts</b>
 Prida01 - gluk
 
-<b>AI Tools</b>
-//Playground AI - 2D art
-//Craiyon - 2D art
-//Piclumen - 2D art
-??Suno - Music
-
-<b>Other Tools Used</b>
+<b>Tools Used</b>
 Audacity
 Gimp
 Blender
@@ -202,7 +211,7 @@ This game was created for the
 Dungeon Crawler Game Jam 2026
 
 
-Thank you for playing!
+////////////////////////////////////////////////////////////////////////////////
 
 
 

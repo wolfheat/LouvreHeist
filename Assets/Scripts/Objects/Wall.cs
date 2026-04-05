@@ -11,6 +11,7 @@ public class Wall : Interactable
 
     public int Health { get { return health;} }
 
+    /* Disable option to damage walls
     
     public bool Damage(int damage=1)
     {
@@ -30,6 +31,9 @@ public class Wall : Interactable
             Hit();
         }
         return health == 0;
+        */
+    /*
+        return false;
     }
     
     public void Shrink()
@@ -145,4 +149,5 @@ public class Wall : Interactable
     {
         ItemSpawner.Instance.SpawnMineralAt(mineralData,transform.position);
     }
+     */
 }

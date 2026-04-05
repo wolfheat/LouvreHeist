@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Unity.Services.Authentication;
@@ -12,7 +13,8 @@ public enum SystemIndexes { Win,WebGL,Unity,Linux,Android}
 
 public partial class LeaderboardConnect : MonoBehaviour
 {
-    private string leaderboardCompletionistID = "100percent";
+    //private string leaderboardCompletionistID = "100percent";
+    private string leaderboardLootID = "loot";
     private string leaderboardSpeedID = "speed";
     public static LeaderboardConnect Instance { get; private set; }
 
@@ -25,19 +27,24 @@ public partial class LeaderboardConnect : MonoBehaviour
         Instance = this;
     }
 
+    public bool IsInitialized { get; private set; }
 
     private async void Start()
     {
+
         Debug.Log("** Initializing Unity Services");
         await UnityServices.InitializeAsync();
         Debug.Log("** Signing in Anonomously");
-        await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        await AuthenticationService.Instance.SignInAnonymouslyAsync(); 
+        IsInitialized = true;
     }
+
+        
 
 
 
     // Add player score
-    public async void AddPlayerScoreAsync(string playerName, float playerScore, float percent)
+    public async void AddPlayerScoreAsync(string playerName, int timeTaken, int lootAmount)
     {
         string sanitized = playerName.Replace(" ", "_");
 
@@ -45,9 +52,8 @@ public partial class LeaderboardConnect : MonoBehaviour
 
         int systemUsed = SystemIDController.Instance.SystemID.GetSystemID();
 
-        var scoreMetadata = new ScoreMetadata { perc = percent, systemID = systemUsed, versionString = Application.version};
-
-        string metadataJson = JsonConvert.SerializeObject(scoreMetadata);
+        var scoreMetadata = new ScoreMetadata { time = timeTaken, loot = lootAmount, systemID = systemUsed, versionString = Application.version};
+        //string metadataJson = JsonConvert.SerializeObject(scoreMetadata);
 
 
         int maxRetries = 8;
@@ -55,7 +61,8 @@ public partial class LeaderboardConnect : MonoBehaviour
         for (int attempt = 0; attempt < maxRetries; attempt++) {
 
             try {
-                await LeaderboardsService.Instance.AddPlayerScoreAsync(percent == 100f ? leaderboardCompletionistID : leaderboardSpeedID, playerScore, new AddPlayerScoreOptions { Metadata = scoreMetadata });
+                await LeaderboardsService.Instance.AddPlayerScoreAsync(leaderboardSpeedID, timeTaken, new AddPlayerScoreOptions { Metadata = scoreMetadata });
+                await LeaderboardsService.Instance.AddPlayerScoreAsync(leaderboardLootID, lootAmount, new AddPlayerScoreOptions { Metadata = scoreMetadata });
                 FindFirstObjectByType<WinScreenScroll>()?.SetSuccessText("Success");
                 return;
             }
@@ -79,7 +86,7 @@ public partial class LeaderboardConnect : MonoBehaviour
     public async Task<LeaderboardScoresPage> UpdateLeaderboard(int leaderboardType)
     {
         Debug.Log("** Updating Leaderboard");
-        return await LeaderboardsService.Instance.GetScoresAsync(leaderboardType == 0 ? leaderboardCompletionistID : leaderboardSpeedID, new GetScoresOptions { IncludeMetadata = true });
+        return await LeaderboardsService.Instance.GetScoresAsync(leaderboardType == 0 ? leaderboardSpeedID : leaderboardLootID, new GetScoresOptions { IncludeMetadata = true });
         //return await LeaderboardsService.Instance.GetScoresAsync(leaderboardType == 0 ? leaderboardCompletionistID : leaderboardSpeedID);
     }
 

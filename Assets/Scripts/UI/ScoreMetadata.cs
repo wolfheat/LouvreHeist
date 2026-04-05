@@ -4,7 +4,8 @@
 [Serializable]
 public class ScoreMetadata
 {
-    public float perc;
+    public int time;
+    public int loot;
     public int systemID = 0;
     public string versionString = "0X";
 }

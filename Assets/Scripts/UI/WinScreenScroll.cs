@@ -13,6 +13,7 @@ public class WinScreenScroll : MonoBehaviour
     [SerializeField] UIController UIController;
     [SerializeField] TextMeshProUGUI winTimeText;
     [SerializeField] TextMeshProUGUI winPercentText;
+    [SerializeField] TextMeshProUGUI lootAmountText;
     [SerializeField] TextMeshProUGUI deathsText;
     [SerializeField] TextMeshProUGUI successText;
 
@@ -167,6 +168,7 @@ public class WinScreenScroll : MonoBehaviour
     internal void SetCompleteTimeText(string winTime) => winTimeText.text = winTime;
 
     internal void SetCompletePercentText(string winPercent) => winPercentText.text = winPercent;
+    internal void SetLootAmountText(string lootAmount) => lootAmountText.text = lootAmount;
 
     internal void SetSuccessText(string success) => successText.text = success;
     internal void SetDeathsText(int deaths)

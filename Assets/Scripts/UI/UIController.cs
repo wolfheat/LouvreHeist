@@ -102,6 +102,11 @@ public class UIController : MonoBehaviour
 		interactableUI.AddPickedUp(data);
 	}
 
+    public void HideDeathScreenInstant()
+    {
+        deathScreen.Hide();
+    }
+    
     public void ShowDeathScreenInstant()
     {
         HideDarkening();
@@ -126,19 +131,26 @@ public class UIController : MonoBehaviour
         // Send Analytics for Game Complete
         //UGS_Analytics.Instance.GameCompletedEvent();
 
+        /*
+
         int completePercent = Stats.Instance.GetCompletePercent();
         if (completePercent== 100) {
             Debug.Log("Completionist!");
         }
         winScreen.ShowCompletionist(completePercent == 100);
         
+
         string completePercentText = completePercent + "%";
 
+        */
 
+        int totalLootAmount = Inventory.Instance.MoneyHeld;
+        string totalLootAmountString = totalLootAmount + "$";
 
         winScreen.SetCompleteTimeText(Stats.Instance.GetElapsedTimeString());
-        winScreen.SetCompletePercentText(completePercentText);
-        winScreen.SetDeathsText(Stats.Instance.DeathCount);
+        winScreen.SetLootAmountText(totalLootAmountString);
+        //winScreen.SetCompletePercentText(completePercentText);
+        //winScreen.SetDeathsText(Stats.Instance.DeathCount);
         
 
         //SoundMaster.Instance.PlaySpeech(SoundName.ExitSpeech,true);
@@ -151,7 +163,7 @@ public class UIController : MonoBehaviour
         open = UIActions.WinScreen;
 
         // This wont happen if player has teleported
-        SavingUtility.gameSettingsData.SendScoreToLeaderboard(Stats.Instance.GetElapsedTimeMS(),completePercent);
+        SavingUtility.gameSettingsData.SendScoreToLeaderboard(Stats.Instance.GetElapsedTimeMS(),totalLootAmount);
 	}
 
 

@@ -1,5 +1,6 @@
 
 using System.Collections;
+using System.Threading.Tasks;
 using TMPro;
 using Unity.Services.Leaderboards.Models;
 using UnityEngine;
@@ -56,10 +57,18 @@ public class LeaderboardTableManager : MonoBehaviour
 
     private void OnDisable() => StartMenuInputs.Instance.Controls.Player.Move.performed -= DirectionInput;
 
-    private void Start()
+    private async void Start()
     {
+        await WaitForServices();
         UpdateLeaderboard(0);        
     }
+
+    private async Task WaitForServices()
+    {
+        while (!LeaderboardConnect.Instance.IsInitialized)
+            await Task.Yield();
+    }
+
 
 
     private void Update()
@@ -102,12 +111,12 @@ public class LeaderboardTableManager : MonoBehaviour
     // Only update when first loaded
     private async void UpdateLeaderboard(int leaderboardType)
     {
-        Debug.Log("** Updating Leaderboard");
+        Debug.Log("** Updating Leaderboard ID: "+leaderboardType);
         LeaderboardScoresPage page = await LeaderboardConnect.Instance.UpdateLeaderboard(1);
         LeaderboardScoresPage page2 = await LeaderboardConnect.Instance.UpdateLeaderboard(0);
 
-        leaderboardScoresPages[0] = page;
-        leaderboardScoresPages[1] = page2;
+        leaderboardScoresPages[1] = page;
+        leaderboardScoresPages[0] = page2;
         UpdateWithLeaderboard(0);
 
         UpdateArrows(leaderboardType);
@@ -143,7 +152,7 @@ public class LeaderboardTableManager : MonoBehaviour
         for (int i = 0; i < page.Results.Count; i++) {
             LeaderboardEntry leaderboardItems = page.Results[i];
             LeaderboardListEntry listEntry = Instantiate(leaderboardEntryPrefab, leaderboardHolder, false);
-            listEntry.SetData(leaderboardItems,i+1);
+            listEntry.SetData(leaderboardItems,i+1,pageIndex);
         }
 
     }

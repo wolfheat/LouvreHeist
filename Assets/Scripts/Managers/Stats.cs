@@ -34,24 +34,41 @@ public class Stats : MonoBehaviour
 
     public static Stats Instance { get; private set; }
     public bool HasSledgeHammer { get; private set; } = false;
-    public bool[] MineralsOwned { get; private set; } = new bool[4];
+
+
+    public bool[] DragonsOwned { get; private set; } = new bool[3] {false,false,false};
+
+    enum DragonTypes {Blue, Red, Green };
+    // Multipliers
+    public float GreenDragonMultiplier { get; private set; } = 0.66f; // Move Speed + 50%
+    public float BlueDragonMultiplier { get; private set; } = 2f; // Tool Speed * 2
+    public float RedDragonMultiplier { get; private set; } = 30f; // Alert Time + 40s
+
+    public int ActiveDragon = -1;
 
     private bool[] MineralsSeeThroughActivated = new bool[4];
 
     public Vector3 SavedStartPosition { get; private set; } = new Vector3();
-    public float MovingSpeedMultiplier { get; internal set; } = 1f;
+
+    public float MovingSpeedMultiplier => (ActiveDragon == (int)DragonTypes.Green) ? GreenDragonMultiplier : 1f;
+    public float ToolSpeedMultiplier => (ActiveDragon == (int)DragonTypes.Blue) ? BlueDragonMultiplier : 1f;
+    public float AdditionalPoliceTime => (ActiveDragon == (int)DragonTypes.Red) ? RedDragonMultiplier : 0f;
+
+    private const float BaseAlertTime = 60f;
     public bool HasTeleported { get; internal set; } = false;
+    public float CurrentAlertTime => BaseAlertTime + AdditionalPoliceTime;
 
     private Stopwatch stopwatch = new();
     private TimeSpan bossStartTime;
 
-    [SerializeField] GameObject[] ActivationMinerals;
+    //[SerializeField] GameObject[] ActivationMinerals;
 
     public static Action<int> HealthUpdate;
     public static Action<int> BombUpdate;
-    public static Action MineralsUpdate;
+    public static Action DragonOwnedUpdate;
     public static Action MineralsAmountUpdate;
     public static Action NoMoreMineralsReached;
+    public static Action<int> OnDragonActivationChange;
 
     private void Awake()
     {
@@ -60,6 +77,10 @@ public class Stats : MonoBehaviour
             return;
         }
         Instance = this;
+        Debug.Log("STATS AWAKE");
+        foreach (var drag in DragonsOwned) {
+            Debug.Log("Dragon owned: " + drag);
+        }
 
         miningSpeed = MiningSpeedDefault;
         damage = DamageDefault;
@@ -67,23 +88,36 @@ public class Stats : MonoBehaviour
 
     }
     int startAmountItems = 0;
+
     private void Start()
     {
-        if (MineralsOwned.Length != ActivationMinerals.Length)
-            Debug.LogWarning("Place all Minerals references in Stats/ActivationMinerals, need " + MineralsOwned.Length);
-
-        
+        // Since this is loaded at start it does not reflect the time from startingg the game, dont set it here, wait for the reset to be called.
         // Start Timer
-        stopwatch.Start();
+        //stopwatch.Start();
 
         //startAmountItems = CountItems();
-        Debug.Log("Start Children Items = "+startAmountItems+" This is the amount the player need to collect to achieve the Completionist");
+        //Debug.Log("Start Children Items = "+startAmountItems+" This is the amount the player need to collect to achieve the Completionist");
     }
+
+    
+    // Need to call this every time going from the Start Menu!
+    public void Restart()
+    {
+        Debug.Log("Timer reset, starting now");
+        // Start Timer
+        stopwatch.Restart();
+    }
+
+
+
     internal void StoreBossStartTime() => bossStartTime = stopwatch.Elapsed;
 
     internal int GetCompletePercent()
     {
         int currentItems = CountItems();
+        startAmountItems = 1000;
+        Debug.Log("Change the 100 Start Items here to calcluate? Skip totally, just show the gold amount and time");
+
         float percent = 100*(((float)startAmountItems - currentItems) / startAmountItems);
         Debug.Log("End Children Items "+currentItems+" percent = > "+percent);
         return (int)percent;
@@ -96,9 +130,10 @@ public class Stats : MonoBehaviour
     //private int CountItems() => itemsHolder.transform.GetComponentsInChildren<Usable>().Where(x => x.gameObject.activeSelf).ToArray().Length 
     //    + itemsHolder.transform.GetComponentsInChildren<PowerUp>().Where(x => x.gameObject.activeSelf).ToArray().Length;
 
+    /*
     [SerializeField] Transform[] levelStartPositions;
-    private int activeLevelStartPosition = 0;
 
+    //private int activeLevelStartPosition = 0;
     public void SetSpecificPosition(int newStartPosition)
     {
         activeLevelStartPosition = newStartPosition;
@@ -116,7 +151,43 @@ public class Stats : MonoBehaviour
         SavedStartPosition = levelStartPositions[activeLevelStartPosition].position;
         return false;
     }
+    */
+    internal void UnlockDragonPerk(int index)
+    {
+        DragonsOwned[index] = true;
 
+        string instructionText = index switch
+        {
+            0 => "Power",
+            1 => "Stealth",
+            2 => "Speed",
+            _ => "None"
+        };
+
+        // Show Instruction Help Notice
+        HelpInstructions.Instance.ShowInstruction(" Perk Unlocked - " + instructionText+". Enable it at Hideout.", HelpButtonType.Info);
+
+        DragonOwnedUpdate?.Invoke();
+    }
+
+    internal void ActivateDragonPerk(int index)
+    {
+        if (DragonsOwned[index]) {
+            if(ActiveDragon == index) {
+                // Deactivate
+                ActiveDragon = -1;
+                SoundMaster.Instance.PlaySound(SoundName.DropItem);
+                PlayerAnimationController.Instance.SetToolSpeedMultiplier(1f);
+            }
+            else {
+                SoundMaster.Instance.PlaySound(SoundName.PickUpMap);
+                ActiveDragon = index;
+                PlayerAnimationController.Instance.SetToolSpeedMultiplier(ActiveDragon == (int)DragonTypes.Blue ? BlueDragonMultiplier : 1f);
+            }
+            OnDragonActivationChange?.Invoke(ActiveDragon);
+        }
+    }
+    
     internal void StopGameTimer()
     {
         stopwatch.Stop();
@@ -150,7 +221,7 @@ public class Stats : MonoBehaviour
 
     }
 
-    public void SetMovemenSpeedMultiplier(float multiplier) => MovingSpeedMultiplier = multiplier;
+    //public void SetMovemenSpeedMultiplier(float multiplier) => MovingSpeedMultiplier = multiplier;
 
     public void SetDefaultSledgeHammer()
     {
@@ -280,7 +351,7 @@ public class Stats : MonoBehaviour
         Inventory.Instance.SetBombs(savedValues.bombsHeld);
         Inventory.Instance.SetCoins(savedValues.coinsHeld);
 
-        MovingSpeedMultiplier = savedValues.movingSpeedMult;
+        //MovingSpeedMultiplier = savedValues.movingSpeedMult;
         Debug.Log("Moving speed multiplier is now "+MovingSpeedMultiplier);
 
         // Updates the graphics to correct health

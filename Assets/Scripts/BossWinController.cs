@@ -20,7 +20,7 @@ public class BossWinController : MonoBehaviour
     public void WinRemoveWalls()
     {
         foreach (var wall in wallsToRemove) {
-            wall.Shrink();
+            //wall.Shrink();
         }
 
         // Make music fade?

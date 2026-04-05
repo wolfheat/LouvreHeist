@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Wolfheat.StartMenu;
 public class DeathScreenController : MonoBehaviour
@@ -33,7 +32,7 @@ public class DeathScreenController : MonoBehaviour
     public void ToMainMenu()
     {
         Debug.Log("Death Controller To Main Menu Clicked");
-
+        /*
         // Save player data here
         if (SavingUtility.playerGameData == null)
         {
@@ -45,7 +44,7 @@ public class DeathScreenController : MonoBehaviour
             //LevelLoader.Instance.DefineGameDataForSave();
             //SavingUtility.Instance.SavePlayerDataToFile();
         }
-
+        */
         // Send Analytics for Game Abandoned
         //UGS_Analytics.Instance.GameAbandonedEvent();
 
@@ -59,6 +58,6 @@ public class DeathScreenController : MonoBehaviour
 
         SoundMaster.Instance.ResetMusic();
         UIController.Pause(false);
-        SetActive(false);
+        panel.SetActive(false);
     }
 }

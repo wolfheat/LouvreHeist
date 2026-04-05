@@ -10,6 +10,7 @@ public class PickUpController : MonoBehaviour
     public Door Door { get; set; }
     public Vehicle Vehicle { get; set; }
     public InfoPanel InfoPanel { get; set; }
+    public Altar Altar { get; set; }
     public LockPickable LockPickable { get; set; }
     public Breakable Breakable { get; set; }
     public Grindable Grindable { get; set; }
@@ -147,6 +148,7 @@ public class PickUpController : MonoBehaviour
         Breakable = null;
         Grindable = null;
         InfoPanel = null;
+        Altar = null;
 
         if(colliders.Length > 0) {
 
@@ -202,12 +204,17 @@ public class PickUpController : MonoBehaviour
                     foundItems +=  " InfoPanel";
                     this.InfoPanel = FoundInfoPanel;
                     AnythingButWallFound++;
+                }else if (collider.gameObject.TryGetComponent(out Altar FoundAltar)) {
+                    // Found A wall
+                    foundItems += " FoundAltar";
+                    this.Altar = FoundAltar;
+                    AnythingButWallFound++;
                 }
             }
             if (AnythingButWallFound > 0)
                 Wall = null;
 
-            SeatedUIDisplayer.Instance.ShowPickupType(foundItems);
+            SeatedUIDisplayer.Instance?.ShowPickupType(foundItems);
         }
         /*
         // Show Help text for stairs

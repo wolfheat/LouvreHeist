@@ -2,7 +2,7 @@ using System;
 using Newtonsoft.Json;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class LeaderboardListEntry : MonoBehaviour
 {
@@ -10,32 +10,57 @@ public class LeaderboardListEntry : MonoBehaviour
     [SerializeField] private TextMeshProUGUI indexText;
     [SerializeField] private TextMeshProUGUI playerNameText;
     [SerializeField] private TextMeshProUGUI playerTimeText;
-    [SerializeField] private TextMeshProUGUI playerPercentText;
+    [SerializeField] private TextMeshProUGUI playerLootText;
     [SerializeField] private LeaderboardSystemSetter systemSetter;
 
-    internal void SetData(Unity.Services.Leaderboards.Models.LeaderboardEntry leaderboardItems, int index = 0)
+    internal void SetData(Unity.Services.Leaderboards.Models.LeaderboardEntry leaderboardItems, int index = 0, int pageIndex = 0)
     {
-        indexText.text = index.ToString();
-        //Debug.Log("Converting ms "+leaderboardItems.Score + " = "+Convert.MStoTimeString(leaderboardItems.Score));
-        playerTimeText.text = Convert.MStoTimeString(leaderboardItems.Score);
 
         string sanitized = Convert.CutHashtagAndEnding(leaderboardItems.PlayerName);
         string unSanitized = sanitized.Replace("_", " ");
 
+        // PLayer Name Position
         playerNameText.text = unSanitized;
+        
+        // Leaderboard Position
+        indexText.text = index.ToString();
+        //
+        bool isSpeedLeaderboard = pageIndex == 0;
+        //
+        if (leaderboardItems.Metadata == null || leaderboardItems.Metadata.Length == 0) {
+            if (isSpeedLeaderboard)
+                playerTimeText.text = Convert.MStoTimeString(leaderboardItems.Score);
+            else
+                playerLootText.text = leaderboardItems.Score + "$";
+        }
+        else {
+            ScoreMetadata scoreMetadata = JsonConvert.DeserializeObject<ScoreMetadata>(leaderboardItems.Metadata);
+
+            // Always use metadata as source of truth
+            playerTimeText.text = Convert.MStoTimeString((int)scoreMetadata.time);
+            playerLootText.text = ((int)scoreMetadata.loot) + "$";
+
+            systemSetter.SetAsSystem(scoreMetadata.systemID, scoreMetadata.versionString);
+        }
+        
+                
+        /*
+        //Debug.Log("Converting ms "+leaderboardItems.Score + " = "+Convert.MStoTimeString(leaderboardItems.Score));
+        playerTimeText.text = Convert.MStoTimeString(leaderboardItems.Score);
 
         //Debug.Log("Metadata string = "+leaderboardItems.Metadata);
 
         // Percent completed metadata handeling
         if (leaderboardItems.Metadata == null || leaderboardItems.Metadata.Length == 0)
-            playerPercentText.text = "XX%";
+            playerLootText.text = "XX%";
         else {
             ScoreMetadata scoreMetadata = JsonConvert.DeserializeObject<ScoreMetadata>(leaderboardItems.Metadata);
-            playerPercentText.text = ((int)scoreMetadata.perc).ToString()+"%";
+            playerLootText.text = ((int)scoreMetadata.loot).ToString()+"$";
+            playerTimeText.text = Convert.MStoTimeString((int)scoreMetadata.time);
 
             systemSetter.SetAsSystem(scoreMetadata.systemID,scoreMetadata.versionString);
             //playerNameText.text += AddSystemText(); 
-        }
+        }*/
 
     }
 

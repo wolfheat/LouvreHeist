@@ -31,6 +31,13 @@ public class Breakable : MonoBehaviour, ISavable
             UnityEditor.EditorUtility.SetDirty(this);
         }
     }
+
+    [ContextMenu("FORCE RENEW GUID")]
+    private void ForceRenewGUID()
+    {
+        guid = System.Guid.NewGuid().ToString();
+        UnityEditor.EditorUtility.SetDirty(this);
+    }
 #endif
 
     public object GetState()

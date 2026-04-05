@@ -171,7 +171,9 @@ public class SceneChanger : MonoBehaviour
     }
 
     */
-    public void ChangeScene(string name, bool additive = true, bool loadFromSaveFile = true, bool useTransitionDarkening = true)
+
+    private bool restartedGame = false;
+    public void ChangeScene(string name, bool additive = true, bool restartTimer = false, bool useTransitionDarkening = true)
     {
         // Store the name of the Scene to change Into
         ActiveGameScene = SceneManager.GetActiveScene().name;
@@ -183,6 +185,9 @@ public class SceneChanger : MonoBehaviour
         Debug.Log("Scene: Unloading Scene: " + ActiveGameScene +" And Loading Scene "+SceneToLoad);
         //{"Office","Market","Buildsite","Louvre" }; 
         // Do the Darkening?
+
+        restartedGame = restartTimer;
+
         if (useTransitionDarkening && ActiveGameScene != StartMenu)
             TransitionScreen.Instance.Darken(ChangeSceneWhenDark, 0.6f);
         else
@@ -237,6 +242,12 @@ public class SceneChanger : MonoBehaviour
         Debug.Log("Scene: Activating Scene: " + SceneToLoad + " Valid: " + scene.IsValid() + " Loaded: " + scene.isLoaded);
         
         SceneManager.SetActiveScene(scene);
+
+        if (restartedGame) {
+            Stats.Instance.Restart();
+            restartedGame = false;
+        }
+
 
         UpdateActiveSceneUIAndCamera(SceneToLoad);
 

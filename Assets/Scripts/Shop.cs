@@ -129,7 +129,7 @@ public class Shop : MonoBehaviour
         Debug.Log("Buying Chicken");
         if (SpecificAltars[(int)AltarTypes.Chicken].gameObject.activeSelf && Inventory.Instance.RemoveCoins(40)) {
             Debug.Log("Speed Up player double");
-            Stats.Instance.SetMovemenSpeedMultiplier(0.8f);            
+            //Stats.Instance.SetMovemenSpeedMultiplier(0.8f);            
             SoundMaster.Instance.PlayCoinSound(true);
             SpecificAltars[(int)AltarTypes.Chicken].RemoveItemFromPillar();
             HidePanel();

@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/PhotoScene.unity
     guid: 9ca38431513760c46adb3dd02ec90623
   - enabled: 0
-    path: Assets/SiuniaevCharacters/01_GamblerCat/Scenes/Showcase.unity
+    path: Assets/ExternalResources/SiuniaevCharacters/01_GamblerCat/Scenes/Showcase.unity
     guid: 3649c7bfdb88f9846905f049324e6339
   - enabled: 0
     path: Assets/Scenes/DungeonDebugging.unity

@@ -61,15 +61,22 @@ public class LockPickable : MonoBehaviour, ISavable
     public void SetGUID(string newGUID) => guid = newGUID;
 
 #if UNITY_EDITOR
-private void OnValidate()
+    private void OnValidate()
     {
 
         ISavable[] allItems = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<ISavable>().ToArray();
-                
+
         if (string.IsNullOrEmpty(guid) || allItems.Count(x => x.GUID == guid) > 1) {
             guid = System.Guid.NewGuid().ToString();
             UnityEditor.EditorUtility.SetDirty(this);
         }
+    }
+
+    [ContextMenu("FORCE RENEW GUID")]
+    private void ForceRenewGUID()
+    {
+        guid = System.Guid.NewGuid().ToString();
+        UnityEditor.EditorUtility.SetDirty(this);
     }
 #endif
 

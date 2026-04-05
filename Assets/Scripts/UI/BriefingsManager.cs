@@ -7,7 +7,8 @@ public class BriefingsManager : MonoBehaviour
     [SerializeField] private HideOutMap hideOutMap; 
     [SerializeField] private GameObject[] briefingsPages; 
     [SerializeField] private GameObject StartMissionButton; 
-    private string[] SceneNames = {"Office","Market","BuildSite","Louvre" }; 
+    private string[] SceneNames = {"Office","BuildSite","Louvre"}; 
+    private int[] moneyNeededToUnlockDestination = {0,10000,15000,20000}; 
 
     private int activeBriefingIndex = 0;
 
@@ -48,10 +49,19 @@ public class BriefingsManager : MonoBehaviour
 
         SetMissionAsActive(activeBriefingIndex);
 
-        PlayerController.Instance.DoingAction = true;
-
+        UpdateUnlockedDestinations();
     }
-    
+
+    private void UpdateUnlockedDestinations()
+    {
+        for (int i = 0; i < moneyNeededToUnlockDestination.Length; i++) {
+            if(Inventory.Instance.MoneyHeld > moneyNeededToUnlockDestination[i]) {
+                //Debug.Log("UNLOCK: index:"+i+" cause player has "+ Inventory.Instance.MoneyHeld+" and need only " + moneyNeededToUnlockDestination[i]+" to unlokc.");
+                UnlockDestination(i);
+            }
+        }
+    }
+
     public void ShowBriefing()
     {
         // Opens the map and sets the current step as active

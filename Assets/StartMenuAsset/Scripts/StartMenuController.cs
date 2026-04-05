@@ -74,14 +74,17 @@ namespace Wolfheat.StartMenu
             //currentOption = startMenu;
             //currentMenu = MenuOption.MainMenu;
             //ActivateDefaultSelectedForCurrentMenu();
-
-            InitiateStartMenu();
+                        
             SoundMaster.Instance.PlayMusic(MusicName.MenuMusic);
-        
+
             actions = new Controls();
             actions.Enable();
             actions.Player.M.performed += SoundMaster.Instance.ToggleMusic;
+
+            InitiateStartMenu();
+            //ForcePlayerName();
         }
+
         private void OnEnable()
         {
             // Leave this
@@ -246,7 +249,7 @@ namespace Wolfheat.StartMenu
         {
             Debug.Log("Start Game Pressed");
             //SceneManager.UnloadSceneAsync("StartMenu");
-            SceneChanger.Instance.ChangeScene(SceneChanger.Instance.StartLevelName);
+            SceneChanger.Instance.ChangeScene(SceneChanger.Instance.StartLevelName,restartTimer: true); // Forces Game timer to restart
         }
 
         private void ShowLeaderboards()
