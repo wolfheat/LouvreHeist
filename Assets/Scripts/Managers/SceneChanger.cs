@@ -16,7 +16,7 @@ public class SceneChanger : MonoBehaviour
     public string Managers = "Managers";
     public string[] ScenesPriorityActivation = {"Louvre","BuildSite", "Office","Hideout","StartMenu"};
 
-    [SerializeField] private GameObject InGameCamera; 
+    [SerializeField] private GameObject playerObjectAlsoIngamCamera; 
     [SerializeField] private GameObject InGameUI; 
     [SerializeField] private GameObject InGameEventSystem;
 
@@ -178,8 +178,11 @@ public class SceneChanger : MonoBehaviour
         // Store the name of the Scene to change Into
         ActiveGameScene = SceneManager.GetActiveScene().name;
 
-        if(name != StartMenu) // Do not save when exiting game
+        if (name != StartMenu) {
+            // Do not save when exiting game
             SaveScene(ActiveGameScene);
+        }
+        PoliceTimer.Instance?.Reset();
 
         SceneToLoad = name;
         Debug.Log("Scene: Unloading Scene: " + ActiveGameScene +" And Loading Scene "+SceneToLoad);
@@ -220,6 +223,7 @@ public class SceneChanger : MonoBehaviour
         bool comingFromStartMenu = ActiveGameScene == StartMenu;
         bool comingFromManagers = ActiveGameScene == Managers;
 
+        
         // Unload
         Debug.Log("Scene: Unloading Scene: " + ActiveGameScene);
         if(!comingFromManagers) // Never Unload Managers
@@ -227,9 +231,13 @@ public class SceneChanger : MonoBehaviour
         
         yield return null;
 
-        
+        // Load the Player, Camera, UI and Eventlistener
+        UpdateActiveSceneUIAndCamera(SceneToLoad);
+
         Debug.Log("Scene: Loading Scene: " + SceneToLoad);
         yield return SceneManager.LoadSceneAsync(SceneToLoad, LoadSceneMode.Additive);
+
+        PlayerController.Instance?.FindAndPlaceAtLevelsStartPosition();
 
         yield return null;
 
@@ -242,21 +250,16 @@ public class SceneChanger : MonoBehaviour
         Debug.Log("Scene: Activating Scene: " + SceneToLoad + " Valid: " + scene.IsValid() + " Loaded: " + scene.isLoaded);
         
         SceneManager.SetActiveScene(scene);
-
+        /*
         if (restartedGame) {
             Stats.Instance.Restart();
             restartedGame = false;
-        }
+        }*/
 
 
-        UpdateActiveSceneUIAndCamera(SceneToLoad);
 
         yield return null;
-
-        if(comingFromStartMenu)
-            PlayerController.Instance.ResetFromStartMenu();
-        else
-            PlayerController.Instance.Reset();
+        
 
         SceneChanged?.Invoke();
     }
@@ -272,10 +275,16 @@ public class SceneChanger : MonoBehaviour
 
         bool showIngame = sceneToLoad != "StartMenu";
 
+        
         Debug.Log("Loaded Scene " + sceneToLoad + " Show the Ingame UI and Camera: " + showIngame);
-        // Hide the In-Game Camera And UI when in the StartMenu
-        InGameCamera.SetActive(showIngame);
+        
+        // Show Player Gameobject with Ingame Camera  (Hidden while in Start Menu)
+        playerObjectAlsoIngamCamera.SetActive(showIngame);
+
+        // Show UI
         InGameUI.SetActive(showIngame);
+
+        // Enable Eventlistener - To interact with new UI
         InGameEventSystem.SetActive(showIngame);
     }
 

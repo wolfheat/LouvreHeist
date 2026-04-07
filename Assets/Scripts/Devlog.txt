@@ -65,10 +65,19 @@ Mar 2026
 		* Lose screen now working
 		* Fix money not zeroed at restart
 		* Make a timer
-		* Fix the Perks working
+		* Fix the Perks working		
+		Jam Release [PC 817Mb, 107Mb] v. 0.0.07	
 
+6/4		* Post Jam - Updated Credits
+		* Fixed initialization bug with Ingame UI being active from start	
 
+7/5		* Fixed Police issue,Fixed Resetting after win issues, nullified hieoutmap selection at restart
+		
 
+		* Fix hitting with sledgehammer smoother
+		* Figure out issue with animations staggering the game play, smooth it out
+		* Fix transitions to be blackened correctly transitionDarkener thingy
+		
 
 		* Fix better lights in hideout
 		* Make harbour boat place etc to escape louvre?
@@ -153,62 +162,65 @@ Mar 2026
 		* New release 0.0.14
 
 ///////////////////////////////////////////////////////////////////////////
-<b>Credits
-</b>
+	<b>Credits
+	</b>
 
 
-A game by wolfheat
-
-
-
+	A game by wolfheat
 
 
 
-A variety of assets were used to create this game.
 
 
-<b>Graphic</b>
-3D
-Synty Studio Asset Packs
-Ancient Empire
-Construction
-Kids
-Mini City
-NightClub
-Office
-Town
 
-Gece Studio - Dragon Head
+	A variety of assets were used to create this game.
 
-2D
-Vector Dividers Collection -  Start menu Dividers
-Kenney - Icons from asset packs
-Zooperdan - Printer Display Image
 
-VFX
-Unity Technologies - Particle Pack
+	<b>Graphic</b>
+	3D
+	Synty Studio Asset Packs
+	Ancient Empire
+	Construction
+	Kids
+	Mini City
+	NightClub
+	Office
+	Town
 
-<b>Audio</b>
+	Gece Studio - Dragon Head
 
-FreeSounds,Pixabay - Various Sounds assets
-Uppbeat - Music
+	2D
+	Vector Dividers Collection -  Start menu Dividers
+	Kenney - Icons from asset packs
+	Zooperdan - Printer Display Image
+	avatar
+	macrovector - Postit
+	Ben Clark - Vector Notes
 
-<b>Music</b>
-Brock Hewitt - In The Silence
-Monument Music - Love Story
+	VFX
+	Unity Technologies - Particle Pack
 
-<b>Fonts</b>
-Prida01 - gluk
+	<b>Audio</b>
 
-<b>Tools Used</b>
-Audacity
-Gimp
-Blender
-Unity
+	FreeSounds,Pixabay - Various Sounds assets
+	Uppbeat - Music
 
-<b>Game Jam</b>
-This game was created for the
-Dungeon Crawler Game Jam 2026
+	<b>Music</b>
+	Brock Hewitt - In The Silence
+	Monument Music - Love Story
+
+	<b>Fonts</b>
+	Prida01 - gluk
+
+	<b>Tools Used</b>
+	Audacity
+	Gimp
+	Blender
+	Unity
+
+	<b>Game Jam</b>
+	This game was created for the
+	Dungeon Crawler Game Jam 2026
 
 
 ////////////////////////////////////////////////////////////////////////////////

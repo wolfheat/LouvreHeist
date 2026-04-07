@@ -23,19 +23,11 @@ public class DragonUIPanel : MonoBehaviour
         textField.text = "";
     }
 
-    private void OnEnable()
-    {
-        Stats.OnDragonActivationChange += OnDragonChange;        
-    }
-    
-
-    private void OnDisable()
-    {
-        Stats.OnDragonActivationChange -= OnDragonChange;        
-    }
+    public void SetDragonActivationChange(int setIndex) => OnDragonChange(setIndex);
 
     private void OnDragonChange(int activeIndex)
     {
+        Debug.Log("Dragon UI Panel: activate "+activeIndex);
         // Update the UI visuals
         switch (activeIndex) {
             case 0:
@@ -56,7 +48,8 @@ public class DragonUIPanel : MonoBehaviour
             default:
                 dragonImage.color = unavailableColor;
                 textField.text = "";
-                HelpInstructions.Instance.ShowInstruction("Perk Removed", HelpButtonType.Info);
+                if(activeIndex==-1)
+                    HelpInstructions.Instance.ShowInstruction("Perk Removed", HelpButtonType.Info); // Hide this if sending in -2 ie dont alert player cause its initialization
                 break;
         }
 

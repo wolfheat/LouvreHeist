@@ -68,7 +68,7 @@ public class Stats : MonoBehaviour
     public static Action DragonOwnedUpdate;
     public static Action MineralsAmountUpdate;
     public static Action NoMoreMineralsReached;
-    public static Action<int> OnDragonActivationChange;
+    //public static Action<int> OnDragonActivationChange;
 
     private void Awake()
     {
@@ -106,6 +106,12 @@ public class Stats : MonoBehaviour
         Debug.Log("Timer reset, starting now");
         // Start Timer
         stopwatch.Restart();
+        IsDead = false;
+        DragonsOwned = new bool[3] { false, false, false };
+        
+        ActiveDragon = -1;
+        UIController.Instance?.SetDragonActivationChange(-2);
+        Debug.Log("Trying to set Dragons Owned to none");        
     }
 
 
@@ -184,7 +190,8 @@ public class Stats : MonoBehaviour
                 ActiveDragon = index;
                 PlayerAnimationController.Instance.SetToolSpeedMultiplier(ActiveDragon == (int)DragonTypes.Blue ? BlueDragonMultiplier : 1f);
             }
-            OnDragonActivationChange?.Invoke(ActiveDragon);
+
+            UIController.Instance?.SetDragonActivationChange(ActiveDragon);
         }
     }
     

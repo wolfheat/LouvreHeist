@@ -36,6 +36,7 @@ public class BriefingsManager : MonoBehaviour
 
     public void Reset()
     {
+        activeBriefingIndex = 0;
         hideOutMap.Reset();
     }
 

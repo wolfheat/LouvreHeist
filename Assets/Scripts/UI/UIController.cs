@@ -16,6 +16,7 @@ public class UIController : MonoBehaviour
     [SerializeField] ToolsUIController toolsUIController;
     [SerializeField] DeathScreenController deathScreen;
     [SerializeField] WinScreenScroll winScreen;
+    [SerializeField] DragonUIPanel dragonUIPanel;
     [SerializeField] GameObject helpScreen;
     [SerializeField] OxygenController oxygenPanel;
     [SerializeField] BriefingsManager briefingsManager;
@@ -38,6 +39,8 @@ public class UIController : MonoBehaviour
     }
     public void OnEnable()
     {
+        Debug.Log("UIController Enable");
+
         Inputs.Instance.Controls.Player.Esc.started += Pause;
         TransitionScreen.AnimationComplete += TransitionComplete;
         Inputs.Instance.Controls.Player.Tilde.performed += Tilde;
@@ -251,4 +254,6 @@ public class UIController : MonoBehaviour
     internal void ActivateToolsUITool(ToolType tool) => toolsUIController.ActivateTool(tool);
     internal void ToolsUIReset() => toolsUIController.Reset();
     internal void BriefingsReset () => briefingsManager.Reset();
+
+    internal void SetDragonActivationChange(int v) => dragonUIPanel.SetDragonActivationChange(v);
 }

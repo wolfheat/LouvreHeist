@@ -28,13 +28,25 @@ public static Inventory Instance { get; private set; }
 
     public int BombsUsed { get; internal set; } = 0;
 
-    private void Start()
+    private void Awake()
     {
-        UpdateInventory();
+        Debug.Log("Inventory Awake");
+        if (Instance != null) {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
+
+    private void OnEnable()
+    {
+        Clear();
     }
 
     internal void Clear()
     {
+
+        Debug.Log("Inventory.Instance.Clear()");
         MoneyHeld = 0;
         UpdateInventory();
     }
@@ -136,17 +148,10 @@ public static Inventory Instance { get; private set; }
     }
 
 
-    private void Awake()
-    {
-        if (Instance != null) {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
-    }
-
     public void UpdateInventory()
     {
+
+        Debug.Log("UpdateInventory");
         keys.text = KeysHeld.ToString();
         bombs.text = BombsHeld.ToString();
         others.text = OthersHeld.ToString();

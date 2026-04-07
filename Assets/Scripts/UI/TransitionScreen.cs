@@ -37,6 +37,11 @@ public class TransitionScreen : MonoBehaviour
         //AnimationComplete += Lighten;
     }
 
+    private void OnEnable()
+    {
+        Reset();
+    }
+
     public void Reset()
     {
         screen.SetActive(false);

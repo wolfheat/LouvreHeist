@@ -19,14 +19,6 @@ namespace Wolfheat.Inputs
         {
             // Enable this when you want to use the loading of a saved file
             //SavingUtility.LoadingComplete += LoadingComplete;
-
-#if UNITY_EDITOR
-    Controls.Player.Y.performed += Give10Gold;
-#endif
-        }
-
-        private void Start()
-        {
             LoadingComplete();
             
         }
@@ -68,9 +60,7 @@ namespace Wolfheat.Inputs
         {
             Controls.Player.M.performed -= SoundMaster.Instance.ToggleAllAudio;
             Controls.Player.N.performed -= SoundMaster.Instance.ToggleMusic;
-            //Controls.Player.T.performed -= JumpToNextEntryPoint;
-            Controls.Player.Y.performed -= Give10Gold;
-            Controls.Disable();
+            
 
 
             // Tools Input Loader
@@ -82,6 +72,8 @@ namespace Wolfheat.Inputs
             Controls.Player.Six.performed -= Six;
             Controls.Player.ScrollDown.performed -= Prev;
             Controls.Player.ScrollUp.performed -= Next;
+
+            Controls.Disable();
         }
 
         public void Give10Gold(InputAction.CallbackContext context)

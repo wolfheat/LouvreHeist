@@ -133,17 +133,18 @@ public class LevelCreator : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerController.Instance.PlayerReachedNewTile += UpdatePlayerDistance;
+        //PlayerController.Instance.PlayerReachedNewTile += UpdatePlayerDistance;
     }
 
     private void OnDisable()
     {
-        PlayerController.Instance.PlayerReachedNewTile -= UpdatePlayerDistance;
+        //PlayerController.Instance.PlayerReachedNewTile -= UpdatePlayerDistance;
     }
 
     private void UpdatePlayerDistance()
     {
         PlayersLastPosition = Convert.V3ToV2Int(PlayerController.Instance.transform.position);
+        //Debug.Log("Levelcreator: Player pos: "+PlayersLastPosition);
     }
 
     void Update()

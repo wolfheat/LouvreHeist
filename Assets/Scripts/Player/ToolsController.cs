@@ -16,7 +16,11 @@ public class ToolsController : MonoBehaviour
 
     private string[] unlockedToolInstructions = new string[]{"You can now pick up loot!","You can now pick locks!","You can now crush stuff!","You can now break tempered glass!", "You can now do Skull 1 actions!", "You can now do Skull 2 actions!" };
 
-
+    private void OnEnable()
+    {
+        Debug.Log("ToolsController Enable");
+        Reset();
+    }
     internal void Reset()
     {
         unlockedTool = new bool[6];
@@ -25,10 +29,8 @@ public class ToolsController : MonoBehaviour
         // Initiate with bare hands
         EquipTool(ToolType.Hands);
 
-        UIController.Instance.ToolsUIReset();
-        UIController.Instance.BriefingsReset();
-
-
+        UIController.Instance?.ToolsUIReset();
+        UIController.Instance?.BriefingsReset();
     }
 
     internal bool ToolUnlocked(ToolType tool) => unlockedTool[(int)tool];
@@ -46,7 +48,7 @@ public class ToolsController : MonoBehaviour
         SetPhysicalToolActive(ActiveTool);
 
         // Update UI
-        UIController.Instance.SetToolsUIActiveTool(tool);
+        UIController.Instance?.SetToolsUIActiveTool(tool);
     }
 
     private void SetPhysicalToolActive(ToolType activeTool)
@@ -80,17 +82,12 @@ public class ToolsController : MonoBehaviour
 		Instance = this;
     }
 
-    private void Start()
-    {
-        Reset();
-    }
-
     public void UnlockTool(ToolType tool)
     {
         unlockedTool[(int)tool] = true;
-        UIController.Instance.ActivateToolsUITool(tool);
+        UIController.Instance?.ActivateToolsUITool(tool);
 
         // Show Instruction Help Notice
-        HelpInstructions.Instance.ShowInstruction(tool+ " Aquired - " + unlockedToolInstructions[(int)tool], HelpButtonType.Info);
+        HelpInstructions.Instance?.ShowInstruction(tool+ " Aquired - " + unlockedToolInstructions[(int)tool], HelpButtonType.Info);
     }
 }

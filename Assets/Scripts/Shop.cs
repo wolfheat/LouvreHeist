@@ -97,7 +97,7 @@ public class Shop : MonoBehaviour
 
         HidePanel();
     }
-
+    /*
     public void BuyBananas()
     {
         Debug.Log("Buying Bananas");
@@ -146,6 +146,7 @@ public class Shop : MonoBehaviour
             HidePanel();
         }
     }
+    */
 
     private void BuyBomb()
     {
@@ -180,7 +181,7 @@ public class Shop : MonoBehaviour
     }
 
 
-
+    /*
     public void BuyShopItem()
     {
         if (WaitForPlayerToReleaseMouseButtonBeforeAllowingButtonCLicks) return;
@@ -203,7 +204,7 @@ public class Shop : MonoBehaviour
             default:
                 break;
         }
-    }
+    }*/
 
     void Update()
     {

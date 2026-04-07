@@ -14,18 +14,21 @@ public class Altar : MonoBehaviour
     private void OnEnable()
     {
         Stats.DragonOwnedUpdate += UpdateOwnedStatus;
+        Debug.Log("Altar Start Enable Updating from the value in Stats DragonsOwned");
+        UpdateOwnedStatus();
     }
 
 
 private void OnDisable()
     {
         Stats.DragonOwnedUpdate -= UpdateOwnedStatus;
+        UpdateOwnedStatus();
     }
 
 
     private void Start()
     {
-        UpdateOwnedStatus();
+        //UpdateOwnedStatus();
     }
 
     public void RemoveItemFromPillar()
@@ -35,6 +38,7 @@ private void OnDisable()
     
     private void UpdateOwnedStatus()
     {
+        Debug.Log("Setting Dragon " + name + " to owned: "+ Stats.Instance?.DragonsOwned[acceptsDragonID]);
         //ownCrystalactivation.SetActive(Stats.Instance?.DragonsOwned[acceptsDragonID] ?? false);
         mineralObject.SetActive(Stats.Instance?.DragonsOwned[acceptsDragonID] ?? false);
     }

@@ -100,6 +100,8 @@ public class PlayerController : MonoBehaviour
 
         playerAnimationController.HitComplete += HitWithTool;
 
+        //Inventory.Instance.Clear();
+        Stats.Instance.Restart();
         Reset();
     }
 
@@ -271,6 +273,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // When shop is open try to buy when interacting
+        /*
         if (Shop.Instance.ShopSpecificIsOpen) {
             if (Mouse.current.leftButton.IsPressed())
                 return;
@@ -278,6 +281,7 @@ public class PlayerController : MonoBehaviour
             Shop.Instance.BuyShopItem();
             return;
         }
+        */
 
         Debug.Log("Checking for a Stair " + (pickupController.Stair!=null));   
         Debug.Log("Checking for a InfoPanel " + (pickupController.InfoPanel!=null));   
@@ -965,11 +969,16 @@ public class PlayerController : MonoBehaviour
         ResetPlayerPosition();         
         PlaceMock(transform.position);
         DoingAction = false;
+        savedAction = null;
+        lastAction = null;
+
+        ActiveVehicle = null;
         Stats.Instance.IsDead = false;
-        //Inventory.Instance.Clear();
-        //pickupController?.Restart();
-        UIController.Instance.Pause(false);
+
         PoliceTimer.Instance.Reset();
+
+        //Inventory.Instance.Clear(); // Not needed since this is reset when the UI is activated which happens when player leaves start Menu
+        //pickupController?.Restart();
         UIController.HideDeathScreenInstant();
 
     }
@@ -977,23 +986,7 @@ public class PlayerController : MonoBehaviour
 
     public void ResetFromStartMenu()
     {
-
-        DoingAction = false;
-        ActiveVehicle = null;
-
-        savedAction = null;
-        lastAction = null;
-
-        Stats.Instance.IsDead = false;
-
-
-        Debug.Log("Reset Player");
-        Inventory.Instance.Clear();
-        ResetPlayerPosition();         
-        PlaceMock(transform.position);
-        pickupController?.Restart();
-        TransitionScreen.Instance.Reset();
-        UIController.HideDeathScreenInstant();
+        Reset();
     }
     
     public void Revive()
@@ -1036,18 +1029,23 @@ public class PlayerController : MonoBehaviour
         playerMock.pos = Convert.V3ToV2Int(position);        
         playerMock.transform.position = position;
     }
+
+    internal void FindAndPlaceAtLevelsStartPosition()
+    {
+        ResetPlayerPosition();
+    }
     /*
-    internal void GotoStartPosition()
-    {
-        Stats.Instance.SetSpecificPosition(0);
-        ResetPlayerPosition();
-    }
-    internal void GotoStartPosition(int leadsTo)
-    {
-        Debug.Log("Specific position");
-        Stats.Instance.SetSpecificPosition(leadsTo);
-        ResetPlayerPosition();
-        //Stats.Instance.DeActivateMap();
-    }
-    */
+internal void GotoStartPosition()
+{
+   Stats.Instance.SetSpecificPosition(0);
+   ResetPlayerPosition();
+}
+internal void GotoStartPosition(int leadsTo)
+{
+   Debug.Log("Specific position");
+   Stats.Instance.SetSpecificPosition(leadsTo);
+   ResetPlayerPosition();
+   //Stats.Instance.DeActivateMap();
+}
+*/
 }
