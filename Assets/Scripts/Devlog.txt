@@ -72,7 +72,8 @@ Mar 2026
 		* Fixed initialization bug with Ingame UI being active from start	
 
 7/5		* Fixed Police issue,Fixed Resetting after win issues, nullified hieoutmap selection at restart
-		
+		* Fixed name set prompt issue
+
 
 		* Fix hitting with sledgehammer smoother
 		* Figure out issue with animations staggering the game play, smooth it out

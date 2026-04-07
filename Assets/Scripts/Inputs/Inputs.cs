@@ -47,14 +47,14 @@ namespace Wolfheat.Inputs
             PlayerController.Instance.DoingAction = false;
         }
 
-        private void One(InputAction.CallbackContext c) => ToolsController.Instance.EquipTool(ToolType.Hands);
-        private void Two(InputAction.CallbackContext c) => ToolsController.Instance.EquipTool(ToolType.LockPick);
-        private void Three(InputAction.CallbackContext c) => ToolsController.Instance.EquipTool(ToolType.Hammer);
-        private void Four(InputAction.CallbackContext c) => ToolsController.Instance.EquipTool(ToolType.Grinder);
-        private void Five(InputAction.CallbackContext c) => ToolsController.Instance.EquipTool(ToolType.Skull);
-        private void Six(InputAction.CallbackContext c) => ToolsController.Instance.EquipTool(ToolType.Skull2);
-        private void Prev(InputAction.CallbackContext c) => ToolsController.Instance.EquipTool(-1);
-        private void Next(InputAction.CallbackContext c) => ToolsController.Instance.EquipTool(1);
+        private void One(InputAction.CallbackContext c) => ToolsController.Instance?.EquipTool(ToolType.Hands);
+        private void Two(InputAction.CallbackContext c) => ToolsController.Instance?.EquipTool(ToolType.LockPick);
+        private void Three(InputAction.CallbackContext c) => ToolsController.Instance?.EquipTool(ToolType.Hammer);
+        private void Four(InputAction.CallbackContext c) => ToolsController.Instance?.EquipTool(ToolType.Grinder);
+        private void Five(InputAction.CallbackContext c) => ToolsController.Instance?.EquipTool(ToolType.Skull);
+        private void Six(InputAction.CallbackContext c) => ToolsController.Instance?.EquipTool(ToolType.Skull2);
+        private void Prev(InputAction.CallbackContext c) => ToolsController.Instance?.EquipTool(-1);
+        private void Next(InputAction.CallbackContext c) => ToolsController.Instance?.EquipTool(1);
 
         private void OnDisable()
         {

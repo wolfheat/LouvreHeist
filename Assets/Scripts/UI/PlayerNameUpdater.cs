@@ -24,9 +24,7 @@ public class PlayerNameUpdater : MonoBehaviour
     private void UpdateName()
     {
         Debug.Log("-- Updating Player Name in Start Menu");
-        if(SavingUtility.gameSettingsData != null) {
-            return;
-        }
+
         playerNameText.text = SavingUtility.gameSettingsData.PlayerName;
         pleaseHolder.gameObject.SetActive(playerNameText.text.Length<=2 || playerNameText.text.ToLower() == "anonymous");
     }

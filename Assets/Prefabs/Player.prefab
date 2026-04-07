@@ -114,6 +114,7 @@ MonoBehaviour:
   playerMock: {fileID: 0}
   playerAnimationController: {fileID: 955377131359831138}
   playerLanternController: {fileID: 0}
+  UIController: {fileID: 0}
   takeFireDamage: {fileID: 9209100304168848773}
   pickupController: {fileID: 2097207098449961436}
 --- !u!114 &9209100304168848773
@@ -176,7 +177,7 @@ Transform:
   - {fileID: 8666778778742325535}
   - {fileID: 77422765859191071}
   - {fileID: 8738731538935342244}
-  - {fileID: 1566239922209929638}
+  - {fileID: 5676644364349315607}
   - {fileID: 4771477887215821955}
   m_Father: {fileID: 1798166546633524071}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -215,6 +216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 8788148316779585585}
+  grinderPlaterAnimator: {fileID: 0}
 --- !u!1 &721308733937816989
 GameObject:
   m_ObjectHideFlags: 0
@@ -1415,6 +1417,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 4132286787464460758}
+--- !u!1 &5996773096547906407
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5676644364349315607}
+  m_Layer: 6
+  m_Name: Grinder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5676644364349315607
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5996773096547906407}
+  serializedVersion: 2
+  m_LocalRotation: {x: 9.3132246e-10, y: -0, z: -0.0000000018626449, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1566239922209929638}
+  m_Father: {fileID: 3001506111824219535}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6798071671868439156
 GameObject:
   m_ObjectHideFlags: 0
@@ -2178,7 +2212,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 3001506111824219535}
+    m_TransformParent: {fileID: 5676644364349315607}
     m_Modifications:
     - target: {fileID: 1795986531283018, guid: 268793cc10cdf654d9bfe3cdb0ee1322, type: 3}
       propertyPath: m_Name
@@ -2190,11 +2224,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4815426359924780, guid: 268793cc10cdf654d9bfe3cdb0ee1322, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.21946813
+      value: -0.21946815
       objectReference: {fileID: 0}
     - target: {fileID: 4815426359924780, guid: 268793cc10cdf654d9bfe3cdb0ee1322, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.03453946
+      value: 0.034539457
       objectReference: {fileID: 0}
     - target: {fileID: 4815426359924780, guid: 268793cc10cdf654d9bfe3cdb0ee1322, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2202,7 +2236,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4815426359924780, guid: 268793cc10cdf654d9bfe3cdb0ee1322, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.40185738
+      value: 0.40185735
       objectReference: {fileID: 0}
     - target: {fileID: 4815426359924780, guid: 268793cc10cdf654d9bfe3cdb0ee1322, type: 3}
       propertyPath: m_LocalRotation.x
@@ -2210,11 +2244,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4815426359924780, guid: 268793cc10cdf654d9bfe3cdb0ee1322, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.359055
+      value: 0.35905504
       objectReference: {fileID: 0}
     - target: {fileID: 4815426359924780, guid: 268793cc10cdf654d9bfe3cdb0ee1322, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.40904066
+      value: 0.40904063
       objectReference: {fileID: 0}
     - target: {fileID: 4815426359924780, guid: 268793cc10cdf654d9bfe3cdb0ee1322, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

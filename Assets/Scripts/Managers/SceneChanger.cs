@@ -182,7 +182,8 @@ public class SceneChanger : MonoBehaviour
             // Do not save when exiting game
             SaveScene(ActiveGameScene);
         }
-        PoliceTimer.Instance?.Reset();
+        if(ActiveGameScene != StartMenu)
+            PoliceTimer.Instance?.Reset(); // Done on exit so need to be sure it is available
 
         SceneToLoad = name;
         Debug.Log("Scene: Unloading Scene: " + ActiveGameScene +" And Loading Scene "+SceneToLoad);
