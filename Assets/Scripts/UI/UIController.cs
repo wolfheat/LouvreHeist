@@ -12,7 +12,6 @@ public enum GameStates { Running, Paused }
 public class UIController : MonoBehaviour
 {
     [SerializeField] InteractableUI interactableUI;
-    [SerializeField] TransitionScreen transitionScreen;
     [SerializeField] ToolsUIController toolsUIController;
     [SerializeField] DeathScreenController deathScreen;
     [SerializeField] WinScreenScroll winScreen;
@@ -120,7 +119,7 @@ public class UIController : MonoBehaviour
 	{
         // Transition to Dark
         open = UIActions.DeathScreen;
-        transitionScreen.Darken();
+        TransitionScreen.Instance.Darken();
 
 
         SoundMaster.Instance.FadeMusic();
@@ -162,7 +161,7 @@ public class UIController : MonoBehaviour
         Pause(true);
 
         // Transition to Dark
-		transitionScreen.Darken();
+		TransitionScreen.Instance.Darken();
         open = UIActions.WinScreen;
 
         // This wont happen if player has teleported
@@ -208,10 +207,10 @@ public class UIController : MonoBehaviour
         compass.SetActive(true);
     }
 
-    internal void ToMainMenu()
+    internal void ToMainMenu(bool fromCreditsWin = false)
     {
         SoundMaster.Instance.ResetMusic();
-        SceneChanger.Instance.ChangeScene("StartMenu");
+        SceneChanger.Instance.ChangeScene("StartMenu",fromCreditsWin: fromCreditsWin);
     }
 
     // Screen darkening image

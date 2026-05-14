@@ -73,9 +73,20 @@ Mar 2026
 
 7/5		* Fixed Police issue,Fixed Resetting after win issues, nullified hieoutmap selection at restart
 		* Fixed name set prompt issue
+8/5		* removed resultstats from startmenu credits
+		* Locked player from moving when in hideoutmap
+14/4	* Made Player name update when returning to start Menu, by trying onEnableUpdate
+		* Fixed transitions?
+		* Boxes breaks earlier
+		* Held movement works after breaking boxes
+15/4	* Added Tool to resolve all GUID conflicts in ISavables 				
+		
 
 
-		* Fix hitting with sledgehammer smoother
+		* Let player change tool when running, but not when using one
+
+
+
 		* Figure out issue with animations staggering the game play, smooth it out
 		* Fix transitions to be blackened correctly transitionDarkener thingy
 		

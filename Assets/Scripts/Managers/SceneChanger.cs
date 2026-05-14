@@ -173,7 +173,7 @@ public class SceneChanger : MonoBehaviour
     */
 
     private bool restartedGame = false;
-    public void ChangeScene(string name, bool additive = true, bool restartTimer = false, bool useTransitionDarkening = true)
+    public void ChangeScene(string name, bool additive = true, bool restartTimer = false, bool useTransitionDarkening = true, bool fromCreditsWin = false)
     {
         // Store the name of the Scene to change Into
         ActiveGameScene = SceneManager.GetActiveScene().name;
@@ -182,6 +182,7 @@ public class SceneChanger : MonoBehaviour
             // Do not save when exiting game
             SaveScene(ActiveGameScene);
         }
+
         if(ActiveGameScene != StartMenu)
             PoliceTimer.Instance?.Reset(); // Done on exit so need to be sure it is available
 
@@ -192,11 +193,20 @@ public class SceneChanger : MonoBehaviour
 
         restartedGame = restartTimer;
 
-        if (useTransitionDarkening && ActiveGameScene != StartMenu)
-            TransitionScreen.Instance.Darken(ChangeSceneWhenDark, 0.6f);
+        // Why not using it from startMenu?
+        if (useTransitionDarkening) {
+
+            if (fromCreditsWin) {
+                TransitionScreen.Instance.Darken(ChangeSceneWhenDark, 1.5f, false); // Start Directly with a dark screen and lighten ie no Callback sent
+            }
+            else
+                TransitionScreen.Instance.Darken(ChangeSceneWhenDark, 0.9f);
+            
+        }
         else
             StartCoroutine(ChangeSceneCO());
     }
+
     public void ChangeSceneWhenDark()
     {
         StartCoroutine(ChangeSceneCO());
@@ -219,6 +229,9 @@ public class SceneChanger : MonoBehaviour
     private IEnumerator ChangeSceneCO()
     {
         // Short Wait
+        yield return null;
+        yield return null;
+        yield return null;
         yield return null;
 
         bool comingFromStartMenu = ActiveGameScene == StartMenu;
@@ -251,6 +264,11 @@ public class SceneChanger : MonoBehaviour
         Debug.Log("Scene: Activating Scene: " + SceneToLoad + " Valid: " + scene.IsValid() + " Loaded: " + scene.isLoaded);
         
         SceneManager.SetActiveScene(scene);
+
+
+        // Need to set player name here again
+
+
         /*
         if (restartedGame) {
             Stats.Instance.Restart();

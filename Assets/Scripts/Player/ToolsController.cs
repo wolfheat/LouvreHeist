@@ -30,7 +30,6 @@ public class ToolsController : MonoBehaviour
         EquipTool(ToolType.Hands);
 
         UIController.Instance?.ToolsUIReset();
-        UIController.Instance?.BriefingsReset();
     }
 
     internal bool ToolUnlocked(ToolType tool) => unlockedTool[(int)tool];

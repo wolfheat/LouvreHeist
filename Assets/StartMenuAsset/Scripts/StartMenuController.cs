@@ -225,7 +225,7 @@ namespace Wolfheat.StartMenu
         private void InitiateStartMenu()
         {
             Debug.Log("Initiating start Menu");
-            Debug.Log("null? = "+startMenu == null);
+            Debug.Log("Startmenu = null? => " + (startMenu == null));
             startMenu.gameObject.SetActive(true);
 
             Debug.Log("Initiating start Menu B");

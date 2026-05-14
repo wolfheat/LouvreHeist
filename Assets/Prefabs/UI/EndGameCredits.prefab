@@ -31,12 +31,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 50}
+  m_SizeDelta: {x: 1699.93, y: 6106.36}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &3279331760046371932
 CanvasRenderer:
@@ -66,7 +65,137 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: End Game Credits
+  m_text: '<b>Credits
+
+    </b>
+
+
+
+
+
+    A game by wolfheat
+
+
+
+
+
+
+
+
+
+
+
+
+
+    A variety
+    of assets were used to create this game.
+
+
+
+
+
+    <b>Graphic</b>
+
+    3D
+
+    Synty
+    Studio Asset Packs
+
+    Ancient Empire
+
+    Construction
+
+    Kids
+
+    Mini
+    City
+
+    NightClub
+
+    Office
+
+    Town
+
+
+
+    Gece Studio - Dragon Head
+
+
+
+    2D
+
+    Vector
+    Dividers Collection -  Start menu Dividers
+
+    Kenney - Icons from asset packs
+
+    Zooperdan
+    - Printer Display Image
+
+    avatar
+
+    macrovector - Postit
+
+    Ben Clark
+    - Vector Notes
+
+
+
+    VFX
+
+    Unity Technologies - Particle Pack
+
+
+
+    <b>Audio</b>
+
+
+
+    FreeSounds,Pixabay
+    - Various Sounds assets
+
+    Uppbeat - Music
+
+
+
+    <b>Music</b>
+
+    Brock Hewitt
+    - In The Silence
+
+    Monument Music - Love Story
+
+
+
+    <b>Fonts</b>
+
+    Prida01
+    - gluk
+
+
+
+    <b>Tools Used</b>
+
+    Audacity
+
+    Gimp
+
+    Blender
+
+    Unity
+
+
+
+    <b>Game
+    Jam</b>
+
+    This game was created for the
+
+    Dungeon Crawler Game Jam 2026
+
+
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9766fd5cd970dcf4a9c1419ddaf135a1, type: 2}
   m_sharedMaterial: {fileID: 1527479749558565102, guid: 9766fd5cd970dcf4a9c1419ddaf135a1, type: 2}
@@ -103,21 +232,24 @@ MonoBehaviour:
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 6
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 80
   m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
+  m_paragraphSpacing: 30
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0

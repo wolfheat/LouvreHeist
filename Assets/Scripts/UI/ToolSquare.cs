@@ -11,12 +11,12 @@ public class ToolSquare : MonoBehaviour
     internal void SetToolActive(bool setActive, bool available = false)
     {
         if (!available) {
-            visual.SetActive(false);
+            visual?.SetActive(false);
             //borderImage.color = GameColorsController.Instance.UnavailableToolColor;
             //backgroundImage.color = GameColorsController.Instance.UnavailableToolColor;
             return;
         }
-        visual.SetActive(true);
+        visual?.SetActive(true);
         borderImage.color = setActive ? GameColorsController.Instance.ActiveToolColor : GameColorsController.Instance.InActiveToolColor;
         backgroundImage.color = setActive ? GameColorsController.Instance.ActiveToolColor : GameColorsController.Instance.InActiveToolColor;
     }

@@ -94,4 +94,11 @@ public class Breakable : MonoBehaviour, ISavable
 
         collider.enabled = false;
     }
+
+    public void DisableVisuals()
+    {
+        if (transform.GetChild(0)?.TryGetComponent<MeshRenderer>(out MeshRenderer childRenderer) != null)
+            childRenderer.enabled = false;
+
+    }
 }

@@ -12,7 +12,7 @@ public class PlayerNameUpdater : MonoBehaviour
     {
         GameSettingsData.GameSettingsUpdated += UpdateName;
         SavingUtility.LoadingComplete += UpdateName;
-        //UpdateName();
+        UpdateName();
     }
 
     private void OnDisable()
@@ -24,7 +24,10 @@ public class PlayerNameUpdater : MonoBehaviour
     private void UpdateName()
     {
         Debug.Log("-- Updating Player Name in Start Menu");
-
+        if(SavingUtility.gameSettingsData == null) {
+            // If not available then dont set it, if so wait for it to load from file
+            return;
+        }
         playerNameText.text = SavingUtility.gameSettingsData.PlayerName;
         pleaseHolder.gameObject.SetActive(playerNameText.text.Length<=2 || playerNameText.text.ToLower() == "anonymous");
     }

@@ -551,6 +551,7 @@ public class PlayerController : MonoBehaviour
         // Unlock if having correct tool
         if (ToolsController.Instance.ActiveTool != ToolType.Grinder) {
             SoundMaster.Instance.PlaySound(SoundName.GlassTap);
+            HelpInstructions.Instance.ShowInstruction("Hardened Glass: You need to equip a grinder!", HelpButtonType.Info);
             return;
         }
 
@@ -573,7 +574,12 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public void InteractComplete() => DoingAction = false;
+    public void InteractComplete()
+    {
+        DoingAction = false;
+        if (savedAction == null)
+            HeldMovementInput();
+    }
 
     private void InteractWithLockpickable(LockPickable lockPickable)
     {
@@ -590,6 +596,7 @@ public class PlayerController : MonoBehaviour
             }
             else {
                 Debug.Log("Its Locked");
+                HelpInstructions.Instance.ShowInstruction("Locked: You need to equip a lockpick!", HelpButtonType.Info);
                 lockPickable.TryOpenFail();
             }
             return;
@@ -617,6 +624,7 @@ public class PlayerController : MonoBehaviour
         // Unlock if having correct tool
         if (ToolsController.Instance.ActiveTool != ToolType.Hammer) {
             SoundMaster.Instance.PlaySound(SoundName.WoodTap);
+            HelpInstructions.Instance.ShowInstruction("You need to equip a sledgeHammer!", HelpButtonType.Info);
             return;
         }
 
@@ -975,11 +983,13 @@ public class PlayerController : MonoBehaviour
         ActiveVehicle = null;
         Stats.Instance.IsDead = false;
 
-        PoliceTimer.Instance.Reset();
+        PoliceTimer.Instance?.Reset();
 
         //Inventory.Instance.Clear(); // Not needed since this is reset when the UI is activated which happens when player leaves start Menu
         //pickupController?.Restart();
         UIController.HideDeathScreenInstant();
+
+        UIController.BriefingsReset();
 
     }
     

@@ -27,6 +27,10 @@ public class DragonUIPanel : MonoBehaviour
 
     private void OnDragonChange(int activeIndex)
     {
+        if(dragonImage == null) {
+            Debug.Log("Dragon UI Panel image is null, cantr set color");
+            return;
+        }
         Debug.Log("Dragon UI Panel: activate "+activeIndex);
         // Update the UI visuals
         switch (activeIndex) {

@@ -1609,6 +1609,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -89.626
       objectReference: {fileID: 0}
+    - target: {fileID: 4052018683499003920, guid: bbbf7b8607dda0548b198b96ead39a21, type: 3}
+      propertyPath: guid
+      value: b085f8f3-8676-4a66-a587-5a3764435546
+      objectReference: {fileID: 0}
     - target: {fileID: 6551289279902365292, guid: bbbf7b8607dda0548b198b96ead39a21, type: 3}
       propertyPath: m_Name
       value: SuitCaseItem (5)
@@ -2116,6 +2120,10 @@ PrefabInstance:
     - target: {fileID: 790564555490008669, guid: bbbf7b8607dda0548b198b96ead39a21, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4052018683499003920, guid: bbbf7b8607dda0548b198b96ead39a21, type: 3}
+      propertyPath: guid
+      value: a80bbdb7-3ba6-4ab6-87ff-bff1e7934ea6
       objectReference: {fileID: 0}
     - target: {fileID: 6551289279902365292, guid: bbbf7b8607dda0548b198b96ead39a21, type: 3}
       propertyPath: m_Name
@@ -5973,6 +5981,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: 4052018683499003920, guid: bbbf7b8607dda0548b198b96ead39a21, type: 3}
+      propertyPath: guid
+      value: 4c4ce853-b854-4a18-9615-480807e7efc4
+      objectReference: {fileID: 0}
     - target: {fileID: 6551289279902365292, guid: bbbf7b8607dda0548b198b96ead39a21, type: 3}
       propertyPath: m_Name
       value: SuitCaseItem (8)
@@ -7187,6 +7199,10 @@ PrefabInstance:
     - target: {fileID: 790564555490008669, guid: bbbf7b8607dda0548b198b96ead39a21, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -89.625
+      objectReference: {fileID: 0}
+    - target: {fileID: 4052018683499003920, guid: bbbf7b8607dda0548b198b96ead39a21, type: 3}
+      propertyPath: guid
+      value: a12917ac-29f3-4c5a-a03b-51970fd04dd7
       objectReference: {fileID: 0}
     - target: {fileID: 6551289279902365292, guid: bbbf7b8607dda0548b198b96ead39a21, type: 3}
       propertyPath: m_Name
@@ -10824,6 +10840,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CabinetInteractable (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 6363246741503468178, guid: 15a913fe650505443b17bcc8d6aa7f42, type: 3}
+      propertyPath: guid
+      value: d0e2dba9-3a09-4f94-9a58-b3cbb4e86976
+      objectReference: {fileID: 0}
+    - target: {fileID: 8658314561404188865, guid: 15a913fe650505443b17bcc8d6aa7f42, type: 3}
+      propertyPath: guid
+      value: e2b7256e-f98b-4ffb-82a5-bb0b38bb7fdd
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12978,6 +13002,10 @@ PrefabInstance:
     - target: {fileID: 790564555490008669, guid: bbbf7b8607dda0548b198b96ead39a21, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4052018683499003920, guid: bbbf7b8607dda0548b198b96ead39a21, type: 3}
+      propertyPath: guid
+      value: 171e5b2c-a919-40a7-ade6-946d0b26e9ef
       objectReference: {fileID: 0}
     - target: {fileID: 6551289279902365292, guid: bbbf7b8607dda0548b198b96ead39a21, type: 3}
       propertyPath: m_Name
@@ -21911,6 +21939,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6362353584414527041, guid: 057c1deb54790984a97ca7da55d88955, type: 3}
+      propertyPath: guid
+      value: 12c570d8-2d41-4e02-be06-6b97d2681bb2
+      objectReference: {fileID: 0}
     - target: {fileID: 7249756254454877219, guid: 057c1deb54790984a97ca7da55d88955, type: 3}
       propertyPath: m_Name
       value: DrawerInteractable (1)
@@ -22538,6 +22570,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1107504986}
     m_Modifications:
+    - target: {fileID: 1744666683302184700, guid: 21430f6b092e9af4fb679d6884a6b1f6, type: 3}
+      propertyPath: guid
+      value: 408c00db-ece8-4382-8351-247d0937f50a
+      objectReference: {fileID: 0}
     - target: {fileID: 3153525814389232632, guid: 21430f6b092e9af4fb679d6884a6b1f6, type: 3}
       propertyPath: m_Name
       value: SafeFilledMoney
@@ -22581,6 +22617,18 @@ PrefabInstance:
     - target: {fileID: 3153525814389526488, guid: 21430f6b092e9af4fb679d6884a6b1f6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4913376134044587694, guid: 21430f6b092e9af4fb679d6884a6b1f6, type: 3}
+      propertyPath: guid
+      value: 6fbbc27f-6051-4391-bd37-9827960057c8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5207686717402545968, guid: 21430f6b092e9af4fb679d6884a6b1f6, type: 3}
+      propertyPath: guid
+      value: e93d353e-b87f-471e-8c3e-d407092e7a57
+      objectReference: {fileID: 0}
+    - target: {fileID: 5237978895103741692, guid: 21430f6b092e9af4fb679d6884a6b1f6, type: 3}
+      propertyPath: guid
+      value: 4a16fd80-ad47-4fad-923c-c3588c2da39b
       objectReference: {fileID: 0}
     - target: {fileID: 5897658418772314982, guid: 21430f6b092e9af4fb679d6884a6b1f6, type: 3}
       propertyPath: guid
@@ -32886,6 +32934,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CabinetInteractable
       objectReference: {fileID: 0}
+    - target: {fileID: 6363246741503468178, guid: 15a913fe650505443b17bcc8d6aa7f42, type: 3}
+      propertyPath: guid
+      value: cec23582-2eb8-4cee-9bed-992345bcde4b
+      objectReference: {fileID: 0}
+    - target: {fileID: 8658314561404188865, guid: 15a913fe650505443b17bcc8d6aa7f42, type: 3}
+      propertyPath: guid
+      value: 06aca45b-476c-4cb1-aa10-845a1772021a
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -34644,6 +34700,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CabinetInteractable (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6363246741503468178, guid: 15a913fe650505443b17bcc8d6aa7f42, type: 3}
+      propertyPath: guid
+      value: 55041bbc-9d17-4be3-a06d-40ac1f593053
+      objectReference: {fileID: 0}
+    - target: {fileID: 8658314561404188865, guid: 15a913fe650505443b17bcc8d6aa7f42, type: 3}
+      propertyPath: guid
+      value: af029f7b-3add-4c59-8f2f-60c3b116d4ee
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -35676,6 +35740,14 @@ PrefabInstance:
     - target: {fileID: 6358425738666213974, guid: 15a913fe650505443b17bcc8d6aa7f42, type: 3}
       propertyPath: m_Name
       value: CabinetInteractable
+      objectReference: {fileID: 0}
+    - target: {fileID: 6363246741503468178, guid: 15a913fe650505443b17bcc8d6aa7f42, type: 3}
+      propertyPath: guid
+      value: 93d8f97e-625a-4356-8068-666c72d5b725
+      objectReference: {fileID: 0}
+    - target: {fileID: 8658314561404188865, guid: 15a913fe650505443b17bcc8d6aa7f42, type: 3}
+      propertyPath: guid
+      value: 714fca7e-f9f0-4c64-9208-7a61101b2590
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -39956,6 +40028,14 @@ PrefabInstance:
     - target: {fileID: 6358425738666213974, guid: 15a913fe650505443b17bcc8d6aa7f42, type: 3}
       propertyPath: m_Name
       value: CabinetInteractable (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6363246741503468178, guid: 15a913fe650505443b17bcc8d6aa7f42, type: 3}
+      propertyPath: guid
+      value: fad9aeab-447e-4e15-a4e2-16a2e67b142d
+      objectReference: {fileID: 0}
+    - target: {fileID: 8658314561404188865, guid: 15a913fe650505443b17bcc8d6aa7f42, type: 3}
+      propertyPath: guid
+      value: 58874c52-c2cf-43cc-83ca-2490f77aba79
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -45694,6 +45774,14 @@ PrefabInstance:
     - target: {fileID: 6358425738666213974, guid: 15a913fe650505443b17bcc8d6aa7f42, type: 3}
       propertyPath: m_Name
       value: CabinetInteractable (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6363246741503468178, guid: 15a913fe650505443b17bcc8d6aa7f42, type: 3}
+      propertyPath: guid
+      value: 7bd2ca05-9781-418f-9471-15f002462df6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8658314561404188865, guid: 15a913fe650505443b17bcc8d6aa7f42, type: 3}
+      propertyPath: guid
+      value: 7fb062fb-7868-4bb8-be06-d0b06d1c4a17
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -54906,6 +54994,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CabinetInteractable (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6363246741503468178, guid: 15a913fe650505443b17bcc8d6aa7f42, type: 3}
+      propertyPath: guid
+      value: 1fd31062-79bf-4449-8605-4412eab8e66e
+      objectReference: {fileID: 0}
+    - target: {fileID: 8658314561404188865, guid: 15a913fe650505443b17bcc8d6aa7f42, type: 3}
+      propertyPath: guid
+      value: e43c7d30-21bd-4133-8768-94a7cbcc5f30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -58567,6 +58663,14 @@ PrefabInstance:
     - target: {fileID: 6358425738666213974, guid: 15a913fe650505443b17bcc8d6aa7f42, type: 3}
       propertyPath: m_Name
       value: CabinetInteractable (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6363246741503468178, guid: 15a913fe650505443b17bcc8d6aa7f42, type: 3}
+      propertyPath: guid
+      value: 8dfdd191-4388-4d96-8d92-71dbc7f810d5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8658314561404188865, guid: 15a913fe650505443b17bcc8d6aa7f42, type: 3}
+      propertyPath: guid
+      value: fc059064-5cc3-47ae-8171-bfcb598c4a0a
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -64298,6 +64402,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CabinetInteractable (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 6363246741503468178, guid: 15a913fe650505443b17bcc8d6aa7f42, type: 3}
+      propertyPath: guid
+      value: da46928c-2a31-4f95-a20c-7e8a7507625b
+      objectReference: {fileID: 0}
+    - target: {fileID: 8658314561404188865, guid: 15a913fe650505443b17bcc8d6aa7f42, type: 3}
+      propertyPath: guid
+      value: 0b6ed478-682f-4319-a621-9690f61fdfa1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -67396,6 +67508,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CabinetInteractable (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 6363246741503468178, guid: 15a913fe650505443b17bcc8d6aa7f42, type: 3}
+      propertyPath: guid
+      value: 173e673a-548c-4545-9507-49fa2c040e7b
+      objectReference: {fileID: 0}
+    - target: {fileID: 8658314561404188865, guid: 15a913fe650505443b17bcc8d6aa7f42, type: 3}
+      propertyPath: guid
+      value: 2bb4a5a8-b825-4002-af1f-d63a6b9f4ca6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -68416,6 +68536,14 @@ PrefabInstance:
     - target: {fileID: 6358425738666213974, guid: 15a913fe650505443b17bcc8d6aa7f42, type: 3}
       propertyPath: m_Name
       value: CabinetInteractable (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6363246741503468178, guid: 15a913fe650505443b17bcc8d6aa7f42, type: 3}
+      propertyPath: guid
+      value: ef1215e7-9be1-42cb-b3d3-2c6be4cb5f5c
+      objectReference: {fileID: 0}
+    - target: {fileID: 8658314561404188865, guid: 15a913fe650505443b17bcc8d6aa7f42, type: 3}
+      propertyPath: guid
+      value: c8ed34a2-3152-4c8b-a045-911f2f4b007a
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -72518,6 +72646,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CabinetInteractable (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6363246741503468178, guid: 15a913fe650505443b17bcc8d6aa7f42, type: 3}
+      propertyPath: guid
+      value: 1979d796-b33f-49d3-ab7f-b5c7a28f902e
+      objectReference: {fileID: 0}
+    - target: {fileID: 8658314561404188865, guid: 15a913fe650505443b17bcc8d6aa7f42, type: 3}
+      propertyPath: guid
+      value: 66721be6-8b5a-450f-9c10-bf2bddb33d73
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -73093,6 +73229,10 @@ PrefabInstance:
     - target: {fileID: 790564555490008669, guid: bbbf7b8607dda0548b198b96ead39a21, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4052018683499003920, guid: bbbf7b8607dda0548b198b96ead39a21, type: 3}
+      propertyPath: guid
+      value: e251aa19-9243-4572-9332-c5ece850fcf7
       objectReference: {fileID: 0}
     - target: {fileID: 6551289279902365292, guid: bbbf7b8607dda0548b198b96ead39a21, type: 3}
       propertyPath: m_Name
@@ -74636,6 +74776,14 @@ PrefabInstance:
     - target: {fileID: 6358425738666213974, guid: 15a913fe650505443b17bcc8d6aa7f42, type: 3}
       propertyPath: m_Name
       value: CabinetInteractable
+      objectReference: {fileID: 0}
+    - target: {fileID: 6363246741503468178, guid: 15a913fe650505443b17bcc8d6aa7f42, type: 3}
+      propertyPath: guid
+      value: 80c5a0f6-5703-44e7-94b7-8666ae422779
+      objectReference: {fileID: 0}
+    - target: {fileID: 8658314561404188865, guid: 15a913fe650505443b17bcc8d6aa7f42, type: 3}
+      propertyPath: guid
+      value: 18388fff-03b6-44cd-94fa-98433fc68a6b
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -78507,6 +78655,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4052018683499003920, guid: bbbf7b8607dda0548b198b96ead39a21, type: 3}
+      propertyPath: guid
+      value: 4e9bc8b9-ffd1-4c92-b94d-038bfa8c37ea
+      objectReference: {fileID: 0}
     - target: {fileID: 6551289279902365292, guid: bbbf7b8607dda0548b198b96ead39a21, type: 3}
       propertyPath: m_Name
       value: SuitCaseItem (3)
@@ -78748,6 +78900,14 @@ PrefabInstance:
     - target: {fileID: 6358425738666213974, guid: 15a913fe650505443b17bcc8d6aa7f42, type: 3}
       propertyPath: m_Name
       value: CabinetInteractable (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6363246741503468178, guid: 15a913fe650505443b17bcc8d6aa7f42, type: 3}
+      propertyPath: guid
+      value: e99c8b9c-129c-4b7d-8bd5-4edcbade0006
+      objectReference: {fileID: 0}
+    - target: {fileID: 8658314561404188865, guid: 15a913fe650505443b17bcc8d6aa7f42, type: 3}
+      propertyPath: guid
+      value: 5b4ec37e-4877-4524-8c42-7a97006258cc
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

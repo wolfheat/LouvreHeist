@@ -1559,7 +1559,7 @@ GameObject:
   - component: {fileID: 8401936149188042327}
   - component: {fileID: 5077311540596368017}
   m_Layer: 5
-  m_Name: ResultHolder
+  m_Name: ResultHolder (Inactive in StartMenu)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1833,10 +1833,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5781487198385989966, guid: c5146402ccb695c43b28291e80f6e2db, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 1173.93
-      objectReference: {fileID: 0}
-    - target: {fileID: 5781487198385989966, guid: c5146402ccb695c43b28291e80f6e2db, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
@@ -1869,10 +1865,6 @@ PrefabInstance:
       value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5781487198385989966, guid: c5146402ccb695c43b28291e80f6e2db, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 964
-      objectReference: {fileID: 0}
-    - target: {fileID: 5781487198385989966, guid: c5146402ccb695c43b28291e80f6e2db, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
@@ -1887,143 +1879,6 @@ PrefabInstance:
     - target: {fileID: 5781487198385989966, guid: c5146402ccb695c43b28291e80f6e2db, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7258905331927034073, guid: c5146402ccb695c43b28291e80f6e2db, type: 3}
-      propertyPath: m_text
-      value: '<b>Credits
-
-        </b>
-
-
-
-        A game by wolfheat
-
-
-
-
-
-
-
-        A
-        variety of assets were used to create this game.
-
-
-
-        <b>Graphics
-
-        </b>
-
-        3D
-
-        Pure
-        Poly - Ultimate Low Poly Mining
-
-        BitGem - Hand Painted Series
-
-        Siuniaev
-        - Gambler Cat
-
-        Instant Zoomies - Horror Starter Pack Free
-
-        Synty
-        - Ancient Empire
-
-
-
-        2D
-
-        Vector Dividers Collection
-
-        upklyak
-        (freepik) - Ground cracks on land isolated
-
-
-
-        VFX
-
-        Unity
-        Technologies - Particle Pack
-
-
-
-        <b>Audio
-
-        </b>
-
-        Freesound
-        - Various Sounds
-
-        Pixabay - Various Sounds
-
-        Uppbeat - Music
-
-
-
-        <b>Music
-
-        </b>
-
-        Brock
-        Hewitt - In The Silence
-
-        Monument Music - Love Story
-
-
-
-        <b>Fonts
-
-        </b>
-
-        Prida01
-        - gluk
-
-
-
-        <b>AI Tools
-
-        </b>
-
-        Playground AI - 2D art
-
-        Craiyon
-        - 2D art
-
-        Piclumen - 2D art
-
-        Suno - Music
-
-
-
-        <b>Other
-        Tools Used
-
-        </b>
-
-        Audacity
-
-        Gimp
-
-        Blender
-
-        Unity
-
-
-
-        <b>Game
-        Jam
-
-        </b>
-
-        This game was created for the
-
-        Dungeon
-        Crawler Game Jam 2025
-
-
-
-
-
-'
       objectReference: {fileID: 0}
     - target: {fileID: 7258905331927034073, guid: c5146402ccb695c43b28291e80f6e2db, type: 3}
       propertyPath: m_fontStyle

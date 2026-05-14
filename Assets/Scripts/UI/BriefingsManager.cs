@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Wolfheat.Inputs;
@@ -8,19 +9,25 @@ public class BriefingsManager : MonoBehaviour
     [SerializeField] private GameObject[] briefingsPages; 
     [SerializeField] private GameObject StartMissionButton; 
     private string[] SceneNames = {"Office","BuildSite","Louvre"}; 
-    private int[] moneyNeededToUnlockDestination = {0,10000,15000,20000}; 
+    private int[] moneyNeededToUnlockDestination = {1000,10000,15000,20000}; 
 
-    private int activeBriefingIndex = 0;
+    private int activeBriefingIndex = -1;
 
     public void SetNextBriefingStage() => activeBriefingIndex++;
     
     public void SetMissionAsActive(int index)
     {
-        activeBriefingIndex = index;
-        Debug.Log("Setting Mission "+index+" as active.");
+        bool isLocked = true;
+        
+        if (allowClicks) {
+            activeBriefingIndex = index;
+        }
+
+        if(index >= 0)
+            isLocked = hideOutMap.Locked(activeBriefingIndex); 
+                        
         hideOutMap.ActivateActiveCircle(activeBriefingIndex);
 
-        bool isLocked = hideOutMap.Locked(activeBriefingIndex);
         Debug.Log("Mission "+index+" is "+(isLocked?"Locked":"Not Locked"));
 
         // Show the start Button if its not locked
@@ -36,27 +43,46 @@ public class BriefingsManager : MonoBehaviour
 
     public void Reset()
     {
+        Debug.Log("BriefingManager Reset");
         activeBriefingIndex = 0;
-        hideOutMap.Reset();
+        if(hideOutMap == null) {
+            Debug.LogError("Hiedoutmap is NULL");
+        }
+        hideOutMap?.Reset();
     }
 
     public void OpenHideOutMap()
     {
         if (hideOutMap.gameObject.activeSelf) return; // already open exit
 
-        Debug.Log("Opening the HideOut Map");
+        PlayerController.Instance.DoingAction = true;
+
+        Debug.Log("Opening the HideOut Map - Initiate with index "+activeBriefingIndex);
         // Opens the map and sets the current step as active
         hideOutMap.gameObject.SetActive(true);
 
-        SetMissionAsActive(activeBriefingIndex);
+        // Unset active everytime its opened!
+        SetMissionAsActive(-1);
 
         UpdateUnlockedDestinations();
+
+        StartCoroutine(WaitForActivation());
+    }
+
+    private bool allowClicks = false;
+    private IEnumerator WaitForActivation()
+    {
+        allowClicks = false;
+        yield return new WaitForSeconds(0.3f);
+        allowClicks = true;
     }
 
     private void UpdateUnlockedDestinations()
     {
+        Debug.Log("Checking which destinations to unlock");
         for (int i = 0; i < moneyNeededToUnlockDestination.Length; i++) {
             if(Inventory.Instance.MoneyHeld > moneyNeededToUnlockDestination[i]) {
+                Debug.Log("unlock destination "+i);
                 //Debug.Log("UNLOCK: index:"+i+" cause player has "+ Inventory.Instance.MoneyHeld+" and need only " + moneyNeededToUnlockDestination[i]+" to unlokc.");
                 UnlockDestination(i);
             }
@@ -84,10 +110,12 @@ public class BriefingsManager : MonoBehaviour
         Inputs.Instance.Controls.Player.Esc.performed -= OnEscape;
     }
 
+    public void OnCloseClicked() => OnEscape(new InputAction.CallbackContext());
+
     private void OnEscape(InputAction.CallbackContext context)
     {
         // Exits the briefing if its open, else closes the map
-        if(briefingsPages[activeBriefingIndex].activeSelf)
+        if (activeBriefingIndex >= 0 && activeBriefingIndex < briefingsPages.Length && briefingsPages[activeBriefingIndex].activeSelf)
             briefingsPages[activeBriefingIndex].SetActive(false);
         else if (hideOutMap.gameObject.activeSelf) {
             PlayerController.Instance.DoingAction = false;

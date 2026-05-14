@@ -48,18 +48,17 @@ public class TransitionScreen : MonoBehaviour
     }
 
     public void Lighten()
-    {
+    {   
         Debug.Log("Transition: Enter here Lighten" ); 
         StartCoroutine(Animate(darkColor, lightColor));
     }
 
-    public void Darken(Action callback, float transitionTime)
+    public void Darken(Action callback, float transitionTime, bool performDarkenPart = true)
     {
         Debug.Log("Transition: Enter here Darken");
-
         AnimationTime = transitionTime;
         callbackMethod = callback;
-        StartCoroutine(Animate(lightColor,darkColor));
+        StartCoroutine(Animate(lightColor,darkColor,performDarkenPart));
     }
 
     public void Darken()    
@@ -69,17 +68,21 @@ public class TransitionScreen : MonoBehaviour
         StartCoroutine(Animate(lightColor,darkColor));
     }
 
-    private IEnumerator Animate(Color fromColor, Color toColor)
+    private IEnumerator Animate(Color fromColor, Color toColor, bool performDarkenPart = true)
     {
         screen.SetActive(true);
-        animationTimer = 0;
-        image.color = fromColor;
-        while (animationTimer < AnimationTime)
-        {
-            image.color = Color.Lerp(fromColor, toColor, animationTimer/AnimationTime);
-            animationTimer += Time.unscaledDeltaTime;
-            yield return null;
+
+        if (performDarkenPart) {
+            animationTimer = 0;
+            image.color = fromColor;
+            while (animationTimer < AnimationTime)
+            {
+                image.color = Color.Lerp(fromColor, toColor, animationTimer/AnimationTime);
+                animationTimer += Time.unscaledDeltaTime;
+                yield return null;
+            }
         }
+
         image.color = toColor;
 
         animationTimer = 0;
@@ -100,10 +103,5 @@ public class TransitionScreen : MonoBehaviour
             screen.SetActive(false);
             AnimationComplete?.Invoke();
         }
-
-
     }
-
-
-
 }

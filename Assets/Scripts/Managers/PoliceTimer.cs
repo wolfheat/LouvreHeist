@@ -33,7 +33,7 @@ public class PoliceTimer : MonoBehaviour
 
     public void Reset()
     {
-        timerHolder.SetActive(false);        
+        timerHolder?.SetActive(false);        
         PoliceAlerted = false;
     }
 
@@ -41,7 +41,7 @@ public class PoliceTimer : MonoBehaviour
     {
         if (PoliceAlerted) return;
         PoliceAlerted = true;
-        timerHolder.SetActive(true);
+        timerHolder?.SetActive(true);
         // Set the Time due to the base timer and any additional dragon
         timer = Stats.Instance.CurrentAlertTime;
     }

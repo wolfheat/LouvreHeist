@@ -101,7 +101,7 @@ public class WinScreenScroll : MonoBehaviour
 
         yield return null;
 
-        float textBoxHeight = rect.rect.height;
+        float textBoxHeight = allText.GetComponent<RectTransform>().rect.height;
         float screenHeight = panel.GetComponent<RectTransform>().rect.height;
 
         StartPosition = -screenHeight - TopScrollPadding;
@@ -151,7 +151,7 @@ public class WinScreenScroll : MonoBehaviour
         Hide();
         if (!startMenuView) { 
             Debug.Log("TO MAIN MENU - ONLY FROM GAME NOT CREDITS VIEW");
-            UIController.Instance.ToMainMenu();
+            UIController.Instance.ToMainMenu(true);
         }
         //panelHider.SetActive(false);
         StopAllCoroutines();
